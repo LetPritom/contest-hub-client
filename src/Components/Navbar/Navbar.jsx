@@ -92,15 +92,20 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="logo flex gap-2 items-center ">
-              <img className="h-10 w-10 cursor-pointer" src={logo} alt="" />
+              <NavLink to="/">
+                <img className="h-10 w-10 cursor-pointer" src={logo} alt="" />
+              </NavLink>
+
               <div className="title">
-                <h1
-                  className="text-2xl font-bold
+                <NavLink to="/">
+                  <h1
+                    className="text-2xl font-bold
                 bg-linear-to-r from-blue-700 to-purple-500
                 bg-clip-text text-transparent"
-                >
-                  ContestHub
-                </h1>
+                  >
+                    ContestHub
+                  </h1>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -160,7 +165,11 @@ const Navbar = () => {
             Log in
           </a> */}
             {/* theme toggle button */}
-            <div className={`theme flex gap-1 items-center mx-2  px-2 py-2 border  ${dark? 'text-white' : 'text-purple-700'}  rounded-full ${dark? 'border-white' : 'border-purple-700'}`}>
+            <div
+              className={`theme flex gap-1 items-center mx-2  px-2 py-2 border  ${
+                dark ? "text-white" : "text-purple-700"
+              }  rounded-full ${dark ? "border-white" : "border-purple-700"}`}
+            >
               <p className="text-sm font-semibold sm:text-es">
                 {dark ? "Dark" : "Light"}
               </p>
