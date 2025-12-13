@@ -96,7 +96,7 @@ const Navbar = () => {
               <div className="title">
                 <h1
                   className="text-2xl font-bold
-                bg-linear-to-r from-indigo-500 to-purple-500
+                bg-linear-to-r from-blue-700 to-purple-500
                 bg-clip-text text-transparent"
                 >
                   ContestHub
@@ -119,7 +119,7 @@ const Navbar = () => {
                 </div>
               </NavLink>
 
-              <NavLink to="/find-partner">
+              <NavLink to="/all-contest">
                 <div className="flex items-center gap-1 icon">
                   <FaUsersViewfinder className="text-md" />
                   <li className="hover:text-[#f55a00] cursor-pointer">
@@ -160,7 +160,7 @@ const Navbar = () => {
             Log in
           </a> */}
             {/* theme toggle button */}
-            <div className="theme flex gap-1 items-center mx-2  px-2 py-2 border border-[#f55a00] text-[#f55a00]  rounded-full">
+            <div className={`theme flex gap-1 items-center mx-2  px-2 py-2 border  ${dark? 'text-white' : 'text-purple-700'}  rounded-full ${dark? 'border-white' : 'border-purple-700'}`}>
               <p className="text-sm font-semibold sm:text-es">
                 {dark ? "Dark" : "Light"}
               </p>
