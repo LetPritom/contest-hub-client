@@ -6,6 +6,7 @@ const Signin = () => {
     <div className="min-h-screen bg-linear-to-br from-purple-900 via-black to-purple-900 flex items-center justify-center px-4 py-16">
       <div className="w-full max-w-md m-5">
         {/* Glassmorphism Card */}
+
         <div className="bg-black/10 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/10 p-10 animate-fade-in">
           <div className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-2xl">
