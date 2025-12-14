@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
 
 import { AuthContext } from "../../Providers/AuthContext";
 import logo from "../../assets/logo.png";
@@ -21,7 +20,6 @@ const Navbar = () => {
   //         toast.error(err);
   //       });
   //   };
-  toast;
   const [dark, setDark] = useState("");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
