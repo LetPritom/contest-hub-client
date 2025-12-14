@@ -1,8 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router";
 import { useForm } from "react-hook-form"
+import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
+
+    const {signInWithGoogleFunc } = useAuth()
+
 
     const {
     register,
@@ -14,6 +18,20 @@ const SignUp = () => {
 
     console.log(data)
   }
+
+
+  const handleGoogleSignin = async () => {
+
+    try {
+      const {user} = await signInWithGoogleFunc()
+      console.log(user)
+
+    } catch (err) {
+     console.log(err)
+    }
+  }
+
+
 
 
 
@@ -128,7 +146,7 @@ const SignUp = () => {
 
             <button
               type="button"
-              onClick={"handleGoogleSignin"}
+              onClick={handleGoogleSignin}
               className="flex items-center justify-center gap-3 w-full border border-white cursor-pointer text-white py-3 rounded-lg font-medium hover:bg-white/10 transition"
             >
               <img
