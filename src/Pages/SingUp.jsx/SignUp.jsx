@@ -1,10 +1,27 @@
 import React from "react";
 import { NavLink } from "react-router";
+import { useForm } from "react-hook-form"
 
 const SignUp = () => {
+
+    const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = (data) => {
+
+    console.log(data)
+  }
+
+
+
+
+
   return (
     <div className="min-h-screen bg-linear-to-br from-purple-900 via-black to-purple-900 flex items-center justify-center px-4 py-16">
-      <div className="w-10/12 mx-auto flex flex-col md:flex-row items-center justify-between gap-15">
+      <div className="w-11/12 md:w-9/12 mx-auto flex flex-col md:flex-row items-center justify-between gap-20">
         <div className="text-center rounded-full  mb-10 flex-1 bg-black/10 backdrop-blur-2xl shadow-2xl border border-white/10 p-10">
           <div className="align flex flex-col justify-center items-center h-52 ">
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-2xl">
@@ -19,7 +36,8 @@ const SignUp = () => {
         {/* Glassmorphism Card */}
 
         <div className="bg-black/10 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/10 p-10 animate-fade-in flex-1">
-          <form onSubmit={"handleSubmit"} className="space-y-3">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+
             {/* Name Field */}
             <div>
               <label className="block text-white/90 font-medium mb-2">
@@ -27,12 +45,15 @@ const SignUp = () => {
               </label>
               <input
                 type="text"
-                name="name"
-                onChange={"handleChange"}
-                required
                 placeholder="Enter your name"
+                {
+                    ...register('name' , {required:'Name is required'})
+                }
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
+             {
+                errors.name &&  <p className=" text-xs mt-2 text-red-500">{errors.name.message}</p>
+             }
             </div>
 
             {/* Photo URL Field */}
@@ -42,14 +63,17 @@ const SignUp = () => {
               </label>
               <input
                 type="url"
-                name="photoURL"
-                onChange={"handleChange"}
+                {
+                    ...register('image' , {required:'Image url is required'})
+                }
                 placeholder="https://example.com/your-photo.jpg"
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
-              <p className="text-white/50 text-xs mt-2">
-                Paste a direct link to your profile picture
-              </p>
+              {
+                errors.image && <p className="text-xs mt-2 text-red-500">{errors.image.message}</p> 
+              }
+              
+              
             </div>
 
             {/* Email Field */}
@@ -59,12 +83,15 @@ const SignUp = () => {
               </label>
               <input
                 type="email"
-                name="email"
-                onChange={"handleChange"}
-                required
                 placeholder="you@example.com"
+                {
+                    ...register('email' , {required:'please enter a valid email'})
+                }
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
+              {
+                errors.email &&  <p className=" text-xs mt-2 text-red-500">{errors.email.message}</p>
+             }
             </div>
 
             {/* Password Field */}
@@ -74,14 +101,19 @@ const SignUp = () => {
               </label>
               <input
                 type="password"
-                name="password"
-                onChange={"handleChange"}
-                required
                 placeholder="••••••••"
-                minLength="6"
+                {
+                    ...register('password' , {required:'Password is required', minLength: {
+                        value:6,
+                        message:'Password should be at least 6 characters long'
+                    }})
+                }
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
-              <p className="text-white/50 text-xs mt-2">Minimum 6 characters</p>
+              {
+                errors.password && <p className="text-red-500 text-xs mt-2">{errors.password.message}</p>
+              }
+              
             </div>
 
             {/* Submit Button */}

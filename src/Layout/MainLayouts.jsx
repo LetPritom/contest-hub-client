@@ -6,7 +6,8 @@ const MainLayouts = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <Outlet></Outlet>
+            {/* <div></div> */}
+            <Outlet ></Outlet>
         </div>
     );
 };
