@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router";
 
 const SignUp = () => {
   return (
@@ -109,12 +110,9 @@ const SignUp = () => {
 
           <p className="text-center text-white/60 mt-8">
             Already have an account?{" "}
-            <a
-              href="/login"
-              className="text-white font-semibold hover:text-purple-300 transition"
-            >
-              Log In
-            </a>
+           <NavLink to='/login' className="text-white font-semibold hover:text-purple-300 transition">
+                   Login
+            </NavLink>
           </p>
         </div>
       </div>

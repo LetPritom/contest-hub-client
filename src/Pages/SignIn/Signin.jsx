@@ -1,11 +1,89 @@
-import React from 'react';
+import React from "react";
+import { NavLink } from "react-router";
 
 const Signin = () => {
-    return (
-        <div>
-            <h1>Sign In used by firebase</h1>
+  return (
+    <div className="min-h-screen bg-linear-to-br from-purple-900 via-black to-purple-900 flex items-center justify-center px-4 py-16">
+      <div className="w-full max-w-md m-5">
+        {/* Glassmorphism Card */}
+        <div className="bg-black/10 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/10 p-10 animate-fade-in">
+          <div className="text-center mb-10">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-2xl">
+              Log in
+            </h2>
+            <p className="text-white/70 text-lg">See Contest And Join!</p>
+          </div>
+
+          <form onSubmit={"handleSubmit"} className="space-y-6">
+            {/* Name Field */}
+
+            {/* Email Field */}
+            <div>
+              <label className="block text-white/90 font-medium mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="you@example.com"
+                className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
+              />
+            </div>
+
+            {/* Password Field */}
+            <div>
+              <label className="block text-white/90 font-medium mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                required
+                placeholder="••••••••"
+                minLength="6"
+                className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
+              />
+              <p className="text-white/50 text-xs mt-2">Minimum 6 characters</p>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full py-4 bg-linear-to-r from-indigo-600 to-purple-700 hover:from-indigo-500 hover:to-purple-600 text-white font-bold text-lg rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300 hover:shadow-purple-500/30 cursor-pointer"
+            >
+              Login
+            </button>
+
+            {/* google signup */}
+
+            <button
+              type="button"
+              onClick={"handleGoogleSignin"}
+              className="flex items-center justify-center gap-3 w-full border border-white cursor-pointer text-white py-3 rounded-lg font-medium hover:bg-white/10 transition"
+            >
+              <img
+                src="https://www.svgrepo.com/show/475656/google-color.svg"
+                alt="Google"
+                className="w-5 h-5"
+              />
+              Continue with Google
+            </button>
+          </form>
+
+          <p className="text-center text-white/60 mt-8">
+            Don't have an account?{" "}
+            <NavLink
+              to="/signup"
+              className="text-white font-semibold hover:text-purple-300 transition"
+            >
+              signup
+            </NavLink>
+          </p>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Signin;
