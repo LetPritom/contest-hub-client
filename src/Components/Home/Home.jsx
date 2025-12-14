@@ -1,9 +1,14 @@
 import React from 'react';
-import Navbar from '../Navbar/Navbar';
+import Banner from '../../Pages/Home/Banner';
+import HomeTitle from '../../Pages/Home/HomeTitle';
+import ContestDetails from '../../Pages/ContestDetails/ContestDetails';
 
 const Home = () => {
     return (
         <div>
+            <Banner></Banner>
+            <HomeTitle></HomeTitle>
+            {/* <ContestDetails></ContestDetails> */}
             <h1>Home</h1>
         </div>
     );

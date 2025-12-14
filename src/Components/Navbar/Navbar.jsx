@@ -100,8 +100,8 @@ const Navbar = () => {
                 <NavLink to="/">
                   <h1
                     className="text-2xl font-bold
-                bg-linear-to-r from-blue-700 to-purple-500
-                bg-clip-text text-transparent"
+                  bg-linear-to-r from-blue-700 to-purple-500
+                  bg-clip-text text-transparent"
                   >
                     ContestHub
                   </h1>
@@ -156,14 +156,7 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            {/* <a
-            className="border border-[#f55a00] bg-transparent text-[#2563EB]  
-                         px-3 py-1.5 rounded-lg cursor-pointer font-semibold
-                       hover:bg-white hover:text-[#f55a00] hover:border-[#2563EB]
-                        transition-all duration-200 ease-in-out shadow-sm hover:shadow-md"
-          >
-            Log in
-          </a> */}
+
             {/* theme toggle button */}
             <div
               className={`theme flex gap-1 items-center mx-2  px-2 py-2 border  ${
@@ -179,6 +172,8 @@ const Navbar = () => {
                 className="toggle"
               />
             </div>
+
+
             (
             <div className="img">
               <button

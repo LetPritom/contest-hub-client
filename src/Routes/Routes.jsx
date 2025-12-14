@@ -6,6 +6,7 @@ import Signin from "../Pages/SignIn/Signin";
 import SignUp from "../Pages/SingUp.jsx/SignUp";
 import Profile from "../Pages/Profile.jsx/Profile";
 import AllContest from "../Pages/AllContest/AllContest";
+import DashboardLayout from "../Layout/DashboardLayout";
 export const router = createBrowserRouter([
 
     {
@@ -33,6 +34,17 @@ export const router = createBrowserRouter([
                 path:'/all-contest',
                 element:<AllContest></AllContest>
             },
+        ],
+    } ,
+
+    {
+        path:'/dashboard',
+        element:<DashboardLayout></DashboardLayout>,
+        children:[
+            {
+                index:true,
+                element:<p>ami all time achi</p>
+            }
         ]
     }
 ])
