@@ -48,7 +48,7 @@ const Sidebar = () => {
           <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
             {/* Sidebar content here */}
 
-            <ul className="menu w-full grow">
+            <ul className="menu w-full grow flex flex-col gap-2">
 
                 <UserSidebar></UserSidebar>
                 <SellerSidebar></SellerSidebar>

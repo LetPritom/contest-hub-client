@@ -1,14 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router';
 import Menu from '../Menu';
+import { TbTournament } from 'react-icons/tb';
+import { LiaFantasyFlightGames } from 'react-icons/lia';
+import { MdEdit, MdFileDownloadDone } from 'react-icons/md';
 
 const SellerSidebar = () => {
     return (
-        <div>
-            <NavLink to='/dashboard/add-Contest'><Menu>Add Contest</Menu></NavLink>
-            <NavLink to='/dashboard/created-Contests'><Menu>My Created Contests</Menu></NavLink>
-            <NavLink to='/dashboard/submitted-Tasks'><Menu>Submitted Tasks</Menu></NavLink>
-            <NavLink to='/dashboard/edit-contest'><Menu>Edit contest</Menu></NavLink>
+        <div className='flex flex-col gap-1' >
+            <NavLink to='/dashboard/add-Contest'><Menu icon={<TbTournament />}>Add Contest</Menu></NavLink>
+            <NavLink to='/dashboard/created-Contests'><Menu icon={<LiaFantasyFlightGames />}>My Created Contests</Menu></NavLink>
+            <NavLink to='/dashboard/submitted-Tasks'><Menu icon={<MdFileDownloadDone />}>Submitted Tasks</Menu></NavLink>
+            <NavLink to='/dashboard/edit-contest'><Menu icon={<MdEdit />}>Edit contest</Menu></NavLink>
         </div>
     );
 };
