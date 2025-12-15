@@ -216,14 +216,18 @@ const Navbar = () => {
                               
                   />
                   }
+
+                  {
+                    open?<RiArrowDropDownLine className="text-2xl cursor-pointer -scale-100 transition duration-250" />: <RiArrowDropDownLine className="text-2xl cursor-pointer transition duration-250" />
+                  }
                  
-                  <RiArrowDropDownLine className="text-2xl cursor-pointer" />
+                  
                 </button>
 
                 {/* Dropdown */}
                 <div
                   className={`absolute right-0 mt-3 w-56 rounded-xl
-                  bg-linear-to-b from-purple-900/40 via-black to-purple-900/40
+                  bg-linear-to-b from-purple-900/60 to-purple-900/40
                 text-white shadow-xl border border-purple-700/40
                   transform transition-all duration-200 ease-out
                   ${

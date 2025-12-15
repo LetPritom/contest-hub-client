@@ -3,7 +3,7 @@ import React from "react";
 const LoaderSpinner = () => {
   return (
 <div className="fixed inset-0 z-999 flex items-center justify-center
-                bg-linear-to-br from-purple-950 via-black to-purple-950">
+                ">
 
     <div className="relative">
     {/* Outer ring */}

@@ -7,44 +7,53 @@ import SignUp from "../Pages/SingUp.jsx/SignUp";
 import Profile from "../Pages/Profile.jsx/Profile";
 import AllContest from "../Pages/AllContest/AllContest";
 import DashboardLayout from "../Layout/DashboardLayout";
+import ContestDetails from "../Pages/ContestDetails/ContestDetails";
+import Private from "../Private/Private";
 export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayouts></MainLayouts>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        index: true,
+        element: <Home></Home>,
+      },
+      {
+        path: "/login",
+        element: <Signin></Signin>,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/profile",
+        element: <Profile></Profile>,
+      },
+      {
+        path: "/all-contest",
+        element: <AllContest></AllContest>,
+      },
+      {
+        path: "/detail-contest",
+        element: (
+          <Private>
+            <ContestDetails></ContestDetails>
+          </Private>
+        ),
+      },
+    ],
+  },
 
-    {
-        path: '/' ,
-        element:<MainLayouts></MainLayouts>,
-        errorElement:<ErrorPage></ErrorPage>,
-        children:[
-            {
-                index:true,
-                element:<Home></Home>
-            },
-            {
-                path:'/login',
-                element:<Signin></Signin>
-            },
-            {
-                path:'/signup',
-                element:<SignUp></SignUp>
-            },
-            {
-                path:'/profile',
-                element:<Profile></Profile>
-            },
-            {
-                path:'/all-contest',
-                element:<AllContest></AllContest>
-            },
-        ],
-    } ,
-
-    {
-        path:'/dashboard',
-        element:<DashboardLayout></DashboardLayout>,
-        children:[
-            {
-                index:true,
-                element:<p>ami all time achi</p>
-            }
-        ]
-    }
-])
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        index: true,
+        element: <p>ami all time achi</p>,
+      },
+    ],
+  },
+]);
