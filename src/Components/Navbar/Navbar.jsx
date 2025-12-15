@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/logo.png";
 import { NavLink } from "react-router";
 import { GoHomeFill } from "react-icons/go";
-import { FaBookOpenReader, FaUsersViewfinder } from "react-icons/fa6";
-import { MdOutlineCreateNewFolder, MdOutlineLogout, MdOutlineSpaceDashboard } from "react-icons/md";
+import { FaUsersViewfinder } from "react-icons/fa6";
+import { MdOutlineLogout, MdOutlineSpaceDashboard } from "react-icons/md";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 import Container from "../Container";
 import useAuth from "../../hooks/useAuth";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -11,27 +12,21 @@ import { toast } from "react-toastify";
 import LoaderSpinner from "../Loader/LoaderSpinner";
 
 const Navbar = () => {
-  const { user, logoutFunction, loading, setLoading} = useAuth();
+  const { user, logoutFunction, loading, setLoading } = useAuth();
 
-  
-    console.log(user);
-    const handleLogOut = async() => {
-      try {
-       await logoutFunction()
-       setOpen(false)
-       setLoading(false)
-       return toast.success("Logout");
-
-      } catch (err) {
-        toast.error(err.message)
-      }
-     
-
-    };
+  console.log(user);
+  const handleLogOut = async () => {
+    try {
+      await logoutFunction();
+      setOpen(false);
+      setLoading(false);
+      return toast.success("Logout");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
   const [dark, setDark] = useState("");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-
 
   useEffect(() => {
     const html = document.querySelector("html");
@@ -58,11 +53,10 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-
   return (
     <Container className="border-b border-gray-300">
       <div className=" ">
-        <div className="navbar w-9/12 lg:w-10/12 mx-auto py-4">
+        <div className="navbar lg:w-10/12 mx-auto py-4">
           <div className="navbar-start">
             <div className="dropdown ">
               <div
@@ -124,7 +118,7 @@ const Navbar = () => {
                   <h1
                     className="text-2xl font-bold
                   bg-linear-to-r from-blue-700 to-purple-500
-                  bg-clip-text text-transparent"
+                  bg-clip-text text-transparent hidden md:block"
                   >
                     ContestHub
                   </h1>
@@ -180,20 +174,31 @@ const Navbar = () => {
           </div>
           <div className="navbar-end">
             {/* theme toggle button */}
+
             <div
-              className={`theme flex gap-1 items-center mx-2  px-2 py-2 border  ${
-                dark ? "text-white" : "text-purple-700"
-              }  rounded-full ${dark ? "border-white" : "border-purple-700"}`}
+              className={`flex items-center gap-2 px-3 py-1.5 mx-2 rounded-full border
+                transition-all duration-300
+                ${
+                  dark? "bg-black/30 border-white/30 text-white": "bg-purple-100 border-purple-400 text-purple-700"
+                }`}
             >
-              <p className="text-sm font-semibold sm:text-es">
-                {dark ? "Dark" : "Light"}
-              </p>
+              {/* Icon (Left side) */}
+              {dark ? (
+                <MdDarkMode className="text-lg text-indigo-400 transition-all duration-300" />
+              ) : (
+                <MdLightMode className="text-lg text-yellow-400 transition-all duration-300" />
+              )}
+
+              {/* Toggle */}
               <input
-                onChange={(e) => handleTheme(e.target.checked)}
                 type="checkbox"
-                className="toggle"
+                checked={dark}
+                onChange={(e) => handleTheme(e.target.checked)}
+                className="toggle toggle-sm bg-transparent border border-current ml-2"
               />
             </div>
+
+            {/* user and dashboard dropdown */}
 
             {user ? (
               <div
@@ -203,24 +208,22 @@ const Navbar = () => {
                 {/* Avatar */}
                 <button
                   onClick={() => setOpen(!open)}
-                  className="focus:outline-none flex items-center gap-2 p-1 cursor-pointer"
+                  className="focus:outline-none flex items-center  gap-2 p-1 cursor-pointer"
                 >
-
-                  {
-                    !loading && user &&  <img
-                    src={user?.photoURL}
-                    alt="user"
-                    className="h-8 w-8 rounded-full ring-2 ring-purple-500 
+                  {!loading && user && (
+                    <img
+                      src={user?.photoURL}
+                      alt="user"
+                      className="h-8 w-8 rounded-full ring-2 ring-purple-500 
                               hover:ring-purple-400 transition"
-                              
-                  />
-                  }
+                    />
+                  )}
 
-                  {
-                    open?<RiArrowDropDownLine className="text-2xl cursor-pointer -scale-100 transition duration-250" />: <RiArrowDropDownLine className="text-2xl cursor-pointer transition duration-250" />
-                  }
-                 
-                  
+                  {open ? (
+                    <RiArrowDropDownLine className="text-2xl cursor-pointer -scale-100 transition duration-250" />
+                  ) : (
+                    <RiArrowDropDownLine className="text-2xl cursor-pointer transition duration-250" />
+                  )}
                 </button>
 
                 {/* Dropdown */}
