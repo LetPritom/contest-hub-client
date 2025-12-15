@@ -1,41 +1,57 @@
 import React from "react";
-import { NavLink } from "react-router";
-import { useForm } from "react-hook-form"
+import { NavLink, useLocation, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
+  const {
+    signInWithGoogleFunc,
+    registerEmailAndPassFunc,
+    updateProfileFunction,
+    setLoading,
+  } = useAuth();
 
-    const {signInWithGoogleFunc } = useAuth()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state || "/";
 
-
-    const {
+  const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
-  const onSubmit = (data) => {
-
-    console.log(data)
-  }
-
-
-  const handleGoogleSignin = async () => {
+  const onSubmit = async (data) => {
+    const { name, password, image, email } = data;
 
     try {
-      const {user} = await signInWithGoogleFunc()
-      console.log(user)
+     const result =await registerEmailAndPassFunc(email, password);
+      setLoading(false);
+
+      await updateProfileFunction(name, image);
+
+      setLoading(false);
+
+      navigate(from);
+
+      toast.success("register successful");
+      console.log(result);
 
     } catch (err) {
-     console.log(err)
+      console.log(err);
     }
-  }
+    console.log({ password, name });
+  };
 
-
-
-
-
-
+  const handleGoogleSignin = async () => {
+    try {
+      const { user } = await signInWithGoogleFunc();
+      console.log(user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-linear-to-br from-purple-900 via-black to-purple-900 flex items-center justify-center px-4 py-16">
@@ -55,7 +71,6 @@ const SignUp = () => {
 
         <div className="bg-black/10 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/10 p-10 animate-fade-in flex-1">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-
             {/* Name Field */}
             <div>
               <label className="block text-white/90 font-medium mb-2">
@@ -64,14 +79,14 @@ const SignUp = () => {
               <input
                 type="text"
                 placeholder="Enter your name"
-                {
-                    ...register('name' , {required:'Name is required'})
-                }
+                {...register("name", { required: "Name is required" })}
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
-             {
-                errors.name &&  <p className=" text-xs mt-2 text-red-500">{errors.name.message}</p>
-             }
+              {errors.name && (
+                <p className=" text-xs mt-2 text-red-500">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
 
             {/* Photo URL Field */}
@@ -81,17 +96,15 @@ const SignUp = () => {
               </label>
               <input
                 type="url"
-                {
-                    ...register('image' , {required:'Image url is required'})
-                }
+                {...register("image", { required: "Image url is required" })}
                 placeholder="https://example.com/your-photo.jpg"
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
-              {
-                errors.image && <p className="text-xs mt-2 text-red-500">{errors.image.message}</p> 
-              }
-              
-              
+              {errors.image && (
+                <p className="text-xs mt-2 text-red-500">
+                  {errors.image.message}
+                </p>
+              )}
             </div>
 
             {/* Email Field */}
@@ -102,14 +115,16 @@ const SignUp = () => {
               <input
                 type="email"
                 placeholder="you@example.com"
-                {
-                    ...register('email' , {required:'please enter a valid email'})
-                }
+                {...register("email", {
+                  required: "please enter a valid email",
+                })}
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
-              {
-                errors.email &&  <p className=" text-xs mt-2 text-red-500">{errors.email.message}</p>
-             }
+              {errors.email && (
+                <p className=" text-xs mt-2 text-red-500">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             {/* Password Field */}
@@ -120,18 +135,20 @@ const SignUp = () => {
               <input
                 type="password"
                 placeholder="••••••••"
-                {
-                    ...register('password' , {required:'Password is required', minLength: {
-                        value:6,
-                        message:'Password should be at least 6 characters long'
-                    }})
-                }
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password should be at least 6 characters long",
+                  },
+                })}
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
-              {
-                errors.password && <p className="text-red-500 text-xs mt-2">{errors.password.message}</p>
-              }
-              
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-2">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             {/* Submit Button */}
@@ -160,8 +177,11 @@ const SignUp = () => {
 
           <p className="text-center text-white/60 mt-8">
             Already have an account?{" "}
-           <NavLink to='/login' className="text-white font-semibold hover:text-purple-300 transition">
-                   Login
+            <NavLink
+              to="/login"
+              className="text-white font-semibold hover:text-purple-300 transition"
+            >
+              Login
             </NavLink>
           </p>
         </div>
