@@ -1,7 +1,46 @@
 import React from "react";
-import { NavLink } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
+import useAuth from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const Signin = () => {
+  const { signInWithGoogleFunc, signInWithEmailAndPassFunc , setLoading } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state || "/";
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit =async (data) => {
+        console.log(data);
+
+    const {email , password} = data;
+     await signInWithEmailAndPassFunc(email, password)
+     setLoading(false)
+     navigate(from)
+     toast.success('successfully Login');
+
+
+  };
+
+
+
+  const handleGoogleSignin = async () => {
+    try {
+      const { user } = await signInWithGoogleFunc();
+      console.log(user);
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message || "Google sign-in failed. Please try again.")
+    }
+  };
+
   return (
     <div className="min-h-screen bg-linear-to-br from-purple-900 via-black to-purple-900 flex items-center justify-center px-4 py-16">
       <div className="w-full max-w-md m-5">
@@ -15,9 +54,7 @@ const Signin = () => {
             <p className="text-white/70 text-lg">See Contest And Join!</p>
           </div>
 
-          <form onSubmit={"handleSubmit"} className="space-y-6">
-            {/* Name Field */}
-
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Email Field */}
             <div>
               <label className="block text-white/90 font-medium mb-2">
@@ -25,11 +62,16 @@ const Signin = () => {
               </label>
               <input
                 type="email"
-                name="email"
-                required
                 placeholder="you@example.com"
+                {...register("email", { required: "Email is required" })}
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
+
+              {errors.email && (
+                <p className="text-xs mt-2 text-red-500">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             {/* Password Field */}
@@ -39,13 +81,21 @@ const Signin = () => {
               </label>
               <input
                 type="password"
-                name="password"
-                required
                 placeholder="••••••••"
-                minLength="6"
+                {...register("password", {
+                  required: "password is required",
+                  minLength: {
+                    value: 6,
+                    message: "password should be at least 6 characters long",
+                  },
+                })}
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
-              <p className="text-white/50 text-xs mt-2">Minimum 6 characters</p>
+              {errors.password && (
+                <p className="text-xs mt-2 text-red-500">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             {/* Submit Button */}
@@ -60,7 +110,7 @@ const Signin = () => {
 
             <button
               type="button"
-              onClick={"handleGoogleSignin"}
+              onClick={handleGoogleSignin}
               className="flex items-center justify-center gap-3 w-full border border-white cursor-pointer text-white py-3 rounded-lg font-medium hover:bg-white/10 transition"
             >
               <img
