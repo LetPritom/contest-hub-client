@@ -12,7 +12,7 @@ const Menu = ({children , icon}) => {
           {/* user icon*/}
           <div className="icon text-lg">{icon}</div>
           
-          <span className="is-drawer-close:hidden text-lg">{children}</span>
+          <span className="is-drawer-close:hidden text-lg font-semibold">{children}</span>
         </button>
       </li>
     </div>

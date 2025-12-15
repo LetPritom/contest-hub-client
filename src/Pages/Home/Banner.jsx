@@ -1,53 +1,65 @@
-import React from 'react';
+import React from "react";
+import banner from '../../assets/banner.jpg'
+import LineParticles from "../../Components/LineParticles";
+import SnowLineParticles from "../../Components/SnowParticles";
 
 const Banner = () => {
+  return (
+    <div className="relative min-h-screen overflow-hidden flex items-center justify-center
+    bg-linear-to-br from-purple-900 via-black to-purple-900">
 
-  
-    return (
-      <>
-      <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-purple-900 via-black to-purple-900">
+      {/* Background Image */}
+      <img
+        src={banner}
+        alt="banner-bg"
+        className="absolute inset-0 w-full h-full object-cover
+        opacity-30 mix-blend-overlay animate-pulse"
+      />
 
-      {/* Glass Overlay */}
+       {/* <SnowLineParticles></SnowLineParticles> */}
+       <LineParticles />
 
-      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
+      {/* Particle Lines Layer */}
+      {/* <div className="absolute inset-0 pointer-events-none">
+        <div className="particle-lines"></div>
+      </div> */}
 
-      {/* Main Glass Card */}
-       
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/30"></div>
 
-      <div className="relative z-10 w-full max-w-4xl mx-4 px-8 py-12 text-center">
-        <div className="bg-black/20 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl px-10 py-16 animate-pulse-border">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-4xl px-8 py-12 text-center">
+        <div className="bg-black/10 backdrop-blur-md border border-white/20 
+        rounded-3xl px-10 py-16 shadow-2xl">
+
+          <h1 className="text-5xl font-bold text-white mb-6">
             Unlock Your Potential in Every Contest
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto font-medium">
-            Join Contest Hub — Where Challenges Meet Champions. Compete, Learn, Grow & Win Big!
+
+          <p className="text-xl text-white/80 mb-10">
+            Join Contest Hub — Where Challenges Meet Champions.
           </p>
 
-          {/* Search Bar */}
-
-          <div className="flex items-center justify-center max-w-2xl mx-auto animate-pulse">
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search contests by name, platform, prize..."
-                className="w-full px-8 py-5 pr-48 text-lg text-white placeholder-white/70 bg-white/15 backdrop-blur-md border border-white/30 rounded-full focus:outline-none focus:ring-4 focus:ring-white/30 focus:border-white/50 transition-all"
-              />
-              <button className="absolute right-2 top-2.5 px-8 py-3 bg-linear-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg cursor-pointer">
-                Search
-              </button>
-            </div>
+          <div className="relative max-w-2xl mx-auto">
+            <input
+              className="w-full px-8 py-5 pr-30 bg-white/15 text-white
+              placeholder-white/60 rounded-full backdrop-blur-md
+              border border-white/30 focus:outline-none animate-pulse"
+              placeholder="Search contests..."
+            />
+            <button
+              className="absolute right-2 top-2 px-5 py-3 rounded-full
+              bg-linear-to-r from-indigo-500 to-purple-600
+              text-white font-semibold hover:scale-105 transition cursor-pointer"
+            >
+              Search
+            </button>
           </div>
+
         </div>
       </div>
-
-      {/* Optional subtle decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 w-72 h-72 bg-purple-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl"></div>
-      </div>
-    </div></>
-       
-    );
+    </div>
+  );
 };
 
 export default Banner;

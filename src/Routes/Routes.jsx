@@ -14,6 +14,10 @@ import MyParticipatedContests from "../Pages/Dashboard/Users/MyParticipatedConte
 import AddContest from "../Pages/Dashboard/Seller/AddContest";
 import MyCreateContestPage from "../Pages/Dashboard/Seller/MyCreateContestPage";
 import SubmittedTasksPage from "../Pages/Dashboard/Seller/SubmittedTasksPage";
+
+import ManageContest from "../Pages/Dashboard/Admin/ManageContest";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+import MyWinningContests from "../Pages/Dashboard/Users/MyWinningContests";
 import EditContestPage from "../Pages/Dashboard/Seller/Editcontestpage";
 export const router = createBrowserRouter([
   {
@@ -69,6 +73,10 @@ export const router = createBrowserRouter([
         element: <MyParticipatedContests></MyParticipatedContests>,
       },
       {
+        path:'my-winning',
+        element: <MyWinningContests></MyWinningContests>,
+      },
+      {
         path:'add-Contest',
         element: <AddContest></AddContest>,
       },
@@ -83,6 +91,14 @@ export const router = createBrowserRouter([
       {
         path:'edit-contest',
         element:<EditContestPage></EditContestPage>
+      },
+      {
+        path:'manage-contest',
+        element:<ManageContest></ManageContest>
+      },
+      {
+        path:'manage-users',
+        element:<ManageUsers></ManageUsers>
       },
     ],
   },

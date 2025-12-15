@@ -58,7 +58,6 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  if(loading)  return <LoaderSpinner></LoaderSpinner>
 
   return (
     <Container className="border-b border-gray-300">

@@ -3,7 +3,7 @@ import React from 'react';
 const EditContestPage = () => {
     return (
         <div>
-           edit my contest page
+           edit my contest page 
         </div>
     );
 };

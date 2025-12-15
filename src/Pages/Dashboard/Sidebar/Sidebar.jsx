@@ -1,15 +1,33 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
-import Menu from "./Menu";
+import { MdPerson } from "react-icons/md";
 import UserSidebar from "./UserSidebar/UserSidebar";
 import SellerSidebar from "./SellerSidebar/SellerSidebar";
+import AdminSidebar from "./AdminSidebar/AdminSidebar";
+import { IoIosLogOut } from "react-icons/io";
+import useAuth from "../../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Sidebar = () => {
+
+    const {logoutFunction , setLoading} = useAuth()
+     const handleLogOut = async() => {
+          try {
+           await logoutFunction()
+           setLoading(false)
+           return toast.success("Logout");
+    
+          } catch (err) {
+            toast.error(err.message)
+          }
+         
+    
+        };
   return (
     <div>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open ">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-content ">
           {/* Navbar */}
           <nav className="navbar w-full bg-base-300">
             <label
@@ -49,34 +67,36 @@ const Sidebar = () => {
             {/* Sidebar content here */}
 
             <ul className="menu w-full grow flex flex-col gap-2">
+              <UserSidebar></UserSidebar>
+              <SellerSidebar></SellerSidebar>
+              <AdminSidebar></AdminSidebar>
 
-                <UserSidebar></UserSidebar>
-                <SellerSidebar></SellerSidebar>
-
-              {/* update profile */} 
+              {/* update profile */}
               <hr />
-              <li>
+
+              <NavLink to="/profile">
+                <li>
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Settings"
+                  >
+                    {/* Settings icon */}
+                    <MdPerson className="text-lg" />
+                    <span className="is-drawer-close:hidden text-lg font-semibold">
+                      Profile
+                    </span>
+                  </button>
+                </li>
+              </NavLink>
+
+              <li onClick={handleLogOut} className="">
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Settings"
                 >
-                  {/* Settings icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                    className="my-1.5 inline-block size-4"
-                  >
-                    <path d="M20 7h-9"></path>
-                    <path d="M14 17H5"></path>
-                    <circle cx="17" cy="17" r="3"></circle>
-                    <circle cx="7" cy="7" r="3"></circle>
-                  </svg>
-                  <span className="is-drawer-close:hidden">Profile</span>
+                  {/* logout*/}
+                  <IoIosLogOut className="text-lg" />
+                  <span className="is-drawer-close:hidden text-lg font-semibold">Logout</span>
                 </button>
               </li>
             </ul>
