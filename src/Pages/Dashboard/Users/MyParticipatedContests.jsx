@@ -3,7 +3,7 @@ import React from 'react';
 const MyParticipatedContests = () => {
     return (
         <div>
-            my participate 
+            my participate
         </div>
     );
 };

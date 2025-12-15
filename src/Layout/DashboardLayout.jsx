@@ -1,9 +1,12 @@
 import React from 'react';
+import Sidebar from '../Pages/Dashboard/Sidebar/Sidebar';
+import Navbar from '../Components/Navbar/Navbar';
 
 const DashboardLayout = () => {
     return (
         <div>
-            <h1>hello im from DashboardLayout</h1>
+            <Navbar></Navbar>
+           <Sidebar></Sidebar>
         </div>
     );
 };

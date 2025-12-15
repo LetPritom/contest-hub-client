@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Editcontestpage = () => {
+const EditContestPage = () => {
     return (
         <div>
            edit my contest page
@@ -8,4 +8,4 @@ const Editcontestpage = () => {
     );
 };
 
-export default Editcontestpage;
+export default EditContestPage;

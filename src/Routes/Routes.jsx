@@ -9,6 +9,12 @@ import AllContest from "../Pages/AllContest/AllContest";
 import DashboardLayout from "../Layout/DashboardLayout";
 import ContestDetails from "../Pages/ContestDetails/ContestDetails";
 import Private from "../Private/Private";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import MyParticipatedContests from "../Pages/Dashboard/Users/MyParticipatedContests";
+import AddContest from "../Pages/Dashboard/Seller/AddContest";
+import MyCreateContestPage from "../Pages/Dashboard/Seller/MyCreateContestPage";
+import SubmittedTasksPage from "../Pages/Dashboard/Seller/SubmittedTasksPage";
+import EditContestPage from "../Pages/Dashboard/Seller/Editcontestpage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -48,11 +54,35 @@ export const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <Private>
+        <DashboardLayout></DashboardLayout>
+      </Private>
+    ),
     children: [
       {
         index: true,
-        element: <p>ami all time achi</p>,
+        element: <Dashboard></Dashboard>,
+      },
+      {
+        path:'my-participate',
+        element: <MyParticipatedContests></MyParticipatedContests>,
+      },
+      {
+        path:'add-Contest',
+        element: <AddContest></AddContest>,
+      },
+      {
+        path:'created-Contests',
+        element: <MyCreateContestPage></MyCreateContestPage>,
+      },
+      {
+        path:'submitted-Tasks',
+        element: <SubmittedTasksPage></SubmittedTasksPage>
+      },
+      {
+        path:'edit-contest',
+        element:<EditContestPage></EditContestPage>
       },
     ],
   },

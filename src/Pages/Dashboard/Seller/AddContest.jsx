@@ -3,7 +3,7 @@ import React from 'react';
 const AddContest = () => {
     return (
         <div>
-            add
+            addjk
         </div>
     );
 };
