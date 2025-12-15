@@ -1,14 +1,18 @@
 import React from 'react';
 
 const Banner = () => {
+
+  
     return (
-       <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-purple-900 via-black to-purple-900">
+      <>
+      <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-purple-900 via-black to-purple-900">
 
       {/* Glass Overlay */}
 
       <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
 
       {/* Main Glass Card */}
+       
 
       <div className="relative z-10 w-full max-w-4xl mx-4 px-8 py-12 text-center">
         <div className="bg-black/20 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl px-10 py-16 animate-pulse-border">
@@ -41,7 +45,8 @@ const Banner = () => {
         <div className="absolute top-10 left-10 w-72 h-72 bg-purple-400/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl"></div>
       </div>
-    </div>
+    </div></>
+       
     );
 };
 

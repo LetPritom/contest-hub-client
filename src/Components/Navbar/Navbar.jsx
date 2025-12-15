@@ -1,27 +1,37 @@
-import { useEffect, useState } from "react";
-
-import { AuthContext } from "../../Providers/AuthContext";
+import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/logo.png";
 import { NavLink } from "react-router";
 import { GoHomeFill } from "react-icons/go";
 import { FaBookOpenReader, FaUsersViewfinder } from "react-icons/fa6";
-import { MdOutlineCreateNewFolder } from "react-icons/md";
+import { MdOutlineCreateNewFolder, MdOutlineLogout, MdOutlineSpaceDashboard } from "react-icons/md";
 import Container from "../Container";
+import useAuth from "../../hooks/useAuth";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { toast } from "react-toastify";
+import LoaderSpinner from "../Loader/LoaderSpinner";
 
 const Navbar = () => {
-  //   const { user, logoutFunction, loading } = useAuth(AuthContext);
-  //   console.log(user);
-  //   const handleLogOut = () => {
-  //     logoutFunction()
-  //       .then(() => {
-  //         return toast.success("Logout");
-  //       })
-  //       .catch((err) => {
-  //         toast.error(err);
-  //       });
-  //   };
+  const { user, logoutFunction, loading, setLoading} = useAuth();
+
+  
+    console.log(user);
+    const handleLogOut = async() => {
+      try {
+       await logoutFunction()
+       setOpen(false)
+       setLoading(false)
+       return toast.success("Logout");
+
+      } catch (err) {
+        toast.error(err.message)
+      }
+     
+
+    };
   const [dark, setDark] = useState("");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+
 
   useEffect(() => {
     const html = document.querySelector("html");
@@ -33,6 +43,22 @@ const Navbar = () => {
     setDark(checked);
     setTheme(checked ? "dark" : "light");
   };
+
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // outside click close
+  useEffect(() => {
+    const handler = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  if(loading)  return <LoaderSpinner></LoaderSpinner>
 
   return (
     <Container className="border-b border-gray-300">
@@ -154,7 +180,6 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end">
-
             {/* theme toggle button */}
             <div
               className={`theme flex gap-1 items-center mx-2  px-2 py-2 border  ${
@@ -171,50 +196,78 @@ const Navbar = () => {
               />
             </div>
 
-
-            (
-            <div className="img">
-              <button
-                className="cursor-pointer"
-                popoverTarget="popover-1"
-                style={{ anchorName: "--anchor-1" }}
+            {user ? (
+              <div
+                className="relative z-50 hover:bg-purple-600/20 p-1 rounded-full transition duration-400 "
+                ref={dropdownRef}
               >
-                {/* <img
-                  className="h-10 w-10 rounded-full"
-                  src={''}
-                  alt="user-image"
-                /> */}
-              </button>
+                {/* Avatar */}
+                <button
+                  onClick={() => setOpen(!open)}
+                  className="focus:outline-none flex items-center gap-2 p-1 cursor-pointer"
+                >
 
-              <ul
-                className="dropdown menu w-32 flex flex-col justify-center rounded-lg bg-white shadow-sm"
-                popover="auto"
-                id="popover-1"
-                style={{ positionAnchor: "--anchor-1" }}
-              >
-                <div className="down flex flex-col justify-center">
-                  <NavLink to="/profile">
-                    <p className="text-sm font-semibold my-2">Profile</p>
-                  </NavLink>
-                </div>
+                  {
+                    !loading && user &&  <img
+                    src={user?.photoURL}
+                    alt="user"
+                    className="h-8 w-8 rounded-full ring-2 ring-purple-500 
+                              hover:ring-purple-400 transition"
+                              
+                  />
+                  }
+                 
+                  <RiArrowDropDownLine className="text-2xl cursor-pointer" />
+                </button>
 
-                <div className="button">
-                  <button
-                    onClick={"handleLogOut"}
-                    className="border border-[#f55a00] bg-transparent text-[#2563EB]  
-                         px-3 py-1.5 rounded-lg cursor-pointer font-semibold
-                        hover:text-[#f55a00] hover:border-[#2563EB]
-                        transition-all duration-200 ease-in-out shadow-sm hover:shadow-md"
-                  >
-                    Log Out
-                  </button>
+                {/* Dropdown */}
+                <div
+                  className={`absolute right-0 mt-3 w-56 rounded-xl
+                  bg-linear-to-b from-purple-900/40 via-black to-purple-900/40
+                text-white shadow-xl border border-purple-700/40
+                  transform transition-all duration-200 ease-out
+                  ${
+                    open
+                      ? "scale-100 opacity-100"
+                      : "scale-95 opacity-0 pointer-events-none"
+                  }`}
+                >
+                  {/* User info */}
+                  <div className="px-4 py-3 border-b border-purple-700/40">
+                    <p
+                      className="text-sm font-semibold truncate"
+                      title={user?.displayName}
+                    >
+                      {user.displayName}
+                    </p>
+                  </div>
+
+                  {/* Menu */}
+                  <div className="flex flex-col px-2 py-2">
+                    <NavLink
+                      to="/dashboard"
+                      className="px-3 py-2 rounded-lg text-sm font-medium cursor-pointer
+                    hover:bg-purple-700/30 transition flex items-center gap-2"
+                      onClick={() => setOpen(false)}
+                    >
+                      <MdOutlineSpaceDashboard />
+                      Dashboard
+                    </NavLink>
+                    <button
+                      onClick={handleLogOut}
+                      className="px-3 py-2 rounded-lg text-sm font-medium text-red-500 hover:text-white
+                    hover:bg-purple-700/30 transition flex items-center gap-2 cursor-pointer"
+                    >
+                      <MdOutlineLogout />
+                      Logout
+                    </button>
+                  </div>
                 </div>
-              </ul>
-            </div>
+              </div>
             ) : (
-            <NavLink to="/login">
-              <button
-                className="
+              <NavLink to="/login">
+                <button
+                  className="
                     relative px-5 py-2 rounded-xl font-semibold text-md
                     text-white
                     bg-linear-to-r from-blue-600 via-indigo-600 to-purple-500
@@ -227,15 +280,15 @@ const Navbar = () => {
                     active:scale-95
                     cursor-pointer
 "
-              >
-                {/* Shiny effect (optional but pro lagbe) */}
-                <span className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
+                >
+                  {/* Shiny effect (optional but pro lagbe) */}
+                  <span className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
 
-                {/* Button text */}
-                <span className="relative z-10">Login</span>
-              </button>
-            </NavLink>
-            )
+                  {/* Button text */}
+                  <span className="relative z-10">Login</span>
+                </button>
+              </NavLink>
+            )}
           </div>
         </div>
       </div>

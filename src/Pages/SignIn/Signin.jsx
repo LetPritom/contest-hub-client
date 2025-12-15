@@ -34,6 +34,7 @@ const Signin = () => {
   const handleGoogleSignin = async () => {
     try {
       const { user } = await signInWithGoogleFunc();
+      navigate(from)
       console.log(user);
     } catch (err) {
       console.log(err);
