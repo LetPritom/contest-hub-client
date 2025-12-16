@@ -1,9 +1,12 @@
 import React from 'react';
+import TableData from '../TableData/TableData';
+import LineParticles from '../../../Components/LineParticles';
 
 const MyParticipatedContests = () => {
     return (
         <div>
-            my participate
+            <LineParticles></LineParticles>
+          <TableData></TableData>
         </div>
     );
 };
