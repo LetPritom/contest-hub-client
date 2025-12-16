@@ -7,35 +7,40 @@ import AdminSidebar from "./AdminSidebar/AdminSidebar";
 import { IoIosLogOut } from "react-icons/io";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
-
+import LineParticles from "../../../Components/LineParticles";
+import { GoHomeFill } from "react-icons/go";
 const Sidebar = () => {
-
-    const {logoutFunction , setLoading} = useAuth()
-     const handleLogOut = async() => {
-          try {
-           await logoutFunction()
-           setLoading(false)
-           return toast.success("Logout");
-    
-          } catch (err) {
-            toast.error(err.message)
-          }
-         
-    
-        };
+  const { logoutFunction, setLoading } = useAuth();
+  const handleLogOut = async () => {
+    try {
+      await logoutFunction();
+      setLoading(false);
+      return toast.success("Logout");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
   return (
-    <div>
-      <div className="drawer lg:drawer-open ">
+    <div className="min-h-screen bg-linear-to-br from-[#17002e] via-[#07000f] to-[#340575] overflow-x-hidden">
+      {/* <LineParticles></LineParticles> */}
+      <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content ">
-          {/* Navbar */}
-          <nav className="navbar w-full bg-base-300">
+
+        {/* ================= MAIN CONTENT ================= */}
+        <div className="drawer-content flex flex-col">
+          {/* ===== NAVBAR ===== */}
+          <nav
+            className="navbar w-full
+              bg-linear-to-r from-purple-900/40 via-black/30 to-purple-900/40
+              backdrop-blur-2xl border-b border-purple-400/20
+              shadow-[0_1px_10px_rgba(88,28,135,0.35)]
+              lg:sticky lg:top-0 z-50 "
+          >
             <label
               htmlFor="my-drawer-4"
               aria-label="open sidebar"
-              className="btn btn-square btn-ghost"
+              className="btn btn-square btn-ghost text-white"
             >
-              {/* Sidebar toggle icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -44,59 +49,96 @@ const Sidebar = () => {
                 strokeWidth="2"
                 fill="none"
                 stroke="currentColor"
-                className="my-1.5 inline-block size-4"
+                className="size-5"
               >
                 <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
                 <path d="M9 4v16"></path>
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
-            <h1 className="px-4">ContestHub Dashboard</h1>
+
+            <h1
+              className="px-4 text-xl md:text-2xl font-extrabold
+          bg-linear-to-r from-purple-300 to-indigo-400
+          bg-clip-text text-transparent drop-shadow"
+            >
+              ContestHub Dashboard
+            </h1>
           </nav>
-          {/* Page content here */}
-          <Outlet></Outlet>
+
+          {/* ===== PAGE CONTENT ===== */}
+          <div className="flex-1 p-4 md:p-8">
+            <Outlet />
+          </div>
         </div>
 
-        <div className="drawer-side is-drawer-close:overflow-visible">
+        {/* ================= SIDEBAR ================= */}
+        <div className="mt-15 sm:mt-0 drawer-side is-drawer-close:overflow-visible">
           <label
             htmlFor="my-drawer-4"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-            {/* Sidebar content here */}
 
-            <ul className="menu w-full grow flex flex-col gap-2">
-              <UserSidebar></UserSidebar>
-              <SellerSidebar></SellerSidebar>
-              <AdminSidebar></AdminSidebar>
+          <div
+            className="flex min-h-full flex-col items-start
+        bg-linear-to-b from-purple-900/40 via-black/40 to-purple-900/30
+        backdrop-blur-2xl border-r border-purple-400/20
+        shadow-[0px_2_10px_rgba(88,28,135,0.45)]
+        is-drawer-close:w-14 is-drawer-open:w-64 transition-all duration-300"
+          >
+            {/* ===== SIDEBAR MENU ===== */}
+            <ul className="menu w-full grow flex flex-col gap-2 p-3 text-white">
+              {/* existing role-based sidebars (UNCHANGED) */}
+              {/* home link */}
+              
 
-              {/* update profile */}
-              <hr />
+              <UserSidebar />
+              <SellerSidebar />
+              <AdminSidebar />
 
+              <hr className="border-purple-400/20 my-3" />
+
+              {/* ===== PROFILE ===== */}
               <NavLink to="/profile">
-                <li>
-                  <button
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Settings"
-                  >
-                    {/* Settings icon */}
-                    <MdPerson className="text-lg" />
-                    <span className="is-drawer-close:hidden text-lg font-semibold">
-                      Profile
-                    </span>
-                  </button>
-                </li>
+                {({ isActive }) => (
+                  <li>
+                    <button
+                      className={`
+                    flex items-center gap-3 px-3 py-2 rounded-xl transition-all
+                    ${
+                      isActive
+                        ? "bg-linear-to-r from-purple-600/40 to-indigo-600/30 shadow-lg"
+                        : "hover:bg-purple-600/20"
+                    }
+                    is-drawer-close:tooltip is-drawer-close:tooltip-right
+                  `}
+                      data-tip="Profile"
+                    >
+                      <MdPerson className="text-xl text-purple-300" />
+                      <span className="is-drawer-close:hidden text-base font-semibold">
+                        Profile
+                      </span>
+                    </button>
+                  </li>
+                )}
               </NavLink>
 
-              <li onClick={handleLogOut} className="">
+              {/* ===== LOGOUT ===== */}
+              <li>
                 <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Settings"
+                  onClick={handleLogOut}
+                  className="
+                flex items-center gap-3 px-3 py-2 rounded-xl transition-all
+                hover:bg-red-500/20
+                is-drawer-close:tooltip is-drawer-close:tooltip-right
+              "
+                  data-tip="Logout"
                 >
-                  {/* logout*/}
-                  <IoIosLogOut className="text-lg" />
-                  <span className="is-drawer-close:hidden text-lg font-semibold">Logout</span>
+                  <IoIosLogOut className="text-xl text-red-400" />
+                  <span className="is-drawer-close:hidden text-base font-semibold">
+                    Logout
+                  </span>
                 </button>
               </li>
             </ul>

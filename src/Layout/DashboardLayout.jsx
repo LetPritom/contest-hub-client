@@ -4,8 +4,9 @@ import Navbar from '../Components/Navbar/Navbar';
 
 const DashboardLayout = () => {
     return (
-        <div>
-            <Navbar></Navbar>
+        <div className=''>
+            {/* <Navbar></Navbar> */}
+            
            <Sidebar></Sidebar>
         </div>
     );
