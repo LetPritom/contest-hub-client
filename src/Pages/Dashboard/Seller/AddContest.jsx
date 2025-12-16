@@ -26,7 +26,7 @@ const AddContest = () => {
           Create New Contest
         </h2>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 ">
           {/* Name */}
           <div>
             <label className="block text-sm font-medium text-purple-200 mb-2">
