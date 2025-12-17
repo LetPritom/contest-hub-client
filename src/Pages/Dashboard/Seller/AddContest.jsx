@@ -4,22 +4,112 @@ import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import LineParticles from "../../../Components/LineParticles";
+import { imageUpload } from "../../../Utils";
+import { toast } from "react-toastify";
+import axios from "axios";
+import useAuth from "../../../hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import ErrorPage from "../../../ErrorPage/ErrorPage";
+import {BeatLoader} from 'react-spinners'
 
 const AddContest = () => {
+  const { user } = useAuth();
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
+    reset,
   } = useForm({});
 
-  const onSubmit = (data) => {
-    console.log(data);
-    alert("Contest created successfully! 🎉");
+  const {
+    isError,
+    mutateAsync,
+    isPending,
+    reset: mutationReset,
+  } = useMutation({
+    mutationFn: async (payload) =>
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/pending-contest`,
+        payload
+      ),
+    onSuccess: (data) => {
+      console.log(data);
+      toast.success("Contest create Successfully");
+      mutationReset();
+    },
+
+    onError: (error) => {
+      console.log(error);
+    },
+
+    onMutate: (payload) => console.log(payload),
+  });
+
+  if (isError) return <ErrorPage></ErrorPage>;
+
+  const onSubmit = async (data) => {
+    const {
+      name,
+      image,
+      description,
+      price,
+      prizeMoney,
+      contestType,
+      deadline,
+      taskInstruction,
+    } = data;
+    const imageFile = image[0];
+    try {
+      const imageUrl = await imageUpload(imageFile);
+      console.log(imageUrl);
+      const contestData = {
+        name,
+        image: imageUrl,
+        description,
+        price: Number(price),
+        participant: 0,
+        prizeMoney,
+        contestType,
+        taskInstruction,
+        deadline: deadline.getTime(),
+        status:'pending',
+        create_by: {
+          name: user.displayName,
+          image: user.photoURL,
+          email: user.email,
+        },
+      };
+
+      mutateAsync(contestData);
+      reset();
+
+      console.log(contestData);
+
+      // await axios.post(
+      //   `${import.meta.env.VITE_API_URL}/pending-contest`,
+      //   contestData
+      // );
+      // toast.success("contest create is successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("create is failed");
+    }
+    console.log({
+      name,
+      imageFile,
+      description,
+      price,
+      prizeMoney,
+      contestType,
+      deadline,
+      taskInstruction,
+    });
   };
   return (
     <div className="min-h-screen  flex items-center justify-center py-5">
-        <LineParticles></LineParticles>
+      <LineParticles></LineParticles>
       {/* Glass Card */}
       <div className="w-full max-w-3xl backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl shadow-2xl p-10">
         <h2 className="text-4xl font-bold text-center mb-10 text-white bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text">
@@ -33,7 +123,7 @@ const AddContest = () => {
               Contest Name
             </label>
             <input
-              {...register("name" , {required:'Contest name is required'})}
+              {...register("name", { required: "Contest name is required" })}
               className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:ring-4 focus:ring-purple-500/20 transition"
               placeholder="contest Name"
             />
@@ -51,7 +141,9 @@ const AddContest = () => {
               <input
                 type="file"
                 accept="image/*"
-                {...register("image" , {required:'Contest image is required'})}
+                {...register("image", {
+                  required: "Contest image is required",
+                })}
                 className="hidden"
                 id="image"
               />
@@ -77,7 +169,9 @@ const AddContest = () => {
                 Description
               </label>
               <textarea
-                {...register("description" , {required: 'Description is required'})}
+                {...register("description", {
+                  required: "Description is required",
+                })}
                 rows={4}
                 className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:ring-4 focus:ring-purple-500/20"
                 placeholder="What is this contest about?"
@@ -89,12 +183,16 @@ const AddContest = () => {
               )}
             </div>
 
+            {/* task instruction */}
+
             <div>
               <label className="block text-sm font-medium text-purple-200 mb-2">
                 Task Instruction
               </label>
               <textarea
-                {...register("taskInstruction" , {required: 'Task instruction is required'})}
+                {...register("taskInstruction", {
+                  required: "Task instruction is required",
+                })}
                 rows={4}
                 className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:ring-4 focus:ring-purple-500/20"
                 placeholder="What should participants submit?"
@@ -228,12 +326,16 @@ const AddContest = () => {
           </div>
 
           {/* Submit Button - Gradient Glow */}
-          <button
-            type="submit"
-            className="w-full py-5 mt-10 text-lg font-bold text-white rounded-xl bg-linear-to-r from-indigo-600 to-purple-700  shadow-lg hover:shadow-blue-500/10 transform hover:scale-105 transition duration-300 cursor-pointer"
-          >
-            Launch Contest 🚀
-          </button>
+
+  
+            <button
+              type="submit"
+              className="w-full py-5 mt-10 text-lg font-bold text-white rounded-xl bg-linear-to-r from-indigo-600 to-purple-700  shadow-lg hover:shadow-blue-500/10 transform hover:scale-105 transition duration-300 cursor-pointer"
+            >
+              {isPending ? <BeatLoader color="white" /> : 'Launch Contest 🚀'}
+              
+            </button>
+         
         </form>
       </div>
     </div>
