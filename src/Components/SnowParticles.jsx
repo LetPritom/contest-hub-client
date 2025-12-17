@@ -15,7 +15,7 @@ const SnowParticles = () => {
     window.addEventListener("resize", resize);
 
     const snowflakes = [];
-    const COUNT =150;
+    const COUNT =120;
 
     for (let i = 0; i < COUNT; i++) {
       snowflakes.push({

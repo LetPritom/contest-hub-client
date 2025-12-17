@@ -15,29 +15,25 @@
 
 
 
-
-/* Particle moving lines */
-.particle-lines {
-  position: absolute;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(
-      120deg,
-      rgba(168, 85, 247, 0.12) 0px,
-      rgba(168, 85, 247, 0.12) 1px,
-      transparent 1px,
-      transparent 120px
-    );
-  background-size: 200% 200%;
-  animation: particleMove 25s linear infinite;
-  opacity: 0.35;
-}
-
-@keyframes particleMove {
-  0% {
-    background-position: 0% 0%;
+.btn-custom {
+    @apply 
+      w-full py-4
+      bg-linear-to-r from-indigo-600 to-purple-700
+      text-white font-bold text-lg
+      rounded-xl
+      shadow-lg
+      transform transition-all duration-300
+      cursor-pointer;
   }
-  100% {
-    background-position: 200% 200%;
+
+
+  
+  .btn-custom:hover {
+    @apply 
+
+      scale-103
+      shadow-purple-500/10;
   }
-}
+
+
+

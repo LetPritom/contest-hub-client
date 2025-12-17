@@ -1,20 +1,58 @@
 import axios from "axios";
 import React from "react";
+import { useParams } from "react-router";
 import { toast } from "react-toastify";
-
+import Swal from "sweetalert2";
 
 const TableData = ({ pending, refetch }) => {
-  const { image, name, contestType, prizeMoney, create_by, price, _id } = pending;
+  const { id } = useParams();
+  console.log(id);
 
-  const handleApprove = async() =>  {
-    await axios.patch(`${import.meta.env.VITE_API_URL}/approve-contest`, {_id})
-    refetch()
-    toast.success('Approved')
-  }
+  const { image, name, contestType, prizeMoney, create_by, price, _id } =
+    pending;
+
+  const handleApprove = async () => {
+    try {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/approve-contest`, {
+        _id,
+      });
+      refetch();
+      toast.success("Approved");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(
+            `${import.meta.env.VITE_API_URL}/delete-contest/${_id}`
+          );
+
+          Swal.fire({
+            title: "Deleted!",
+            text: "Pending Contest Deleted.",
+            icon: "success",
+          });
+          refetch();
+        } catch (err) {
+          toast.error(err.message, "Failed Delete");
+        }
+      }
+    });
+  };
 
   return (
-
-    
     <div className="w-11/12 max-w-7xl mx-auto my-10">
       {/* Mobile Card */}
       <div className="block lg:hidden">
@@ -120,21 +158,21 @@ const TableData = ({ pending, refetch }) => {
               </td>
 
               <td className="text-center space-x-3">
-
                 {/* approve */}
 
-                <button 
-                onClick={handleApprove}
-                className="btn btn-sm bg-green-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 rounded-lg">
+                <button
+                  onClick={handleApprove}
+                  className="btn btn-sm bg-green-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 rounded-lg"
+                >
                   Approve
                 </button>
 
                 {/* delete */}
 
-
                 <button
-                onClick={''}
-                 className="btn btn-sm bg-red-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:bg-red-700 hover:scale-105 transition-all duration-300 rounded-lg">
+                  onClick={handleDelete}
+                  className="btn btn-sm bg-red-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:bg-red-700 hover:scale-105 transition-all duration-300 rounded-lg"
+                >
                   Delete
                 </button>
               </td>
