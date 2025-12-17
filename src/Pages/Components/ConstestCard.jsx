@@ -6,9 +6,12 @@ import { MdEmojiPeople } from "react-icons/md";
 
 const ConstestCard = ({contest}) => {
 
-  const {image , name , description , participant, contestType} = contest;
+  const {image , name , description , participant, contestType ,_id} = contest;
   const shortDes = description.slice(0  , 50) 
   console.log(shortDes)
+
+
+
 
   
   return (
@@ -61,7 +64,7 @@ const ConstestCard = ({contest}) => {
           </div>
 
           {/* create partner profile button */}
-          <NavLink to={`/partnersDetails/${8}`}>
+          <NavLink to={`/detail-contest/${_id}`}>
             <button className="w-full mt-4 py-3 btn-custom text-white font-bold rounded-xl hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-md cursor-pointer">
               View Profile
             </button>
