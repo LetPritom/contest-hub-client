@@ -1,13 +1,45 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import React from "react";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const RegisterModal = ({ isOpen, closeModal, ContestDetails }) => {
 
     const{user} = useAuth()
 
-    const {name , contestType , price} = ContestDetails;
+    const {name , image, contestType , price , _id , prizeMoney , description , create_by} = ContestDetails;
     console.log(name)
+
+
+    const handlePayment =async () => {
+      const paymentInfo  = {
+            contestId : _id,
+            contestType,
+            name,
+            price,
+            image,
+            prizeMoney,
+            description,
+            register:'done',
+            create_by,
+            participant : {
+                name: user?.displayName,
+                image:user?.photoURL,
+                email:user?.email,
+
+            }
+
+        }
+
+        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/create-checkout-session` , paymentInfo) 
+        console.log(data)
+        window.location.href = data.url
+
+        
+    }
+
+
+
   return (
     <Dialog
       open={isOpen}
@@ -63,7 +95,7 @@ const RegisterModal = ({ isOpen, closeModal, ContestDetails }) => {
         {/* Buttons */}
         <div className="flex gap-4 mt-8">
           <button
-            onClick={'handlePayment'} // তোর function name change করিস যদি অন্য হয়
+            onClick={handlePayment} // তোর function name change করিস যদি অন্য হয়
             className="flex-1 py-4 text-lg font-bold text-white cursor-pointer rounded-2xl bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 shadow-lg hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300 "
           >
             Confirm & Pay

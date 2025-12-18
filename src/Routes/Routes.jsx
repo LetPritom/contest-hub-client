@@ -19,6 +19,7 @@ import ManageContest from "../Pages/Dashboard/Admin/ManageContest";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import MyWinningContests from "../Pages/Dashboard/Users/MyWinningContests";
 import EditContestPage from "../Pages/Dashboard/Seller/Editcontestpage";
+import PaymentSuccess from "../Pages/Pyment/PaymentSuccess";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/all-contest",
         element: <AllContest></AllContest>,
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccess></PaymentSuccess>,
       },
       {
         path: "/detail-contest/:id",
