@@ -1,8 +1,10 @@
 import React from 'react';
+import { useParams } from 'react-router';
 
 const ContestDetails = () => {
 
-    
+    const {id} = useParams()
+    console.log(id);
     return (
     <div className="min-h-screen bg-linear-to-br from-purple-950  via-black to-blue-900/80 py-12 px-4">
       {/* Main Glass Container */}
