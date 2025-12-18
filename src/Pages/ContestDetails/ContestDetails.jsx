@@ -5,14 +5,22 @@ import LoaderSpinner from "../../Components/Loader/LoaderSpinner";
 import CountDown from "./CountDown";
 import RegisterModal from "../Modal/RegisterModal";
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import TaskModal from "../Modal/TaskModal";
 
 const ContestDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [submit , setSubmit] = useState(false)
   const [expired, setExpired] = useState(false);
+
+
   const closeModal = () => setIsOpen(false);
+  const cancelSubmit =() => setSubmit(false)
+  
 
   const { id } = useParams();
   console.log(id);
+  const {user} = useAuth()
 
   const { data: ContestDetails = {}, isPending } = useQuery({
     queryKey: ["contest", id],
@@ -24,13 +32,11 @@ const ContestDetails = () => {
     },
   });
 
-  console.log(ContestDetails);
 
   const {
     name,
     image,
     description,
-    contestType,
     deadline,
     participant,
     price,
@@ -38,19 +44,31 @@ const ContestDetails = () => {
     taskInstruction,
   } = ContestDetails;
 
-  console.log({
-    name,
-    image,
-    description,
-    contestType,
-    deadline,
-    participant,
-    price,
-    prizeMoney,
-    taskInstruction,
+    const { data: taskAllow = {} } = useQuery({
+    queryKey: ["task", id],
+    queryFn: async () => {
+      const result = await axios(
+        `${import.meta.env.VITE_API_URL}/submit-task?email=${user?.email}&contestId=${id}`
+      );
+
+         return result.data;
+      
+      
+    },
   });
 
+  const { participant_email} = taskAllow;
+
+
+
+
+
+
+
+
   if (isPending) return <LoaderSpinner></LoaderSpinner>;
+
+  
 
   return (
     <div className="min-h-screen bg-linear-to-br from-purple-950  via-black to-blue-900/80 py-12 px-4">
@@ -153,9 +171,19 @@ const ContestDetails = () => {
                   closeModal={closeModal}
                 ></RegisterModal>
 
-                <button className="w-full py-3 text-xl font-bold text-white rounded-2xl bg-transparent backdrop-blur-2xl border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer ">
+
+                {
+                  participant_email === user?.email &&  <button 
+                  onClick={() => setSubmit(true)}
+                  className="w-full py-3 text-xl font-bold text-white rounded-2xl bg-transparent backdrop-blur-2xl border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer ">
                   Submit Your Task
                 </button>
+                }
+
+
+                <TaskModal submit={submit} cancelSubmit={cancelSubmit}></TaskModal>
+
+               
 
                 {/* If ended or already registered, disable buttons */}
                 {/* <button disabled className="w-full py-5 text-xl font-bold text-gray-500 bg-gray-700 rounded-2xl cursor-not-allowed">

@@ -7,7 +7,7 @@ const RegisterModal = ({ isOpen, closeModal, ContestDetails }) => {
 
     const{user} = useAuth()
 
-    const {name , image, contestType , price , _id , prizeMoney , description , create_by} = ContestDetails;
+    const {name , image, contestType , price , _id , prizeMoney , description , create_by, deadline} = ContestDetails;
     console.log(name)
 
 
@@ -22,6 +22,7 @@ const RegisterModal = ({ isOpen, closeModal, ContestDetails }) => {
             description,
             register:'done',
             create_by,
+            deadline,
             participant : {
                 name: user?.displayName,
                 image:user?.photoURL,

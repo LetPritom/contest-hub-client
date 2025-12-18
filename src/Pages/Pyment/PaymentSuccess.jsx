@@ -1,24 +1,41 @@
-import React from 'react';
-import { useNavigate } from 'react-router';
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router";
 
 const PaymentSuccess = () => {
+  const [searchParams] = useSearchParams();
+  const sessionId = searchParams.get("session_id");
+  console.log(sessionId);
 
-    const navigate = useNavigate()
-    return (
-        <div className="min-h-screen bg-linear-to-br from-purple-950 via-black to-pink-950 flex items-center justify-center p-6">
-      
+  useEffect(() => {
+    if(sessionId) {
+        axios.post(`${import.meta.env.VITE_API_URL}/payment-success` ,{sessionId})
+    }
+  }, [sessionId]);
+
+  const navigate = useNavigate();
+  return (
+    <div className="min-h-screen bg-linear-to-br from-purple-950 via-black to-pink-950 flex items-center justify-center p-6">
       {/* Main Glass Card */}
       <div className="w-full max-w-md backdrop-blur-2xl bg-white/5 border border-white/10 rounded-3xl shadow-2xl overflow-hidden">
-        
         {/* Subtle Top Gradient Glow */}
         <div className="h-32 bg-linear-to-b from-purple-600/20 to-transparent" />
-        
+
         <div className="relative -mt-20 px-10 pb-12 text-center">
-          
           {/* Large Glowing Checkmark Circle */}
           <div className="w-40 h-40 mx-auto mb-8 rounded-full bg-linear-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-2xl shadow-green-500/40 border-4 border-white/20">
-            <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            <svg
+              className="w-20 h-20 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth="3"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
 
@@ -29,16 +46,15 @@ const PaymentSuccess = () => {
 
           {/* Subtitle Message */}
           <p className="text-xl text-purple-200 leading-relaxed mb-12">
-            Congratulations! 🎉<br />
-            You're now officially registered for the contest.<br />
+            Congratulations! 🎉
+            <br />
+            You're now officially registered for the contest.
+            <br />
             Best of luck – show the world your talent!
           </p>
 
           {/* Home Button – Gorgeous Gradient */}
-          <button
-            onClick={() => navigate('/')}
-            className="w-full btn-custom"
-          >
+          <button onClick={() => navigate("/")} className="w-full btn-custom">
             Back to Home →
           </button>
         </div>
@@ -47,7 +63,7 @@ const PaymentSuccess = () => {
         <div className="h-20 bg-linear-to-t from-purple-800/20 to-transparent" />
       </div>
     </div>
-    );
+  );
 };
 
 export default PaymentSuccess;
