@@ -6,7 +6,6 @@ import ContestCard from "../../Pages/Components/ContestCard";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LoaderSpinner from "../Loader/LoaderSpinner";
-import Container from "../Container";
 import { NavLink } from "react-router";
 import { FaRightLong } from "react-icons/fa6";
 
@@ -28,8 +27,6 @@ const Home = () => {
       <Banner></Banner>
       <HomeTitle></HomeTitle>
 
-      <Container></Container>
-
       <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {contests.map((contest, i) => (
           <ContestCard contest={contest} key={i}></ContestCard>
@@ -38,19 +35,15 @@ const Home = () => {
 
       {/* see all button */}
 
-      <NavLink to='/all-contest'>
+      <NavLink to="/all-contest">
         <div className="align flex justify-center items-center my-10">
-            <div className="button w-48 ">
-            <button className="btn-custom flex items-center justify-center gap-2 text-center">See All <FaRightLong /></button>
+          <div className="button w-48 ">
+            <button className="btn-custom flex items-center justify-center gap-2 text-center">
+              See All <FaRightLong />
+            </button>
+          </div>
         </div>
-        </div>
-        
-        
       </NavLink>
-
-      
-
-
     </div>
   );
 };
