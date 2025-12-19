@@ -1,35 +1,123 @@
-import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import LineParticles from '../../../Components/LineParticles';
-import DatePicker from 'react-datepicker';
+import React, { useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import LineParticles from "../../../Components/LineParticles";
+import DatePicker from "react-datepicker";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router";
+import LoaderSpinner from "../../../Components/Loader/LoaderSpinner";
+import { imageUpload } from "../../../Utils";
+import { toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
 
 const EditContestPage = () => {
+  const { upId } = useParams();
+  const navigate  = useNavigate()
 
 
-    const {
-       register,
-       handleSubmit,
-       control,
-       formState: { errors },
-     } = useForm({});
+  const { data: update = {}, isPending } = useQuery({
+    queryKey: ["Update", upId],
+    queryFn: async () => {
+      const result = await axios(
+        `${import.meta.env.VITE_API_URL}/detail-contest/${upId}`
+      );
+      return result.data;
+    },
+
+    enabled:!!upId ,
+  });
+
+
+  //   name,
+  //   image,
+  //   description,
+  //   contestType,
+  //   deadline,
+  //   price,
+  //   prizeMoney,
+  //   taskInstruction,
+  // } = update;
+  // console.log(update);
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({});
 
 
 
-     const onSubmit = (data) => {
-         console.log(data)
+useEffect(() => {
+  if (update?._id) {
+    reset({
+      name: update.name || "",
+      description: update.description || "",
+      taskInstruction: update.taskInstruction || "",
+      price: update.price || 0,
+      prizeMoney: update.prizeMoney || 0,
+      contestType: update.contestType || "",
+      deadline: update.deadline ? new Date(update.deadline) : null,
+    });
+  }
+}, [update, reset]);
+
+
+
+
+
+  const onSubmit = async (data) => {
+
+    const {name , image , description, taskInstruction, price, prizeMoney , deadline, contestType} = data
+
+
+
+
+    try {
+
+      let imageUrl = update.image
+
+      if(image && image.length > 0) {
+            const imageFile = image[0];
+            imageUrl = await imageUpload(imageFile)
+      }
+      
+        const updateInfo = { 
+
+      name,
+      deadline: deadline.getTime(),
+      description,
+      taskInstruction,
+      price,
+      prizeMoney,
+      contestType,
+      image: imageUrl
+
      }
+
+     await axios.patch(`${import.meta.env.VITE_API_URL}/edit-contest/${upId}`, updateInfo);
+     toast.success('Updated')
+
+
+    } catch (err) {
+      console.log(err)
+      toast.error('Failed Update')
+      navigate('/dashboard/created-Contests')
+    }
+
    
+  };
 
+  if (isPending) return <LoaderSpinner></LoaderSpinner>;
 
-
-
-    return (
-        <div className="min-h-screen  flex items-center justify-center py-5">
+  return (
+    <div className="min-h-screen  flex items-center justify-center py-5">
       <LineParticles></LineParticles>
       {/* Glass Card */}
       <div className="w-full max-w-3xl backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl shadow-2xl p-10">
         <h2 className="text-4xl font-bold text-center mb-10 text-white bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text">
-          Create New Contest
+          Update Contest
         </h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 ">
@@ -42,6 +130,7 @@ const EditContestPage = () => {
               {...register("name", { required: "Contest name is required" })}
               className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:ring-4 focus:ring-purple-500/20 transition"
               placeholder="contest Name"
+              
             />
             {errors.name && (
               <p className="text-red-400 text-sm mt-2">{errors.name.message}</p>
@@ -50,16 +139,32 @@ const EditContestPage = () => {
 
           {/* Image Upload */}
           <div>
+            {/* Preview Image */}{" "}
+            {update.image && (
+              <div className="mb-4 text-center">
+                {" "}
+                <img
+                  src={update.image}
+                  alt="Contest Banner"
+                  className="w-40 h-40 object-cover rounded-lg mx-auto shadow-md"
+                />{" "}
+                <p className="text-xs text-gray-400 mt-2">
+                  Current banner from database
+                </p>{" "}
+              </div>
+            )}
             <label className="block text-sm font-medium text-purple-200 mb-2">
-              Contest Banner Image
+              If You, Update Your Banner 
             </label>
             <div className="border-2 border-dashed border-white/30 rounded-xl p-8 text-center hover:border-purple-400 transition">
               <input
                 type="file"
                 accept="image/*"
-                {...register("image", {
-                  required: "Contest image is required",
-                })}
+                {...register("image", 
+                //   {
+                //   required: "Contest image is required",
+                // }
+              )}
                 className="hidden"
                 id="image"
               />
@@ -68,7 +173,7 @@ const EditContestPage = () => {
                 className="cursor-pointer text-purple-300 hover:text-purple-100"
               >
                 <span className="text-2xl">📸</span>
-                <p className="mt-2">Click to upload contest image</p>
+                <p className="mt-2">Click to upload update  image</p>
               </label>
             </div>
             {errors.image && (
@@ -243,19 +348,16 @@ const EditContestPage = () => {
 
           {/* Submit Button - Gradient Glow */}
 
-  
-            <button
-              type="submit"
-              className="w-full py-5 mt-10 text-lg font-bold text-white rounded-xl bg-linear-to-r from-indigo-600 to-purple-700  shadow-lg hover:shadow-blue-500/10 transform hover:scale-105 transition duration-300 cursor-pointer"
-            >
-              {/* {isPending ? <BeatLoader color="white" /> : 'Launch Contest 🚀'} */}
-              'Launch Contest 🚀'
-            </button>
-         
+          <button
+            type="submit"
+            className="w-full py-5 mt-10 text-lg font-bold text-white rounded-xl bg-linear-to-r from-indigo-600 to-purple-700  shadow-lg hover:shadow-blue-500/10 transform hover:scale-105 transition duration-300 cursor-pointer"
+          >
+            {isPending ? <BeatLoader color="white" /> : 'Update'}
+          </button>
         </form>
       </div>
     </div>
-    );
+  );
 };
 
 export default EditContestPage;

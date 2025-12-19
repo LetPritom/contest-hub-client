@@ -4,73 +4,77 @@ import { Description } from "@headlessui/react";
 import { MdEmojiPeople } from "react-icons/md";
 import LineParticles from "../../Components/LineParticles";
 
-const ContestCard = ({contest}) => {
+const ContestCard = ({ contest }) => {
+  const { image, name, description, participant, contestType, _id } = contest;
+  const shortDes = description.slice(0, 50);
+  console.log(shortDes);
 
-  const {image , name , description , participant, contestType ,_id} = contest;
-  const shortDes = description.slice(0  , 50) 
-  console.log(shortDes)
-
-
-
-
-  
   return (
-    <div>
-      <div className="group relative  bg-purple-900/10 backdrop-blur-xl rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-500/20 transition-all hover:-translate-y-2 duration-500 border border-white/20 my-5">
-            
-            <LineParticles></LineParticles>
-            
-        {/* Gradient Border Effect */}
+    <div
+      className="group relative bg-purple-900/10 backdrop-blur-xl
+  rounded-3xl overflow-hidden shadow-lg
+  hover:shadow-2xl hover:shadow-purple-500/20
+  transition-all hover:-translate-y-2 duration-500
+  border border-white/20 my-5
+  flex flex-col h-full"
+    >
+      <LineParticles />
 
-        <div className="absolute inset-0 bg-linear-to-br from-purple-900/10 to-purple-500/10 opacity-20 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl -z-10 scale-105"></div>
+      {/* Gradient overlay */}
+      <div
+        className="absolute inset-0 bg-linear-to-br from-purple-900/10 to-purple-500/10
+                  opacity-20 group-hover:opacity-100 transition-opacity duration-500
+                  rounded-3xl -z-10 scale-105"
+      />
 
-        {/* Profile Image zoom  kora hoiche jokhon over korbo */}
+      {/* Image */}
+      <div className="relative overflow-hidden h-60">
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
 
-        <div className="relative overflow-hidden">
-          <img
-            src={image}
-            alt={name}
-            className="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+      {/* Body */}
+
+      <div className="p-6 flex flex-col grow space-y-4">
+
+        {/* Title & Description */}
+
+        <div>
+          <h2 className="text-xl font-bold">{name}</h2>
+
+          {/* FIXED HEIGHT DESCRIPTION */}
+
+          <p className="text-sm font-medium line-clamp-2 min-h-10 mt-2">
+            {shortDes}
+          </p>
         </div>
 
-        {/* Card Body */}
+        {/* Type r Participant */}
+        
+        <div className="flex justify-between items-center">
+          <span className="px-4 py-1 border border-purple-600/40 rounded-full text-sm">
+            {contestType}
+          </span>
 
-        <div className="p-6 space-y-4">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl font-bold">
-              {name}
-            </h2>
-            <h2 className="text-sm font-bold ">
-              {shortDes}.......
-            </h2>
-            <div className="flex items-center gap-2">
-              <p className="px-4 py-2 border-2 border-purple-600/40 rounded-full">{contestType}</p>
-            </div>
-
-            
+          <div className="flex items-center gap-2">
+            <MdEmojiPeople className="text-green-600 text-2xl" />
+            <span className="font-bold">{participant}</span>
           </div>
-
-          {/* Subject and Rating */}
-
-          <div className="flex justify-between items-center relative">
-            <div className="flex items-center absolute left-52 bottom-4">
-              <span className="text-green-600 text-2xl">
-               <MdEmojiPeople />
-              </span>
-              <span className="font-bold">
-                {participant}
-              </span>
-            </div>
-          </div>
-
-          {/* create partner profile button */}
-          <NavLink to={`/detail-contest/${_id}`}>
-            <button className="w-full relative mt-4 py-3 btn-custom text-white font-bold rounded-xl hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-md z-50">
-              Contest Details
-            </button>
-          </NavLink>
         </div>
+
+        {/* BUTTON ALWAYS BOTTOM */}
+
+        <NavLink to={`/detail-contest/${_id}`} className="mt-auto">
+          <button
+            className="w-full py-3 btn-custom text-white font-bold relative z-50
+                        rounded-xl hover:scale-105 transition-all duration-300 shadow-md"
+          > 
+            Contest Details
+          </button>
+        </NavLink>
       </div>
     </div>
   );

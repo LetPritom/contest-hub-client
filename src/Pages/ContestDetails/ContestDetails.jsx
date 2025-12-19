@@ -54,7 +54,7 @@ const ContestDetails = () => {
     },
   });
 
-  const { participant_email } = taskAllow;
+  const { participant_email , payment_status } = taskAllow;
 
   if (isPending) return <LoaderSpinner></LoaderSpinner>;
 
@@ -143,7 +143,9 @@ const ContestDetails = () => {
 
               {/* Buttons */}
               <div className="space-y-4">
-                <button
+
+                {
+                  payment_status !=='paid' ?  <button
                   disabled={expired}
                   onClick={() => setIsOpen(true)}
                   className={`w-full  py-5 rounded-xl font-semibold 
@@ -151,7 +153,9 @@ const ContestDetails = () => {
                    `}
                 >
                   {expired ? "Contest Expired" : "Register & Pay"} ${price}
-                </button>
+                </button> : <button className='btn-custom disabled cursor-not-allowed:'>Registered</button>
+                }
+               
 
                 <RegisterModal
                   ContestDetails={ContestDetails}
@@ -168,7 +172,8 @@ const ContestDetails = () => {
                   </button>
                 )}
 
-                <TaskModal
+                <TaskModal 
+                  ContestDetails={ContestDetails}
                   submit={submit}
                   cancelSubmit={cancelSubmit}
                 ></TaskModal>

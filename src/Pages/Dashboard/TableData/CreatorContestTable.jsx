@@ -72,24 +72,22 @@ const CreatorContestTable = ({ creator, refetch }) => {
             </div>
           </div>
 
-          <p className="text-xs text-gray-400 mt-1">
-            Created by: {`create_by?.email`}
-          </p>
 
           {/* Buttons */}
           <div className="flex gap-3 pt-3">
             {status === "pending" ? (
               <NavLink to={`/dashboard/edit-contest/${_id}`}>
                 <button
-                  className="btn btn-sm rounded-lg bg-green-600 text-white backdrop-blur-md border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  disabled={status !== "pending"}
+                  className="flex-1 btn btn-sm rounded-lg bg-green-600 text-white backdrop-blur-md border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
                   update
                 </button>
               </NavLink>
             ) : (
               <button
-                disabled
-                className="btn btn-sm rounded-lg bg-gray-400 text-white cursor-not-allowed"
+                disabled={status !== "pending"}
+                className="flex-1 btn btn-sm rounded-lg bg-gray-400 text-white cursor-not-allowed"
               >
                 update
               </button>
@@ -98,10 +96,22 @@ const CreatorContestTable = ({ creator, refetch }) => {
             {/* delete */}
 
             <button
+                  disabled={status !== "pending"}
+                  onClick={handleDelete}
+                  className={`${
+                    status === "pending"
+                      ? "btn btn-sm bg-red-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:bg-red-700 hover:scale-105 transition-all duration-300 rounded-lg"
+                      : " bg-red-400 text-white btn btn-sm rounded-lg "
+                  }`}
+                >
+                  Delete
+                </button>
+            <button
+              
               onClick={handleDelete}
-              className="flex-1 btn btn-sm bg-red-500/70 hover:bg-red-600 text-white border-none shadow-md hover:shadow-xl transform hover:scale-105 transition-all"
+              className={`flex-1 btn btn-sm bg-white/20 backdrop-blur-2xl border border-white/20 text-white shadow-md hover:shadow-xl transform  hover:scale-105 transition-all duration-300 rounded-lg`}
             >
-              Delete
+              Submissions
             </button>
           </div>
         </div>
@@ -131,8 +141,8 @@ const CreatorContestTable = ({ creator, refetch }) => {
                   <div>
                     <div className="font-bold text-xl text-white">{name}</div>
                     <div className="text-sm opacity-70 text-gray-300">
-                      <p>Created By: {`create_by?.email`}</p>
-                      {contestType}
+                      <p>contest type : {contestType}</p>
+                      
                     </div>
                   </div>
                 </div>
@@ -173,7 +183,6 @@ const CreatorContestTable = ({ creator, refetch }) => {
                 {status === "pending" ? (
                   <NavLink to={`/dashboard/edit-contest/${_id}`}>
                     <button
-                      onClick={"handleUpdate"}
                       className="btn btn-sm rounded-lg bg-green-600 text-white backdrop-blur-md border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                     >
                       update
@@ -201,6 +210,9 @@ const CreatorContestTable = ({ creator, refetch }) => {
                 >
                   Delete
                 </button>
+
+
+                {/* Submissions button */}
 
                 <button
                   className={`btn btn-sm bg-white/20 backdrop-blur-2xl border border-white/20 text-white shadow-md hover:shadow-xl transform  hover:scale-105 transition-all duration-300 rounded-lg`}
