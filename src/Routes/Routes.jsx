@@ -94,7 +94,7 @@ export const router = createBrowserRouter([
         element: <SubmittedTasksPage></SubmittedTasksPage>
       },
       {
-        path:'edit-contest',
+        path:'edit-contest/:upId',
         element:<EditContestPage></EditContestPage>
       },
       {

@@ -36,7 +36,7 @@ const AddContest = () => {
       ),
     onSuccess: (data) => {
       console.log(data);
-      toast.success("Contest create Successfully");
+      toast.success("Create Successfully ! Waiting For Admin Approval");
       mutationReset();
     },
 

@@ -1,65 +1,31 @@
 import axios from "axios";
 import React from "react";
-import { useParams } from "react-router";
+import { NavLink } from "react-router";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 
-const TableData = ({ pending, refetch }) => {
-  const { id } = useParams();
-  console.log(id);
+const CreatorContestTable = ({ creator, refetch }) => {
+  console.log(creator);
 
-  const { image, name, contestType, prizeMoney, create_by, price, _id } =
-    pending;
+  const {
 
-  const handleApprove = async () => {
+    contestType,
+    image,
+    name,
+    price,
+    prizeMoney,
+    status,
+    _id,
+  } = creator;
+
+  const handleDelete = async () => {
     try {
-      await axios.patch(`${import.meta.env.VITE_API_URL}/approve-contest`, {
-        _id,
-      });
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/delete-contest/${_id}`,
+        {}
+      );
+
+      toast.success("Delete");
       refetch();
-      toast.success("Approved");
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
-
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          await axios.delete(
-            `${import.meta.env.VITE_API_URL}/delete-contest/${_id}`
-          );
-
-          Swal.fire({
-            title: "Deleted!",
-            text: "Pending Contest Deleted.",
-            icon: "success",
-          });
-          refetch();
-        } catch (err) {
-          toast.error(err.message, "Failed Delete");
-        }
-      }
-    });
-  };
-
-
-  const handleReject = async () => {
-    try {
-      await axios.patch(`${import.meta.env.VITE_API_URL}/reject-contest`, {
-        _id,
-      });
-      refetch();
-      toast.success("Rejected");
     } catch (err) {
       toast.error(err.message);
     }
@@ -107,25 +73,34 @@ const TableData = ({ pending, refetch }) => {
           </div>
 
           <p className="text-xs text-gray-400 mt-1">
-            Created by: {create_by?.email}
+            Created by: {`create_by?.email`}
           </p>
 
           {/* Buttons */}
           <div className="flex gap-3 pt-3">
-            <button 
-            onClick={handleApprove}
-            className="flex-1 btn btn-sm bg-green-600 hover:bg-[#f55a00] text-white border-none shadow-md hover:shadow-xl transform hover:scale-105 transition-all">
-              Approve
-            </button>
+            {status === "pending" ? (
+              <NavLink to={`/dashboard/edit-contest/${_id}`}>
+                <button
+                  className="btn btn-sm rounded-lg bg-green-600 text-white backdrop-blur-md border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                >
+                  update
+                </button>
+              </NavLink>
+            ) : (
+              <button
+                disabled
+                className="btn btn-sm rounded-lg bg-gray-400 text-white cursor-not-allowed"
+              >
+                update
+              </button>
+            )}
+
+            {/* delete */}
 
             <button
-            onClick={handleReject}
-             className="flex-1 btn btn-sm bg-red-500/70 hover:bg-red-600 text-white border-none shadow-md hover:shadow-xl transform hover:scale-105 transition-all">
-              Reject
-            </button>
-            <button
-            onClick={handleDelete}
-             className="flex-1 btn btn-sm bg-red-500/70 hover:bg-red-600 text-white border-none shadow-md hover:shadow-xl transform hover:scale-105 transition-all">
+              onClick={handleDelete}
+              className="flex-1 btn btn-sm bg-red-500/70 hover:bg-red-600 text-white border-none shadow-md hover:shadow-xl transform hover:scale-105 transition-all"
+            >
               Delete
             </button>
           </div>
@@ -140,6 +115,7 @@ const TableData = ({ pending, refetch }) => {
               <th className="py-5 rounded-tl-2xl">Contest Detail</th>
               <th className="py-5">Prize Money</th>
               <th className="py-5">Entry Fee</th>
+              <th className="py-5">Status</th>
               <th className="py-5 rounded-tr-2xl text-center">Action</th>
             </tr>
           </thead>
@@ -155,18 +131,29 @@ const TableData = ({ pending, refetch }) => {
                   <div>
                     <div className="font-bold text-xl text-white">{name}</div>
                     <div className="text-sm opacity-70 text-gray-300">
-                      <p>Created By: {create_by?.email}</p>
+                      <p>Created By: {`create_by?.email`}</p>
                       {contestType}
                     </div>
                   </div>
                 </div>
               </td>
 
+              {/* priXeMoney */}
+
               <td>
                 <span className="px-5 py-2 bg-purple-900/30 text-purple-200 font-bold rounded-full text-sm shadow-sm backdrop-blur-sm">
                   $ {prizeMoney}
                 </span>
               </td>
+              <td>
+                {/* entry fee */}
+
+                <span className="px-5 py-2 bg-purple-900/30 text-purple-200 font-bold rounded-full text-sm shadow-sm backdrop-blur-sm">
+                  $ {price}
+                </span>
+              </td>
+
+              {/* status */}
 
               <td>
                 <span
@@ -175,34 +162,50 @@ const TableData = ({ pending, refetch }) => {
                   <span
                     className={`w-auto h-3 rounded-full text-white flex items-center justify-center`}
                   >
-                    $ {price}
+                    {status}
                   </span>
                 </span>
               </td>
 
               <td className="text-center space-x-3">
-                {/* approve */}
+                {/* update */}
+
+                {status === "pending" ? (
+                  <NavLink to={`/dashboard/edit-contest/${_id}`}>
+                    <button
+                      onClick={"handleUpdate"}
+                      className="btn btn-sm rounded-lg bg-green-600 text-white backdrop-blur-md border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                    >
+                      update
+                    </button>
+                  </NavLink>
+                ) : (
+                  <button
+                    disabled
+                    className="btn btn-sm rounded-lg bg-gray-400 text-white cursor-not-allowed"
+                  >
+                    update
+                  </button>
+                )}
+
+                {/* delete button  */}
 
                 <button
-                  onClick={handleApprove}
-                  className="btn btn-sm bg-green-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 rounded-lg"
-                >
-                  Approve
-                </button>
-
-                {/* delete */}
-
-                <button
-                  onClick={handleReject}
-                  className="btn btn-sm bg-red-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:bg-red-700 hover:scale-105 transition-all duration-300 rounded-lg"
-                >
-                  Reject
-                </button>
-                <button
+                  disabled={status !== "pending"}
                   onClick={handleDelete}
-                  className="btn btn-sm bg-red-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:bg-red-700 hover:scale-105 transition-all duration-300 rounded-lg"
+                  className={`${
+                    status === "pending"
+                      ? "btn btn-sm bg-red-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:bg-red-700 hover:scale-105 transition-all duration-300 rounded-lg"
+                      : " bg-red-400 text-white btn btn-sm rounded-lg "
+                  }`}
                 >
                   Delete
+                </button>
+
+                <button
+                  className={`btn btn-sm bg-white/20 backdrop-blur-2xl border border-white/20 text-white shadow-md hover:shadow-xl transform  hover:scale-105 transition-all duration-300 rounded-lg`}
+                >
+                  See Submissions
                 </button>
               </td>
             </tr>
@@ -217,4 +220,4 @@ const TableData = ({ pending, refetch }) => {
   );
 };
 
-export default TableData;
+export default CreatorContestTable;
