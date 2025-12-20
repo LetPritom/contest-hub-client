@@ -3,9 +3,10 @@ import { NavLink, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { saveOrUpdateUser } from "../../Utils";
 
 const Signin = () => {
-  const { signInWithGoogleFunc, signInWithEmailAndPassFunc , setLoading } = useAuth();
+  const { signInWithGoogleFunc, signInWithEmailAndPassFunc , setLoading , user } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -22,6 +23,12 @@ const Signin = () => {
 
     const {email , password} = data;
      await signInWithEmailAndPassFunc(email, password)
+     saveOrUpdateUser({
+      name: user?.displayName,
+      image:user?.photoURL,
+      email,
+      win:0
+     })
      setLoading(false)
      navigate(from)
      toast.success('successfully Login');
@@ -34,6 +41,12 @@ const Signin = () => {
   const handleGoogleSignin = async () => {
     try {
       const { user } = await signInWithGoogleFunc();
+      saveOrUpdateUser({
+      name: user?.displayName,
+      image:user?.photoURL,
+      email:user?.email,
+      win:0
+     })
       navigate(from)
       console.log(user);
     } catch (err) {

@@ -12,11 +12,11 @@ const ContestCard = ({ contest }) => {
   return (
     <div
       className="group relative bg-purple-900/10 backdrop-blur-xl
-  rounded-3xl overflow-hidden shadow-lg
-  hover:shadow-2xl hover:shadow-purple-500/20
-  transition-all hover:-translate-y-2 duration-500
-  border border-white/20 my-5
-  flex flex-col h-full"
+          rounded-3xl overflow-hidden shadow-lg
+          hover:shadow-2xl hover:shadow-purple-500/20
+          transition-all hover:-translate-y-2 duration-500
+          border border-white/20 my-5
+          flex flex-col h-full"
     >
       <LineParticles />
 

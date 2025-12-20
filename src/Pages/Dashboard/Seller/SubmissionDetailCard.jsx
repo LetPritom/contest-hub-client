@@ -1,11 +1,19 @@
+import axios from 'axios';
 import React from 'react';
+import { toast } from 'react-toastify';
 
 const SubmissionDetailCard = ({ submission }) => {
-  const { participant_name, participant_email, taskInstruction, submittedAt } = submission || {};
+  const { participant_name, participant_email, taskData, submittedAt, _id, contestId } = submission || {};
 
-  const handleDeclareWinner = () => {
-    alert(`Winner declared: ${participant_name}! 🏆`);
-    // Backend call here
+  const handleDeclareWinner = async () => {
+
+    try {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/announce-winner`, { _id, contestId});
+      toast.success("Winner :",participant_name);
+    } catch (err) {
+      toast.error(err.message);
+    }
+
   };
 
   return (
@@ -33,7 +41,7 @@ const SubmissionDetailCard = ({ submission }) => {
 
       {/* Task */}
       <div className="bg-white/10 border border-white/20 rounded-xl p-4 text-sm text-gray-200 whitespace-pre-wrap min-h-24">
-        {taskInstruction || "No additional notes provided."}
+        {taskData || "No additional notes provided."}
       </div>
 
       {/* Button */}

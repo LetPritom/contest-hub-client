@@ -3,6 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import { saveOrUpdateUser } from "../../Utils";
 
 const SignUp = () => {
   const {
@@ -26,7 +27,8 @@ const SignUp = () => {
     const { name, password, image, email } = data;
 
     try {
-     const result =await registerEmailAndPassFunc(email, password);
+      const result =await registerEmailAndPassFunc(email, password);
+      saveOrUpdateUser({name , email , image , win:0})
       setLoading(false);
 
       await updateProfileFunction(name, image);
@@ -35,11 +37,13 @@ const SignUp = () => {
 
       navigate(from);
 
-      toast.success("register successful");
+
+      toast.success("signup successful");
       console.log(result);
 
     } catch (err) {
       console.log(err);
+      toast.error(err.message)
     }
     console.log({ password, name });
   };
@@ -47,6 +51,14 @@ const SignUp = () => {
   const handleGoogleSignin = async () => {
     try {
       const { user } = await signInWithGoogleFunc();
+      saveOrUpdateUser({
+        name:user?.displayName,
+        image:user?.photoURL,
+        email:user?.email,
+        win:0
+
+      })
+      
       console.log(user);
     } catch (err) {
       console.log(err);
