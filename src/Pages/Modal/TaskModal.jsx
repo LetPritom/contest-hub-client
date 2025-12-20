@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const TaskModal = ({ submit, cancelSubmit, ContestDetails }) => {
   console.log(ContestDetails);
@@ -29,20 +30,20 @@ const TaskModal = ({ submit, cancelSubmit, ContestDetails }) => {
     const submitTaskInfo = {
       contestId: _id,
       name,
-      task,
+      taskData : task,
       participant_name: user?.displayName,
       participant_email:user?.email,
       price,
       prizeMoney,
       taskInstruction,
+      isWinner: false,
       
     }
 
     const result = await axios.post(`${import.meta.env.VITE_API_URL}/submit-task` , submitTaskInfo)
     console.log(result)
-
-
     cancelSubmit()
+    toast.success("Task will be Submitted")
   };
 
   return (

@@ -90,7 +90,7 @@ export const router = createBrowserRouter([
         element: <MyCreateContestPage></MyCreateContestPage>,
       },
       {
-        path:'submitted-Tasks',
+        path:'submitted-tasks/:id',
         element: <SubmittedTasksPage></SubmittedTasksPage>
       },
       {

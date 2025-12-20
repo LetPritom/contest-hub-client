@@ -45,7 +45,7 @@ const ContestDetails = () => {
     queryKey: ["task", id],
     queryFn: async () => {
       const result = await axios(
-        `${import.meta.env.VITE_API_URL}/submit-task?email=${
+        `${import.meta.env.VITE_API_URL}/submit-task-open?email=${
           user?.email
         }&contestId=${id}`
       );
@@ -55,6 +55,8 @@ const ContestDetails = () => {
   });
 
   const { participant_email , payment_status } = taskAllow;
+
+  console.log(participant_email)
 
   if (isPending) return <LoaderSpinner></LoaderSpinner>;
 

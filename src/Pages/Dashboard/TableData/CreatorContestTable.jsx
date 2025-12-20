@@ -6,16 +6,7 @@ import { toast } from "react-toastify";
 const CreatorContestTable = ({ creator, refetch }) => {
   console.log(creator);
 
-  const {
-
-    contestType,
-    image,
-    name,
-    price,
-    prizeMoney,
-    status,
-    _id,
-  } = creator;
+  const { contestType, image, name, price, prizeMoney, status, _id } = creator;
 
   const handleDelete = async () => {
     try {
@@ -72,7 +63,6 @@ const CreatorContestTable = ({ creator, refetch }) => {
             </div>
           </div>
 
-
           {/* Buttons */}
           <div className="flex gap-3 pt-3">
             {status === "pending" ? (
@@ -96,23 +86,26 @@ const CreatorContestTable = ({ creator, refetch }) => {
             {/* delete */}
 
             <button
-                  disabled={status !== "pending"}
-                  onClick={handleDelete}
-                  className={`${
-                    status === "pending"
-                      ? "btn btn-sm bg-red-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:bg-red-700 hover:scale-105 transition-all duration-300 rounded-lg"
-                      : " bg-red-400 text-white btn btn-sm rounded-lg "
-                  }`}
-                >
-                  Delete
-                </button>
-            <button
-              
+              disabled={status !== "pending"}
               onClick={handleDelete}
-              className={`flex-1 btn btn-sm bg-white/20 backdrop-blur-2xl border border-white/20 text-white shadow-md hover:shadow-xl transform  hover:scale-105 transition-all duration-300 rounded-lg`}
+              className={`${
+                status === "pending"
+                  ? "btn btn-sm bg-red-600 backdrop-blur-md border border-white/20 text-white shadow-md hover:shadow-xl transform hover:bg-red-700 hover:scale-105 transition-all duration-300 rounded-lg"
+                  : " bg-red-400 text-white btn btn-sm rounded-lg "
+              }`}
             >
-              Submissions
+              Delete
             </button>
+
+            {/* submission button */}
+
+            <NavLink to={`/dashboard/submitted-Tasks/${_id}`}>
+              <button
+                className={`flex-1 btn btn-sm bg-white/20 backdrop-blur-2xl border border-white/20 text-white shadow-md hover:shadow-xl transform  hover:scale-105 transition-all duration-300 rounded-lg`}
+              >
+                Submissions
+              </button>
+            </NavLink>
           </div>
         </div>
       </div>
@@ -142,7 +135,6 @@ const CreatorContestTable = ({ creator, refetch }) => {
                     <div className="font-bold text-xl text-white">{name}</div>
                     <div className="text-sm opacity-70 text-gray-300">
                       <p>contest type : {contestType}</p>
-                      
                     </div>
                   </div>
                 </div>
@@ -182,9 +174,7 @@ const CreatorContestTable = ({ creator, refetch }) => {
 
                 {status === "pending" ? (
                   <NavLink to={`/dashboard/edit-contest/${_id}`}>
-                    <button
-                      className="btn btn-sm rounded-lg bg-green-600 text-white backdrop-blur-md border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                    >
+                    <button className="btn btn-sm rounded-lg bg-green-600 text-white backdrop-blur-md border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                       update
                     </button>
                   </NavLink>
@@ -211,14 +201,15 @@ const CreatorContestTable = ({ creator, refetch }) => {
                   Delete
                 </button>
 
-
                 {/* Submissions button */}
 
-                <button
-                  className={`btn btn-sm bg-white/20 backdrop-blur-2xl border border-white/20 text-white shadow-md hover:shadow-xl transform  hover:scale-105 transition-all duration-300 rounded-lg`}
-                >
-                  See Submissions
-                </button>
+                <NavLink to={`/dashboard/submitted-tasks/${_id}`}>
+                  <button
+                    className={`btn btn-sm bg-white/20 backdrop-blur-2xl border border-white/20 text-white shadow-md hover:shadow-xl transform  hover:scale-105 transition-all duration-300 rounded-lg`}
+                  >
+                    See Submissions
+                  </button>
+                </NavLink>
               </td>
             </tr>
           </tbody>
