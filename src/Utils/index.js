@@ -15,3 +15,13 @@ export const imageUpload =async (imageData) => {
 // export const participantsData = () => {
 //    const {data:participantsData}
 // }
+
+
+// user data save function 
+
+export const  saveOrUpdateUser = async (userData) => {
+   const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/user` , userData)
+
+
+   return data;
+}
