@@ -12,6 +12,13 @@ import WinnerSections from "../../Pages/Home/WinnerSections";
 import ExtraSection from "../../Pages/Home/ExtraSection";
 
 const Home = () => {
+  // const [searchType, setSearchType] = useState("");
+  // const [contests, setContests] = useState([]);
+
+        //   searchType={searchType}
+        // setSearchType={setSearchType}
+        // setContests={setContests}
+
   const { data: contests = [], isPending } = useQuery({
     queryKey: ["contest"],
     queryFn: async () => {
@@ -26,7 +33,9 @@ const Home = () => {
 
   return (
     <div>
-      <Banner></Banner>
+      <Banner
+
+      ></Banner>
       <HomeTitle></HomeTitle>
 
       <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">

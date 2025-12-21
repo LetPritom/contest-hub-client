@@ -27,7 +27,9 @@ const Signin = () => {
       name: user?.displayName,
       image:user?.photoURL,
       email,
-      win:0
+      win:0,
+      participated:0,
+      address: 'Jashore Khulna Bangladesh',
      })
      setLoading(false)
      navigate(from)
@@ -45,7 +47,9 @@ const Signin = () => {
       name: user?.displayName,
       image:user?.photoURL,
       email:user?.email,
-      win:0
+      win:0,
+      participated:0,
+      address: 'Jashore Khulna Bangladesh',
      })
       navigate(from)
       console.log(user);

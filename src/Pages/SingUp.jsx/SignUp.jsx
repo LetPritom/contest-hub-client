@@ -28,7 +28,7 @@ const SignUp = () => {
 
     try {
       const result =await registerEmailAndPassFunc(email, password);
-      saveOrUpdateUser({name , email , image , win:0})
+      saveOrUpdateUser({name , email , image , win:0 , address: 'Jashore Khulna Bangladesh', participated:0})
       setLoading(false);
 
       await updateProfileFunction(name, image);
@@ -55,7 +55,9 @@ const SignUp = () => {
         name:user?.displayName,
         image:user?.photoURL,
         email:user?.email,
-        win:0
+        win:0,
+        participated:0,
+        address: 'Jashore Khulna Bangladesh',
 
       })
       

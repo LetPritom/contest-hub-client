@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 
-const TaskModal = ({ submit, cancelSubmit, ContestDetails }) => {
+const TaskModal = ({ submit, cancelSubmit, ContestDetails, refetch }) => {
   console.log(ContestDetails);
 
   const {user} = useAuth()
@@ -47,6 +47,7 @@ const TaskModal = ({ submit, cancelSubmit, ContestDetails }) => {
     console.log(result)
     cancelSubmit()
     toast.success("Task will be Submitted")
+    refetch()
   };
 
   return (

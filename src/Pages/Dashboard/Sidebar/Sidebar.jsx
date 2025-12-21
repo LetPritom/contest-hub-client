@@ -100,7 +100,7 @@ const Sidebar = () => {
               <hr className="border-purple-400/20 my-3" />
 
               {/* ===== PROFILE ===== */}
-              <NavLink to="/profile">
+              {/* <NavLink to="/profile">
                 {({ isActive }) => (
                   <li>
                     <button
@@ -122,7 +122,7 @@ const Sidebar = () => {
                     </button>
                   </li>
                 )}
-              </NavLink>
+              </NavLink> */}
 
               {/* ===== LOGOUT ===== */}
               <li>

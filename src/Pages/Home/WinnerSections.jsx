@@ -24,7 +24,7 @@ const WinnerSections = () => {
 
   const totalWinner = winnerDetail.length;
 
-  if(winnerDetail.length === 0) return <p>No</p>
+  if(winnerDetail.length === 0) return <p className="2xl my-8 text-center font-semibold">NO Winner Available</p>
 
 
   if(isPending) return <LoaderSpinner></LoaderSpinner>
@@ -45,7 +45,7 @@ if (winnerDetail.length === 0) return <div className="text-center text-purple-30
           </p>
         </div>
 
-        <StatsSection></StatsSection>
+        <StatsSection totalWinner={totalWinner}></StatsSection>
 
         <div className="current my-20 flex items-center justify-center gap-5 flex-wrap">
           <span className="animate-bounce text-5xl">🏆</span>

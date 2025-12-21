@@ -44,7 +44,7 @@ const ContestDetails = () => {
     taskInstruction,
   } = ContestDetails;
 
-  const { data: taskAllow = {} } = useQuery({
+  const { data: taskAllow = {} ,} = useQuery({
     queryKey: ["task", id],
     queryFn: async () => {
       const result = await axios(
@@ -59,7 +59,7 @@ const ContestDetails = () => {
 
   // conditional winner rendering and button 
   
-  const { data: isSubmit= {} } = useQuery({
+  const { data: isSubmit= {} , refetch } = useQuery({
     queryKey: ["isSubmit", id],
     queryFn: async () => {
       const result = await axiosSecure(
@@ -225,6 +225,7 @@ const ContestDetails = () => {
                 )}
 
                 <TaskModal 
+                refetch={refetch}
                   ContestDetails={ContestDetails}
                   submit={submit}
                   cancelSubmit={cancelSubmit}

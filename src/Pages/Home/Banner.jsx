@@ -1,13 +1,22 @@
-import React from "react";
-import banner from '../../assets/banner.jpg'
+import banner from "../../assets/banner.jpg";
 import LineParticles from "../../Components/LineParticles";
 import SnowLineParticles from "../../Components/SnowParticles";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const Banner = () => {
+const Banner = ( {searchType, setSearchType, setContests}) => {
+
+  const axiosSecure= useAxiosSecure()
+
+  const handleSearch = async () => {
+    const result = await axiosSecure(`/search-contest?type=${searchType}` );
+    setContests(result.data);
+  };
+
   return (
-    <div className="relative min-h-screen overflow-hidden flex items-center justify-center
-    bg-linear-to-br from-purple-900 via-black to-purple-900">
-
+    <div
+      className="relative min-h-screen overflow-hidden flex items-center justify-center
+    bg-linear-to-br from-purple-900 via-black to-purple-900"
+    >
       {/* Background Image */}
       <img
         src={banner}
@@ -16,22 +25,17 @@ const Banner = () => {
         opacity-30 mix-blend-overlay animate-pulse"
       />
 
-       {/* <SnowLineParticles></SnowLineParticles> */}
-       <LineParticles />
-
-      {/* Particle Lines Layer */}
-      {/* <div className="absolute inset-0 pointer-events-none">
-        <div className="particle-lines"></div>
-      </div> */}
+      <LineParticles />
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/30"></div>
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl px-8 py-12 text-center">
-        <div className="bg-black/10 backdrop-blur-md border border-white/20 
-        rounded-3xl px-10 py-16 shadow-2xl">
-
+        <div
+          className="bg-black/10 backdrop-blur-md border border-white/20 
+        rounded-3xl px-10 py-16 shadow-2xl"
+        >
           <h1 className="text-5xl font-bold text-white mb-6">
             Unlock Your Potential in Every Contest
           </h1>
@@ -42,12 +46,15 @@ const Banner = () => {
 
           <div className="relative max-w-2xl mx-auto">
             <input
+              onChange={(e) => setSearchType(e.target.value)}
+              value={searchType}
               className="w-full px-8 py-5 pr-30 bg-white/15 text-white
               placeholder-white/60 rounded-full backdrop-blur-md
               border border-white/30 focus:outline-none animate-pulse"
               placeholder="Search contests..."
             />
             <button
+              onClick={handleSearch}
               className="absolute right-2 top-2 px-5 py-3 rounded-full
               bg-linear-to-r from-indigo-500 to-purple-600
               text-white font-semibold hover:scale-105 transition cursor-pointer"
@@ -55,7 +62,6 @@ const Banner = () => {
               Search
             </button>
           </div>
-
         </div>
       </div>
     </div>

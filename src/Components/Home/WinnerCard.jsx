@@ -4,7 +4,7 @@ const WinnerCard = ({winner}) => {
   const { name, prizeMoney,  participant_name, participant_image } = winner; // তোর data structure অনুযায়ী adjust করিস
 
   return (
-    <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 hover:shadow-purple-500/30 hover:-translate-y-4">
+    <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 hover:shadow-purple-500/30 hover:-translate-y-4 h-120">
       {/* Subtle Glow on Hover */}
       <div className="absolute inset-0 bg-linear-to-br from-purple-600/10 to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
 

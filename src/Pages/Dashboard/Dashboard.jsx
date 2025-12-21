@@ -1,13 +1,9 @@
 import React from "react";
 
-/* Tailwind tips:
-   - Make sure Tailwind is configured with dark background (e.g., bg-[#0b0f1a]) and JIT enabled.
-   - Fonts: Try 'Inter' or 'Plus Jakarta Sans' for premium look.
-*/
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0b0f1a] via-[#0c1022] to-[#11152a] text-white">
+    <div className="min-h-screen bg-linear-to-br from-[#0b0f1a] via-[#0c1022] to-[#11152a] text-white">
       {/* Glow background accents */}
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute -top-20 -left-20 h-64 w-64 rounded-full bg-yellow-500/10 blur-3xl" />
@@ -19,13 +15,13 @@ const Dashboard = () => {
       <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/5 border-b border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-600 shadow-lg ring-1 ring-white/20" />
+            <div className="h-9 w-9 rounded-lg bg-linear-to-br from-yellow-400 to-amber-600 shadow-lg ring-1 ring-white/20" />
             <h1 className="text-xl md:text-2xl font-extrabold tracking-tight">
               Contest Hub
             </h1>
           </div>
           <div className="flex items-center gap-3">
-            <button className="hidden md:inline-flex px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-bold shadow-lg hover:shadow-yellow-500/40 transition">
+            <button className="hidden md:inline-flex px-4 py-2 rounded-lg bg-linear-to-r from-yellow-500 to-amber-600 text-black font-bold shadow-lg hover:shadow-yellow-500/40 transition">
               New contest
             </button>
             <div className="flex items-center gap-3">
@@ -75,7 +71,7 @@ const Dashboard = () => {
           <div className="mt-6 backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-4">
             <p className="text-xs uppercase tracking-widest text-white/60 mb-3">Quick actions</p>
             <div className="grid grid-cols-2 gap-3">
-              <button className="px-3 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 font-semibold shadow-lg hover:shadow-purple-500/40 transition">
+              <button className="px-3 py-2 rounded-lg bg-linear-to-r from-purple-600 to-pink-600 font-semibold shadow-lg hover:shadow-purple-500/40 transition">
                 Create
               </button>
               <button className="px-3 py-2 rounded-lg bg-white/10 border border-white/10 font-semibold hover:bg-white/15 transition">
@@ -130,7 +126,7 @@ const Dashboard = () => {
                   Last 30 days
                 </button>
               </div>
-              <div className="mt-5 h-56 rounded-xl bg-gradient-to-b from-white/10 to-transparent border border-white/10 flex items-center justify-center text-white/50">
+              <div className="mt-5 h-56 rounded-xl bg-linear-to-b from-white/10 to-transparent border border-white/10 flex items-center justify-center text-white/50">
                 <span>Chart placeholder</span>
               </div>
             </div>
@@ -237,7 +233,7 @@ const Dashboard = () => {
               <p className="text-sm text-white/70">Set theme, prize pool, and schedule in minutes.</p>
             </div>
             <div className="flex gap-3">
-              <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-bold shadow-lg hover:shadow-yellow-500/40 transition">
+              <button className="px-4 py-2 rounded-lg bg-linear-to-r from-yellow-500 to-amber-600 text-black font-bold shadow-lg hover:shadow-yellow-500/40 transition">
                 Create contest
               </button>
               <button className="px-4 py-2 rounded-lg bg-white/10 border border-white/10 font-semibold hover:bg-white/15 transition">

@@ -42,10 +42,6 @@ export const router = createBrowserRouter([
         element: <SignUp></SignUp>,
       },
       {
-        path: "/profile",
-        element: <Profile></Profile>,
-      },
-      {
         path: "/all-contest",
         element: <AllContest></AllContest>,
       },
@@ -91,6 +87,10 @@ export const router = createBrowserRouter([
       {
         path:'my-participate',
         element: <MyParticipatedContests></MyParticipatedContests>,
+      },
+      {
+        path:'my-profile',
+        element: <Profile></Profile>,
       },
       {
         path:'my-winning',

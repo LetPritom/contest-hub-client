@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StatsSection = ({ totalPrize = '150K+', totalWinners = '1,200+' }) => {
+const StatsSection = ({ totalWinner }) => {
   return (
     <section className="py-12 px-4 ">
       <div className="max-w-5xl mx-auto">
@@ -20,7 +20,7 @@ const StatsSection = ({ totalPrize = '150K+', totalWinners = '1,200+' }) => {
               {/* Text */}
               <div className="text-left">
                 <p className="text-4xl md:text-5xl font-extrabold text-white">
-                  ${totalPrize}
+                  $150k+
                 </p>
                 <p className="text-lg md:text-xl text-green-300 mt-2">
                   Total Prize Distributed
@@ -42,7 +42,7 @@ const StatsSection = ({ totalPrize = '150K+', totalWinners = '1,200+' }) => {
               {/* Text */}
               <div className="text-left ">
                 <p className="text-4xl md:text-5xl font-extrabold text-white">
-                  {totalWinners}+
+                  {totalWinner}+
                 </p>
                 <p className="text-lg md:text-xl text-orange-300 mt-2">
                   Talented Winners
