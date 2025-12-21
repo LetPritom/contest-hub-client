@@ -8,6 +8,8 @@ import axios from "axios";
 import LoaderSpinner from "../Loader/LoaderSpinner";
 import { NavLink } from "react-router";
 import { FaRightLong } from "react-icons/fa6";
+import WinnerSections from "../../Pages/Home/WinnerSections";
+import ExtraSection from "../../Pages/Home/ExtraSection";
 
 const Home = () => {
   const { data: contests = [], isPending } = useQuery({
@@ -44,6 +46,9 @@ const Home = () => {
           </div>
         </div>
       </NavLink>
+
+      <WinnerSections></WinnerSections>
+      <ExtraSection></ExtraSection>
     </div>
   );
 };

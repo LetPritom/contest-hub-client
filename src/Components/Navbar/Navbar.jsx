@@ -3,12 +3,14 @@ import logo from "../../assets/logo.png";
 import { NavLink } from "react-router";
 import { GoHomeFill } from "react-icons/go";
 import { FaUsersViewfinder } from "react-icons/fa6";
-import { MdOutlineLogout, MdOutlineSpaceDashboard } from "react-icons/md";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { MdOutlineLeaderboard, MdOutlineLogout, MdOutlineSpaceDashboard } from "react-icons/md";
+import { MdDarkMode, MdLightMode , } from "react-icons/md";
+import { MdAutoStories } from "react-icons/md";
 import Container from "../Container";
 import useAuth from "../../hooks/useAuth";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { toast } from "react-toastify";
+import { FaInfoCircle } from "react-icons/fa";
 import LoaderSpinner from "../Loader/LoaderSpinner";
 
 const Navbar = () => {
@@ -56,7 +58,7 @@ const Navbar = () => {
   return (
     <Container className="border-b border-gray-300">
       <div className=" ">
-        <div className="navbar lg:w-10/12 mx-auto py-4">
+        <div className="navbar lg:w-12/12 mx-auto py-4">
           <div className="navbar-start">
             <div className="dropdown ">
               <div
@@ -84,28 +86,52 @@ const Navbar = () => {
                 tabIndex="-1"
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
-                <NavLink to="/">
-                  <li className="hover:text-[#f55a00] cursor-pointer">Home</li>
-                </NavLink>
-                <NavLink to="/find-partner">
-                  <li className="hover:text-[#f55a00] cursor-pointer">
-                    All Contests
+              <NavLink to="/">
+                <div className="flex items-center gap-1 icon">
+                  <GoHomeFill className="text-md" />
+                  <li className="hover:text-[#f55a00] cursor-pointer flex gap-1 items-center">
+                    Home
                   </li>
-                </NavLink>
+                </div>
+              </NavLink>
 
-                {/* extra section */}
-
-                {/* <NavLink to="/create-partner">
+              <NavLink to="/all-contest">
+                <div className="flex items-center gap-1 icon">
+                  <FaUsersViewfinder className="text-md" />
                   <li className="hover:text-[#f55a00] cursor-pointer">
-                    Create Partner Profile
+                    All Contest
                   </li>
-                </NavLink>
+                </div>
+              </NavLink>
 
-                <NavLink to="my-connection">
+                <NavLink to="/stories">
+                <div className="flex items-center gap-1 icon">
+                  <MdAutoStories className="text-md" />
                   <li className="hover:text-[#f55a00] cursor-pointer">
-                    My Connections
+                    Stories
                   </li>
-                </NavLink> */}
+                </div>
+              </NavLink>
+         
+
+              <NavLink to="/leaderboard">
+                <div className="flex items-center gap-1 icon">
+                  <MdOutlineLeaderboard className="text-md" />
+                  <li className="hover:text-[#f55a00] cursor-pointer">
+                    Leaderboard
+                  </li>
+                </div>
+              </NavLink>
+
+              <NavLink to="/about">
+                <div className="flex items-center gap-1 icon">
+                  <FaInfoCircle className="text-md" />
+                  <li className="hover:text-[#f55a00] cursor-pointer">
+                    About Us
+                  </li>
+                </div>
+              </NavLink>
+
               </ul>
             </div>
             <div className="logo flex gap-2 items-center ">
@@ -146,6 +172,34 @@ const Navbar = () => {
                   <FaUsersViewfinder className="text-md" />
                   <li className="hover:text-[#f55a00] cursor-pointer">
                     All Contest
+                  </li>
+                </div>
+              </NavLink>
+
+              <NavLink to="/stories">
+                <div className="flex items-center gap-1 icon">
+                  <MdAutoStories className="text-md" />
+                  <li className="hover:text-[#f55a00] cursor-pointer">
+                    Stories
+                  </li>
+                </div>
+              </NavLink>
+         
+
+              <NavLink to="/leaderboard">
+                <div className="flex items-center gap-1 icon">
+                  <MdOutlineLeaderboard className="text-md" />
+                  <li className="hover:text-[#f55a00] cursor-pointer">
+                    Leaderboard
+                  </li>
+                </div>
+              </NavLink>
+
+              <NavLink to="/about">
+                <div className="flex items-center gap-1 icon">
+                  <FaInfoCircle className="text-md" />
+                  <li className="hover:text-[#f55a00] cursor-pointer">
+                    About Us
                   </li>
                 </div>
               </NavLink>

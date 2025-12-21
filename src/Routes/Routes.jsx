@@ -20,6 +20,9 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import MyWinningContests from "../Pages/Dashboard/Users/MyWinningContests";
 import EditContestPage from "../Pages/Dashboard/Seller/Editcontestpage";
 import PaymentSuccess from "../Pages/Pyment/PaymentSuccess";
+import About from "../Components/About/About";
+import Stories from "../Components/Stories/Stories";
+import Leaderboard from "../Components/Leaderboard/Leaderboard";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -45,6 +48,18 @@ export const router = createBrowserRouter([
       {
         path: "/all-contest",
         element: <AllContest></AllContest>,
+      },
+      {
+        path: "/leaderboard",
+        element: <Leaderboard></Leaderboard>,
+      },
+      {
+        path: "/stories",
+        element: <Stories></Stories>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
       {
         path: "/payment-success",
