@@ -29,7 +29,7 @@ const Leaderboard = () => {
       <div className="w-11/12 mx-auto">
         {/* Title */}
         <div className="text-center mb-16">
-          <h1 className="text-6xl md:text-8xl font-extrabold mb-6 bg-linear-to-r from-yellow-400 via-orange-400 to-pink-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-7xl font-extrabold mb-6 bg-linear-to-r from-yellow-400 via-orange-400 to-pink-400 bg-clip-text text-transparent">
             ContestHub Leaderboard
           </h1>
           <p className="text-2xl md:text-3xl text-purple-200">
