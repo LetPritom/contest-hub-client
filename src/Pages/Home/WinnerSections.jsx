@@ -1,8 +1,36 @@
 import React from "react";
 import WinnerCard from "../../Components/Home/WinnerCard";
 import StatsSection from "./StatsSection";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import LoaderSpinner from "../../Components/Loader/LoaderSpinner";
+import useAuth from "../../hooks/useAuth";
 
 const WinnerSections = () => {
+
+  const {user} = useAuth()
+
+ const { data: winnerDetail = [], isPending , } = useQuery({
+    queryKey: ["Winner" , user?.email],
+    queryFn: async () => {
+      const result = await axios(
+        `${import.meta.env.VITE_API_URL}/all-winner`
+      );
+      return result.data;
+    },
+  });
+
+  console.log(winnerDetail)
+
+  const totalWinner = winnerDetail.length;
+
+  if(winnerDetail.length === 0) return <p>No</p>
+
+
+  if(isPending) return <LoaderSpinner></LoaderSpinner>
+
+if (winnerDetail.length === 0) return <div className="text-center text-purple-300 text-2xl">No winners declared yet!</div>
+
   return (
     <section className="py-20 px-4 bg-linear-to-b from-black via-purple-950 to-black">
       <div className="w-11/12 mx-auto">
@@ -27,7 +55,10 @@ const WinnerSections = () => {
         </div>
 
         <div className="w-10/12 mx-auto space-y-5 my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          <WinnerCard></WinnerCard>
+        {
+          winnerDetail.map((winner , i) => <WinnerCard winner={winner} key={i} totalWinner={totalWinner}></WinnerCard>)
+        }
+          
         </div>
 
         {/* CTA Text */}

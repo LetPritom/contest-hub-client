@@ -14,6 +14,7 @@ const TaskModal = ({ submit, cancelSubmit, ContestDetails }) => {
     _id,
     name,
     price,
+    image,
     prizeMoney,
     taskInstruction,
   } = ContestDetails;
@@ -30,6 +31,8 @@ const TaskModal = ({ submit, cancelSubmit, ContestDetails }) => {
     const submitTaskInfo = {
       contestId: _id,
       name,
+      participant_image:user?.photoURL,
+      image,
       taskData : task,
       participant_name: user?.displayName,
       participant_email:user?.email,
