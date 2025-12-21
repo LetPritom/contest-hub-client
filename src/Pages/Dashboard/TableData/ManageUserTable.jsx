@@ -1,11 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+// import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+// import axios from "axios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageUserTable = ({ user, refetch }) => {
-  const { name, email, role, image } = user;
-  const axiosSecure = useAxiosSecure();
+  const { name, email, role, image } = user || {};
+//   const axiosSecure = useAxiosSecure();
+const axiosSecure = useAxiosSecure();
 
   const {
     register,
@@ -15,7 +18,8 @@ const ManageUserTable = ({ user, refetch }) => {
 
   const onSubmit = async (data) => {
     try {
-      const role = data.role;
+      const {role} = data;
+      console.log(role)
       await axiosSecure.patch(`/change-role`, { email, role });
       toast.success("role Update");
       refetch()
