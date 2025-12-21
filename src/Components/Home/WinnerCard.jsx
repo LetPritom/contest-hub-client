@@ -28,10 +28,11 @@ const WinnerCard = ({winner}) => {
           <span className="text-sm font-normal">Won</span>
         </div>
 
-        {/* Name & Role */}
+        {/* Name &  */}
+
+        
         <div>
           <h3 className="text-2xl font-bold text-white">{participant_name}</h3>
-          <p className="text-purple-300 text-lg">{`sdffd`}</p>
         </div>
 
         {/* Quote */}

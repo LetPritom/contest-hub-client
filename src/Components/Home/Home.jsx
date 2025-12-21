@@ -29,7 +29,7 @@ const Home = () => {
       <Banner></Banner>
       <HomeTitle></HomeTitle>
 
-      <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {contests.map((contest, i) => (
           <ContestCard contest={contest} key={i}></ContestCard>
         ))}

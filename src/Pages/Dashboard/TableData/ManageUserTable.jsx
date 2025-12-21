@@ -99,7 +99,7 @@ const axiosSecure = useAxiosSecure();
                       </p>
                     )}
 
-                    <button className="mt-2 md:mt-3 w-full max-w-30 md:max-w-xs py-2 md:py-3 bg-linear-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-purple-500/50 hover:scale-105 transform transition-all duration-300 text-xs md:text-base">
+                    <button className="mt-2 cursor-pointer md:mt-3 w-full max-w-30 md:max-w-xs py-2 md:py-3 bg-linear-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-purple-500/50 hover:scale-105 transform transition-all duration-300 text-xs md:text-base">
                       Change
                     </button>
                   </form>

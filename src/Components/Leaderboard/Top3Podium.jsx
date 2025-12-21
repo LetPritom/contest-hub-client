@@ -22,13 +22,13 @@ const Top3Podium = ({ topWinners = [] }) => {
   };
 
   return (
-    <div className="py-16 px-4">
+    <div className="py-16 px-4 cursor-pointer">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 bg-linear-to-r from-yellow-400 via-orange-400 to-pink-400 bg-clip-text text-transparent">
           Top Champions 🏆
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-end">
           {topWinners.slice(0, 3).map((winner, index) => {
             const { emoji, color } = getMedal(index);
 
@@ -39,7 +39,7 @@ const Top3Podium = ({ topWinners = [] }) => {
               >
                 {/* Medal Badge */}
                 <div
-                  className={`absolute -top-14 left-1/2 -translate-x-1/2 z-20 w-28 h-28 rounded-full bg-linear-to-br ${color} flex items-center justify-center shadow-2xl text-7xl border-4 border-white/30`}
+                  className={`absolute -top-14 left-1/2 -translate-x-1/2 z-20 w-18 h-18 rounded-full bg-linear-to-br ${color} flex items-center justify-center shadow-2xl text-7xl border-4 border-white/30 my-8`}
                 >
                   {emoji}
                 </div>
@@ -51,7 +51,7 @@ const Top3Podium = ({ topWinners = [] }) => {
                     <img
                       src={winner.image || 'https://randomuser.me/api/portraits/lego/5.jpg'}
                       alt={winner.name}
-                      className="w-36 h-36 mx-auto rounded-full ring-8 ring-purple-400/40 object-cover shadow-xl group-hover:ring-yellow-400/60 transition-all duration-500"
+                      className="w-20 h-20 mx-auto rounded-full ring-8 ring-purple-400/40 object-cover shadow-xl group-hover:ring-yellow-400/60 transition-all duration-500"
                     />
 
                     {/* Name & Prize */}
@@ -60,8 +60,8 @@ const Top3Podium = ({ topWinners = [] }) => {
                         {winner.name}
                       </h3>
                       <div className="mt-4 inline-flex items-center gap-3 px-8 py-4 bg-linear-to-r from-green-500 to-emerald-600 rounded-full text-white font-extrabold text-2xl shadow-xl">
-                        <span>$ {winner.win}</span>
-                        <span className="text-lg">Won</span>
+                        <span>{winner.win}</span>
+                        <span className="text-lg">Won different contest</span>
                       </div>
                     </div>
 
@@ -71,7 +71,7 @@ const Top3Podium = ({ topWinners = [] }) => {
                         Champion of
                       </p>
                       <p className="text-xl font-bold text-purple-200 mt-2">
-                        {winner.contestName}
+                        ContestHub
                       </p>
                     </div>
                   </div>

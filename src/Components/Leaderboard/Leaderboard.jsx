@@ -5,6 +5,7 @@ import LoaderSpinner from "../Loader/LoaderSpinner";
 import useAuth from "../../hooks/useAuth";
 import SnowParticles from "../SnowParticles";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import LineParticles from "../LineParticles";
 
 const Leaderboard = () => {
   const { user } = useAuth();
@@ -24,8 +25,11 @@ const Leaderboard = () => {
 
   if (isPending) return <LoaderSpinner></LoaderSpinner>;
   return (
-    <div className="min-h-screen bg-linear-to-br from-purple-950 via-black to-pink-950 py-16 px-4">
+    <div className="min-h-screen bg-linear-to-br from-purple-950 via-black to-pink-950 py-16 px-4 ">
+      <div className="div w-10/12 mx-auto relative z-10">
       <SnowParticles></SnowParticles>
+      </div>
+      
       <div className="w-11/12 mx-auto">
         {/* Title */}
         <div className="text-center mb-16">

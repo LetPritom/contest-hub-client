@@ -7,6 +7,7 @@ import RegisterModal from "../Modal/RegisterModal";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import TaskModal from "../Modal/TaskModal";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ContestDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +20,8 @@ const ContestDetails = () => {
   const { id } = useParams();
   console.log(id);
   const { user } = useAuth();
+
+  const axiosSecure = useAxiosSecure()
 
   const { data: ContestDetails = {}, isPending } = useQuery({
     queryKey: ["contest", id],
@@ -53,6 +56,39 @@ const ContestDetails = () => {
       return result.data;
     },
   });
+
+  // conditional winner rendering and button 
+  
+  const { data: isSubmit= {} } = useQuery({
+    queryKey: ["isSubmit", id],
+    queryFn: async () => {
+      const result = await axiosSecure(
+        `${import.meta.env.VITE_API_URL}/condition-submit?email=${
+          user?.email
+        }&contestId=${id}`
+      );
+
+      return result.data;
+    },
+  });
+
+
+  const { data: isWinner= {} } = useQuery({
+    queryKey: ["card", id],
+    queryFn: async () => {
+      const result = await axiosSecure(
+        `${import.meta.env.VITE_API_URL}/single-winner?contestId=${id}`
+      );
+
+      return result.data;
+    },
+  });
+
+  console.log(isWinner)
+
+  const {image:winnerImage , participant_name:winnerName, declaredWinnerTime  } = isWinner;
+
+ const winnerDeclaredTime = new Date(declaredWinnerTime).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short", });
 
   const { participant_email , payment_status } = taskAllow;
 
@@ -90,6 +126,25 @@ const ContestDetails = () => {
             {/* Left: Description & Task */}
             <div className="md:col-span-2 space-y-10">
               {/* Description */}
+
+              {/* Winner Section (show only after declaration) */}
+
+              {
+                isWinner ? <div className="backdrop-blur-md bg-linear-to-r from-purple-600/20 to-pink-600/20 border border-purple-400/50 rounded-2xl p-8 text-center">
+                <h3 className="text-2xl font-bold text-purple-200 mb-6">
+                  Winner 🏆
+                </h3>
+                <img
+                  src={winnerImage}
+                  alt="Winner"
+                  className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-purple-400"
+                />
+                <p className="text-2xl font-bold text-white">{winnerName}</p>
+                <p className="text-purple-200 mt-2">Declared on {winnerDeclaredTime}</p>
+              </div> : <div className="backdrop-blur-md bg-white/20 border text-white font-semibold text-lg border-purple-400/70 rounded-2xl p-8 text-center">Winner hasn’t been announced yet</div>
+              }
+              
+
               <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8">
                 <h2 className="text-3xl font-bold text-purple-300 mb-6">
                   Contest Description
@@ -129,21 +184,11 @@ const ContestDetails = () => {
                 deadline={deadline}
               ></CountDown>
 
-              {/* Winner Section (show only after declaration) */}
-              <div className="backdrop-blur-md bg-linear-to-r from-purple-600/30 to-pink-600/30 border border-purple-400/50 rounded-2xl p-8 text-center">
-                <h3 className="text-2xl font-bold text-purple-200 mb-6">
-                  Winner 🏆
-                </h3>
-                <img
-                  src="https://randomuser.me/api/portraits/men/32.jpg"
-                  alt="Winner"
-                  className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-purple-400"
-                />
-                <p className="text-2xl font-bold text-white">Rahim Khan</p>
-                <p className="text-purple-200 mt-2">Declared on Dec 25, 2025</p>
-              </div>
+              
 
               {/* Buttons */}
+
+
               <div className="space-y-4">
 
                 {
@@ -167,10 +212,15 @@ const ContestDetails = () => {
 
                 {participant_email === user?.email && (
                   <button
+                   disabled={isSubmit}
                     onClick={() => setSubmit(true)}
                     className="w-full py-3 text-xl font-bold text-white rounded-2xl bg-transparent backdrop-blur-2xl border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer "
                   >
-                    Submit Your Task
+
+                    {
+                      isSubmit? 'Your Task submitted':'Submit Your Task'
+                    }
+                    
                   </button>
                 )}
 

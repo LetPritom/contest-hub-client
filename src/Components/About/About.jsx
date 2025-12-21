@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 
 const About = () => {
   return (
-    <div className="  min-h-screen bg-gradient-to-br from-purple-950 via-black to-black text-white py-16 px-4 overflow-hidden relative">
+    <div className="  min-h-screen bg-linear-to-br from-purple-950 via-black to-black text-white py-16 px-4 overflow-hidden relative">
       {/* Floating Glow Orbs */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-pink-600/20 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -11,7 +11,7 @@ const About = () => {
       <div className="w-11/12 mx-auto space-y-20 relative z-10">
         {/* Hero Title */}
         <div className="text-center">
-          <h1 className="text-6xl md:text-8xl font-extrabold mb-8 bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-8xl font-extrabold mb-8 bg-linear-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent">
             About ContestHub
           </h1>
           <p className="text-2xl md:text-4xl text-purple-200 max-w-4xl mx-auto">

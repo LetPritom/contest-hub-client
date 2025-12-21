@@ -11,6 +11,7 @@ import useAuth from "../../../hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import ErrorPage from "../../../ErrorPage/ErrorPage";
 import {BeatLoader} from 'react-spinners'
+import LoaderSpinner from "../../../Components/Loader/LoaderSpinner";
 
 const AddContest = () => {
   const { user } = useAuth();
@@ -47,7 +48,7 @@ const AddContest = () => {
     onMutate: (payload) => console.log(payload),
   });
 
-  if (isError) return <ErrorPage></ErrorPage>;
+ 
 
   const onSubmit = async (data) => {
     const {
@@ -107,6 +108,11 @@ const AddContest = () => {
       taskInstruction,
     });
   };
+
+   if (isError) return <ErrorPage></ErrorPage>;
+
+   if(isPending) return <LoaderSpinner></LoaderSpinner>
+
   return (
     <div className="min-h-screen  flex items-center justify-center py-5">
       <LineParticles></LineParticles>
@@ -214,7 +220,7 @@ const AddContest = () => {
               <input
                 type="number"
                 {...register("price", {
-                  required: "rice is required",
+                  required: "price is required",
                   min: { value: 0, message: "Price cannot be negative" },
                   valueAsNumber: true,
                 })}
@@ -285,8 +291,8 @@ const AddContest = () => {
                 <option value="writing" className="bg-gray-900">
                   Writing
                 </option>
-                <option value="other" className="bg-gray-900">
-                  Other
+                <option value="article" className="bg-gray-900">
+                  Article
                 </option>
               </select>
               {errors.contestType && (

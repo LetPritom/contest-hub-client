@@ -9,7 +9,7 @@ const SubmissionDetailCard = ({ submission }) => {
 
     try {
       await axios.patch(`${import.meta.env.VITE_API_URL}/announce-winner`, { _id, contestId});
-      toast.success("Winner :",participant_name);
+      toast.success("Winner",participant_name);
     } catch (err) {
       toast.error(err.message);
     }
