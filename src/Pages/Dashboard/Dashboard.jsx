@@ -1,7 +1,10 @@
 import React from "react";
 
 
+
 const Dashboard = () => {
+
+
   return (
     <div className="min-h-screen bg-linear-to-br from-[#0b0f1a] via-[#0c1022] to-[#11152a] text-white">
       {/* Glow background accents */}
@@ -12,7 +15,7 @@ const Dashboard = () => {
       </div>
 
       {/* Top navbar */}
-      <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/5 border-b border-white/10">
+      {/* <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/5 border-b border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="h-9 w-9 rounded-lg bg-linear-to-br from-yellow-400 to-amber-600 shadow-lg ring-1 ring-white/20" />
@@ -30,13 +33,13 @@ const Dashboard = () => {
               </button>
               <img
                 className="h-9 w-9 rounded-full ring-2 ring-white/20 object-cover"
-                src="https://i.pravatar.cc/64?img=12"
+                src={user.photoURL}
                 alt="User avatar"
               />
             </div>
           </div>
         </div>
-      </header>
+      </header> */}
 
       {/* Layout: sidebar + content */}
       <div className="mx-auto max-w-7xl px-4 py-6 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-6">

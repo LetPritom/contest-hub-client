@@ -1,7 +1,7 @@
 import React from 'react';
 
 const WinnerCard = ({winner}) => {
-  const { name, prizeMoney,  participant_name, participant_image } = winner; // তোর data structure অনুযায়ী adjust করিস
+  const { name, prizeMoney,  participant_name, participant_image  } = winner; // তোর data structure অনুযায়ী adjust করিস
 
   return (
     <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 hover:shadow-purple-500/30 hover:-translate-y-4 h-120">
@@ -44,7 +44,7 @@ const WinnerCard = ({winner}) => {
         <div className="pt-4 border-t border-white/10">
           <p className="text-sm text-gray-500 uppercase tracking-wider">Winner of</p>
           <p className="text-xl font-semibold text-purple-200 mt-1">
-            {`contestName`}
+            {name}
           </p>
         </div>
       </div>

@@ -8,7 +8,13 @@ const StatsSection = ({ totalWinner }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
           {/* Card 1: Total Prize Distributed */}
-          <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 hover:shadow-green-500/30 hover:-translate-y-2">
+          <div
+          data-aos="fade-left"
+          data-aos-delay="200"
+          data-aos-easing="ease-out-cubic"
+           className="ani">
+
+            <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 hover:shadow-green-500/30 hover:-translate-y-2">
             <div className="absolute inset-0 bg-linear-to-br from-green-600/10 to-emerald-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
             
             <div className="relative p-8 md:p-12 text-center flex items-center justify-center gap-6 cursor-pointer">
@@ -28,9 +34,19 @@ const StatsSection = ({ totalWinner }) => {
               </div>
             </div>
           </div>
+            
+          </div>
+          
 
           {/* Card 2: Total Winners */}
-          <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 hover:shadow-orange-500/30 hover:-translate-y-2  cursor-pointer">
+
+          <div
+          data-aos="fade-right"
+          data-aos-delay="200"
+          data-aos-easing="ease-out-cubic"
+           className="ani">
+
+            <div className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 hover:shadow-orange-500/30 hover:-translate-y-2  cursor-pointer">
             <div className="absolute inset-0 bg-linear-to-br from-orange-600/10 to-yellow-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
             
             <div className="relative p-8 md:p-12 text-center flex items-center justify-center gap-6">
@@ -50,6 +66,10 @@ const StatsSection = ({ totalWinner }) => {
               </div>
             </div>
           </div>
+
+
+          </div>
+          
         </div>
       </div>
     </section>

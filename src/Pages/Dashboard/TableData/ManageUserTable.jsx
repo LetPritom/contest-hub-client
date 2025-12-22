@@ -19,7 +19,6 @@ const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
     try {
       const {role} = data;
-      console.log(role)
       await axiosSecure.patch(`/change-role`, { email, role });
       toast.success("role Update");
       refetch()
@@ -83,13 +82,13 @@ const axiosSecure = useAxiosSecure();
                       defaultValue={role}
                       className="w-full max-w-30 md:max-w-xs px-3 py-2 md:px-5 md:py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white text-xs md:text-base focus:outline-none focus:border-purple-400 focus:ring-4 focus:ring-purple-500/30"
                     >
-                      <option value="User" className="bg-gray-900">
+                      <option value="user" className="bg-gray-900">
                         User
                       </option>
-                      <option value="Creator" className="bg-gray-900">
+                      <option value="creator" className="bg-gray-900">
                         Creator
                       </option>
-                      <option value="Admin" className="bg-gray-900">
+                      <option value="admin" className="bg-gray-900">
                         Admin
                       </option>
                     </select>

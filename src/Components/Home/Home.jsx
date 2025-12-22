@@ -12,10 +12,7 @@ import WinnerSections from "../../Pages/Home/WinnerSections";
 import ExtraSection from "../../Pages/Home/ExtraSection";
 
 const Home = () => {
-
-  
   const [uiContests, setUiContests] = useState([]);
-
 
   // Default approved contests load (page load e)
   const { data: defaultContests = [], isPending } = useQuery({
@@ -30,42 +27,74 @@ const Home = () => {
 
   // Jab search hoy na, default contests show korbo
   useEffect(() => {
-    
     setUiContests(defaultContests);
-  
   }, [defaultContests]);
 
-  console.log(uiContests)
+  console.log(uiContests);
 
-  if(isPending) return<LoaderSpinner></LoaderSpinner>
+  if (isPending) return <LoaderSpinner></LoaderSpinner>;
 
   return (
     <div>
-      <Banner
-        setUiContests={setUiContests}
-      ></Banner>
+      <div
+        data-aos="fade-down"
+        data-aos-delay="200"
+        data-aos-easing="ease-out-cubic"
+        className="ani"
+      >
+        <Banner setUiContests={setUiContests}></Banner>
+      </div>
+
       <HomeTitle></HomeTitle>
 
       <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {uiContests.map((contest, i) => (
-          <ContestCard contest={contest} key={i}></ContestCard>
+        {uiContests.map((contest, index) => (
+          <div
+            key={contest._id}
+            data-aos="fade-up"
+            data-aos-delay={index * 150}
+            data-aos-duration="800"
+            data-aos-easing="ease-out-cubic"
+            data-aos-offset="100"
+            className="group"
+          >
+            <ContestCard contest={contest} />
+          </div>
         ))}
       </div>
 
       {/* see all button */}
 
-      <NavLink to="/all-contest">
-        <div className="align flex justify-center items-center my-10">
-          <div className="button w-48 ">
-            <button className="btn-custom flex items-center justify-center gap-2 text-center">
-              See All <FaRightLong />
-            </button>
+      <div
+        data-aos="fade-up"
+        data-aos-delay="200"
+        data-aos-easing="ease-out-cubic"
+        className=""
+      >
+        <NavLink to="/all-contest">
+          <div className="align flex justify-center items-center h-32 my-10">
+            <div className="button w-48">
+              <button className="btn-custom flex items-center justify-center gap-2 text-center animate-bounce hover:animate-none">
+                Explore <FaRightLong />
+              </button>
+            </div>
           </div>
-        </div>
-      </NavLink>
+        </NavLink>
+      </div>
 
       <WinnerSections></WinnerSections>
-      <ExtraSection></ExtraSection>
+
+      <div
+        data-aos="fade-down"
+        data-aos-delay="200"
+        data-aos-easing="ease-out-cubic"
+        className="ani"
+      >
+
+        <ExtraSection></ExtraSection>
+
+      </div>
+      
     </div>
   );
 };

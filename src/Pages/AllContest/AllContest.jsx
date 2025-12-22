@@ -35,7 +35,7 @@ const AllContest = () => {
   queryKey: ["contests", activeTab],
   queryFn: async () => {
     if (activeTab === "All") {
-      const res = await axiosSecure("/approve-contest");
+      const res = await axiosSecure("/all-approve-contest");
       return res.data;
     } else {
       const res = await axiosSecure(`/search-contest?type=${activeTab}`);

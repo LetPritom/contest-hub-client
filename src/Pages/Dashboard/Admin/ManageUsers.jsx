@@ -1,19 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import useAuth from "../../../hooks/useAuth";
-import axios from 'axios';
 import React from 'react';
 import LoaderSpinner from '../../../Components/Loader/LoaderSpinner';
 import ManageUserTable from '../TableData/ManageUserTable';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const ManageUsers = () => {
 
     const {user} = useAuth()
+    const axiosSecure = useAxiosSecure();
 
      const { data: users = [], isPending , refetch} = useQuery({
     queryKey: ["users", user?.email ],
     queryFn: async () => {
-      const result = await axios(
-        `${import.meta.env.VITE_API_URL}/all-users`
+      const result = await axiosSecure(
+        `/all-users`
       );
       return result.data;
     },

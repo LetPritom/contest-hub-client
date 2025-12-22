@@ -7,7 +7,7 @@ const PrivateCreator = ({children}) => {
      const [role , isRoleLoading] = useRole()
 
      if(isRoleLoading) return <LoaderSpinner></LoaderSpinner>
-     if(role === 'Creator') return children
+     if(role === 'creator') return children
     return <Navigate to='/' replace='true' />
 };
 

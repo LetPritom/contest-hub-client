@@ -26,7 +26,7 @@ const Sidebar = () => {
   console.log(role);
   return (
     <div className="min-h-screen bg-linear-to-br from-[#17002e] via-[#07000f] to-[#340575] overflow-x-hidden">
-      {/* <LineParticles></LineParticles> */}
+``
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
@@ -62,9 +62,9 @@ const Sidebar = () => {
             </label>
 
             <h1
-              className="px-4 text-xl md:text-2xl font-extrabold
-          bg-linear-to-r from-purple-300 to-indigo-400
-          bg-clip-text text-transparent drop-shadow"
+                className="px-4 text-xl md:text-2xl font-extrabold
+                bg-linear-to-r from-purple-300 to-indigo-400
+                bg-clip-text text-transparent drop-shadow"
             >
               ContestHub Dashboard
             </h1>
@@ -85,14 +85,14 @@ const Sidebar = () => {
           ></label>
 
           <div
-            className="flex min-h-full flex-col items-start
-        bg-linear-to-b from-purple-900/40 via-black/40 to-purple-900/30
-        backdrop-blur-2xl border-r border-purple-400/20
-        shadow-[0px_2_10px_rgba(88,28,135,0.45)]
-        is-drawer-close:w-14 is-drawer-open:w-64 transition-all duration-300"
+            className="flex min-h-full flex-col items-start py-5
+            bg-linear-to-b from-purple-900/40 via-black/40 to-purple-900/30
+            backdrop-blur-2xl border-r border-purple-400/20
+            shadow-[0px_2_10px_rgba(88,28,135,0.45)]
+            is-drawer-close:w-14 is-drawer-open:w-64 transition-all duration-300"
           >
             {/* ===== SIDEBAR MENU ===== */}
-            <ul className="menu w-full grow flex flex-col gap-2 p-3 text-white">
+            <ul className="menu w-full grow flex flex-col gap-2 p-4 text-white">
               {/* existing role-based sidebars (UNCHANGED) */}
               {/* home link */}
               <NavLink to="/">
@@ -105,9 +105,9 @@ const Sidebar = () => {
 
                 {role === "user" && <UserSidebar />}
 
-                {role === "Creator" && <SellerSidebar />}
+                {role === "creator" && <SellerSidebar />}
 
-                {role === "Admin" && <AdminSidebar />}
+                {role === "admin" && <AdminSidebar />}
 
               <NavLink to="/dashboard/my-profile">
                 <Menu title={"My-profile"} icon={<MdPerson />}>

@@ -60,6 +60,8 @@ const SignUp = () => {
         address: 'Jashore Khulna Bangladesh',
 
       })
+
+      navigate(from);
       
       console.log(user);
     } catch (err) {
@@ -70,14 +72,11 @@ const SignUp = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-purple-900 via-black to-purple-900 flex items-center justify-center px-4 py-16">
       <div className="w-11/12 md:w-9/12 mx-auto flex flex-col md:flex-row items-center justify-between gap-20">
-        <div className="text-center rounded-full  mb-10 flex-1 bg-black/10 backdrop-blur-2xl shadow-2xl border border-white/10 p-10">
+        <div className="text-center rounded-full  mb-10 flex-1 b p-10">
           <div className="align flex flex-col justify-center items-center h-52 ">
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-2xl">
               Join Contest Hub!
             </h2>
-            <p className="text-white/70 text-lg">
-              Create your account and start competing today
-            </p>
           </div>
         </div>
 

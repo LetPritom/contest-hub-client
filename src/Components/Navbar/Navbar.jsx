@@ -58,7 +58,7 @@ const Navbar = () => {
   return (
     <Container className="border-b border-gray-300">
       <div className=" ">
-        <div className="navbar lg:w-12/12 mx-auto py-4">
+        <div className="navbar lg:w-12/12 mx-auto py-4 relative z-50">
           <div className="navbar-start">
             <div className="dropdown ">
               <div

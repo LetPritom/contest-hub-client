@@ -8,7 +8,7 @@ import { MdPerson } from 'react-icons/md';
 
 const UserSidebar = () => {
     return (
-        <div className='flex flex-col gap-2 mt-2'>
+        <div className='flex flex-col gap-2 mt-2 '>
             
             <NavLink to='/dashboard/my-participate'><Menu title={'My Contest'} icon={<FaListCheck />}>My Contest</Menu></NavLink>
             <NavLink to='/dashboard/my-winning'><Menu title={'My winning'} icon={<GiPodiumWinner />}>My winning</Menu></NavLink>

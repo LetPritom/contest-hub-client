@@ -6,7 +6,7 @@ import { Navigate } from 'react-router';
 const AdminCreator = ({children}) => {
     const [role , isRoleLoading] = useRole()
     if(isRoleLoading) return <LoaderSpinner></LoaderSpinner>
-    if(role ==='Admin') return children
+    if(role ==='admin') return children
     return <Navigate to='/' replace='true' />
 };
 
