@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useParams } from "react-router";
 import LoaderSpinner from "../../Components/Loader/LoaderSpinner";
 import CountDown from "./CountDown";
@@ -21,14 +20,12 @@ const ContestDetails = () => {
   console.log(id);
   const { user } = useAuth();
 
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
 
   const { data: ContestDetails = {}, isPending } = useQuery({
     queryKey: ["contest", id],
     queryFn: async () => {
-      const result = await axios(
-        `${import.meta.env.VITE_API_URL}/detail-contest/${id}`
-      );
+      const result = await axiosSecure(`/detail-contest/${id}`);
       return result.data;
     },
   });
@@ -44,22 +41,20 @@ const ContestDetails = () => {
     taskInstruction,
   } = ContestDetails;
 
-  const { data: taskAllow = {} ,} = useQuery({
+  const { data: taskAllow = {} } = useQuery({
     queryKey: ["task", id],
     queryFn: async () => {
-      const result = await axios(
-        `${import.meta.env.VITE_API_URL}/submit-task-open?email=${
-          user?.email
-        }&contestId=${id}`
+      const result = await axiosSecure(
+        `/submit-task-open?email=${user?.email}&contestId=${id}`
       );
 
       return result.data;
     },
   });
 
-  // conditional winner rendering and button 
-  
-  const { data: isSubmit= {} , refetch } = useQuery({
+  // conditional winner rendering and button
+
+  const { data: isSubmit = {}, refetch } = useQuery({
     queryKey: ["isSubmit", id],
     queryFn: async () => {
       const result = await axiosSecure(
@@ -72,8 +67,7 @@ const ContestDetails = () => {
     },
   });
 
-
-  const { data: isWinner= {} } = useQuery({
+  const { data: isWinner = {} } = useQuery({
     queryKey: ["card", id],
     queryFn: async () => {
       const result = await axiosSecure(
@@ -84,15 +78,22 @@ const ContestDetails = () => {
     },
   });
 
-  console.log(isWinner)
+  console.log(isWinner);
 
-  const {image:winnerImage , participant_name:winnerName, declaredWinnerTime  } = isWinner;
+  const {
+    image: winnerImage,
+    participant_name: winnerName,
+    declaredWinnerTime,
+  } = isWinner;
 
- const winnerDeclaredTime = new Date(declaredWinnerTime).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short", });
+  const winnerDeclaredTime = new Date(declaredWinnerTime).toLocaleString(
+    "en-US",
+    { dateStyle: "medium", timeStyle: "short" }
+  );
 
-  const { participant_email , payment_status } = taskAllow;
+  const { participant_email, payment_status } = taskAllow;
 
-  console.log(participant_email)
+  console.log(participant_email);
 
   if (isPending) return <LoaderSpinner></LoaderSpinner>;
 
@@ -129,21 +130,26 @@ const ContestDetails = () => {
 
               {/* Winner Section (show only after declaration) */}
 
-              {
-                isWinner ? <div className="backdrop-blur-md bg-linear-to-r from-purple-600/20 to-pink-600/20 border border-purple-400/50 rounded-2xl p-8 text-center">
-                <h3 className="text-2xl font-bold text-purple-200 mb-6">
-                  Winner 🏆
-                </h3>
-                <img
-                  src={winnerImage}
-                  alt="Winner"
-                  className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-purple-400"
-                />
-                <p className="text-2xl font-bold text-white">{winnerName}</p>
-                <p className="text-purple-200 mt-2">Declared on {winnerDeclaredTime}</p>
-              </div> : <div className="backdrop-blur-md bg-white/20 border text-white font-semibold text-lg border-purple-400/70 rounded-2xl p-8 text-center">Winner hasn’t been announced yet</div>
-              }
-              
+              {isWinner ? (
+                <div className="backdrop-blur-md bg-linear-to-r from-purple-600/20 to-pink-600/20 border border-purple-400/50 rounded-2xl p-8 text-center">
+                  <h3 className="text-2xl font-bold text-purple-200 mb-6">
+                    Winner 🏆
+                  </h3>
+                  <img
+                    src={winnerImage}
+                    alt="Winner"
+                    className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-purple-400"
+                  />
+                  <p className="text-2xl font-bold text-white">{winnerName}</p>
+                  <p className="text-purple-200 mt-2">
+                    Declared on {winnerDeclaredTime}
+                  </p>
+                </div>
+              ) : (
+                <div className="backdrop-blur-md bg-white/20 border text-white font-semibold text-lg border-purple-400/70 rounded-2xl p-8 text-center">
+                  Winner hasn’t been announced yet
+                </div>
+              )}
 
               <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8">
                 <h2 className="text-3xl font-bold text-purple-300 mb-6">
@@ -184,25 +190,24 @@ const ContestDetails = () => {
                 deadline={deadline}
               ></CountDown>
 
-              
-
               {/* Buttons */}
 
-
               <div className="space-y-4">
-
-                {
-                  payment_status !=='paid' ?  <button
-                  disabled={expired}
-                  onClick={() => setIsOpen(true)}
-                  className={`w-full  py-5 rounded-xl font-semibold 
+                {payment_status !== "paid" ? (
+                  <button
+                    disabled={expired}
+                    onClick={() => setIsOpen(true)}
+                    className={`w-full  py-5 rounded-xl font-semibold 
                   ${expired ? "bg-gray-500 cursor-not-allowed" : "btn-custom "}
                    `}
-                >
-                  {expired ? "Contest Expired" : "Register & Pay"} ${price}
-                </button> : <button className='btn-custom disabled cursor-not-allowed:'>Registered</button>
-                }
-               
+                  >
+                    {expired ? "Contest Expired" : "Register & Pay"} ${price}
+                  </button>
+                ) : (
+                  <button className="btn-custom disabled cursor-not-allowed:">
+                    Registered
+                  </button>
+                )}
 
                 <RegisterModal
                   ContestDetails={ContestDetails}
@@ -212,20 +217,16 @@ const ContestDetails = () => {
 
                 {participant_email === user?.email && (
                   <button
-                   disabled={isSubmit}
+                    disabled={isSubmit}
                     onClick={() => setSubmit(true)}
                     className="w-full py-3 text-xl font-bold text-white rounded-2xl bg-transparent backdrop-blur-2xl border border-white/20 shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer "
                   >
-
-                    {
-                      isSubmit? 'Your Task submitted':'Submit Your Task'
-                    }
-                    
+                    {isSubmit ? "Your Task submitted" : "Submit Your Task"}
                   </button>
                 )}
 
-                <TaskModal 
-                refetch={refetch}
+                <TaskModal
+                  refetch={refetch}
                   ContestDetails={ContestDetails}
                   submit={submit}
                   cancelSubmit={cancelSubmit}

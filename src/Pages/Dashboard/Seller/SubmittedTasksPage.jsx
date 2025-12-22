@@ -2,12 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import LoaderSpinner from "../../../Components/Loader/LoaderSpinner";
-import axios from "axios";
 import { useParams } from "react-router";
 import SubmissionDetailCard from "./SubmissionDetailCard";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const SubmittedTasksPage = () => {
   const { id } = useParams();
+
+  const axiosSecure = useAxiosSecure()
 
   console.log(id);
 
@@ -16,8 +18,8 @@ const SubmittedTasksPage = () => {
   const { data: submissions = [], isPending } = useQuery({
     queryKey: ["contest", user?.email],
     queryFn: async () => {
-      const result = await axios(
-        `${import.meta.env.VITE_API_URL}/submit-task?contestId=${id}`
+      const result = await axiosSecure(
+        `/submit-task?contestId=${id}`
       );
       return result.data;
     },

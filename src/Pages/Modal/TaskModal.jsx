@@ -1,14 +1,15 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import React from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const TaskModal = ({ submit, cancelSubmit, ContestDetails, refetch }) => {
   console.log(ContestDetails);
 
   const {user} = useAuth()
+  const axiosSecure = useAxiosSecure()
 
   const {
     _id,
@@ -43,7 +44,7 @@ const TaskModal = ({ submit, cancelSubmit, ContestDetails, refetch }) => {
       
     }
 
-    const result = await axios.post(`${import.meta.env.VITE_API_URL}/submit-task` , submitTaskInfo)
+    const result = await axiosSecure.post(`/submit-task` , submitTaskInfo)
     console.log(result)
     cancelSubmit()
     toast.success("Task will be Submitted")

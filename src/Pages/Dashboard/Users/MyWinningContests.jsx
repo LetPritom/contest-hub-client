@@ -14,7 +14,7 @@ const MyWinningContests = () => {
         queryKey: ["myWinning", user?.email],
         queryFn: async () => {
           const result = await axiosSecure(
-            `${import.meta.env.VITE_API_URL}/my-winning?email=${user?.email}`
+            `/my-winning?email=${user?.email}`
           );
           return result.data;
           

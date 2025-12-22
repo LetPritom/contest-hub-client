@@ -1,11 +1,12 @@
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import React from "react";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const RegisterModal = ({ isOpen, closeModal, ContestDetails }) => {
 
     const{user} = useAuth()
+    const axiosSecure = useAxiosSecure()
 
     const {name , image, contestType , price , _id , prizeMoney , description , create_by, deadline} = ContestDetails;
     console.log(name)
@@ -32,7 +33,7 @@ const RegisterModal = ({ isOpen, closeModal, ContestDetails }) => {
 
         }
 
-        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/create-checkout-session` , paymentInfo) 
+        const {data} = await axiosSecure.post(`/create-checkout-session` , paymentInfo) 
         console.log(data)
         window.location.href = data.url
 

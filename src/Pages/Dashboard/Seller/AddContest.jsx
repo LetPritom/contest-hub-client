@@ -1,20 +1,20 @@
 import React from "react";
-
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import LineParticles from "../../../Components/LineParticles";
 import { imageUpload } from "../../../Utils";
 import { toast } from "react-toastify";
-import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import ErrorPage from "../../../ErrorPage/ErrorPage";
 import {BeatLoader} from 'react-spinners'
 import LoaderSpinner from "../../../Components/Loader/LoaderSpinner";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AddContest = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure()
 
   const {
     register,
@@ -31,10 +31,7 @@ const AddContest = () => {
     reset: mutationReset,
   } = useMutation({
     mutationFn: async (payload) =>
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/pending-contest`,
-        payload
-      ),
+      await axiosSecure.post(`/pending-contest`, payload ),
     onSuccess: (data) => {
       console.log(data);
       toast.success("Create Successfully ! Waiting For Admin Approval");

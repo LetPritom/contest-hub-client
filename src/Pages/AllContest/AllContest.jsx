@@ -43,6 +43,10 @@ const AllContest = () => {
     }
   },
 });
+  
+
+   const length = contests.length
+  
 
   if (isPending) return <LoaderSpinner></LoaderSpinner>;
 
@@ -78,13 +82,21 @@ const AllContest = () => {
         ))}{" "}
       </div>
 
-
-
-<div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 my-14">
+      {
+    (length === 0) ?  <div className="min-h-screen flex justify-center items-center flex-wrap">
+    <p className="text-xl md:text-3xl font-bold text-center">This contest doesn't have any creator assigned yet.</p>
+   </div> : <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 my-14">
   {contests.map((contest, i) => (
     <ContestCard key={i} contest={contest} />
   ))}
 </div>
+      }
+
+   
+
+
+
+
     </div>
   );
 };

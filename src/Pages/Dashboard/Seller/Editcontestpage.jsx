@@ -3,23 +3,24 @@ import { useForm, Controller } from "react-hook-form";
 import LineParticles from "../../../Components/LineParticles";
 import DatePicker from "react-datepicker";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import LoaderSpinner from "../../../Components/Loader/LoaderSpinner";
 import { imageUpload } from "../../../Utils";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const EditContestPage = () => {
   const { upId } = useParams();
   const navigate  = useNavigate()
+  const axiosSecure = useAxiosSecure()
 
 
   const { data: update = {}, isPending } = useQuery({
     queryKey: ["Update", upId],
     queryFn: async () => {
-      const result = await axios(
-        `${import.meta.env.VITE_API_URL}/detail-contest/${upId}`
+      const result = await axiosSecure(
+        `/detail-contest/${upId}`
       );
       return result.data;
     },
@@ -48,6 +49,8 @@ const EditContestPage = () => {
   } = useForm({});
 
 
+
+  //default value
 
 useEffect(() => {
   if (update?._id) {
@@ -96,7 +99,7 @@ useEffect(() => {
 
      }
 
-     await axios.patch(`${import.meta.env.VITE_API_URL}/edit-contest/${upId}`, updateInfo);
+     await axiosSecure.patch(`/edit-contest/${upId}`, updateInfo);
      toast.success('Updated')
 
 

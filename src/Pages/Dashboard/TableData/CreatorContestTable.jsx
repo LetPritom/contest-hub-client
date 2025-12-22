@@ -1,18 +1,18 @@
-import axios from "axios";
 import React from "react";
 import { NavLink } from "react-router";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const CreatorContestTable = ({ creator, refetch }) => {
-  console.log(creator);
+const axiosSecure= useAxiosSecure()
+  
 
   const { contestType, image, name, price, prizeMoney, status, _id } = creator;
 
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `${import.meta.env.VITE_API_URL}/delete-contest/${_id}`,
-        {}
+      await axiosSecure.delete(
+        `/delete-contest/${_id}`
       );
 
       toast.success("Delete");

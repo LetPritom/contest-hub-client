@@ -1,17 +1,18 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const PaymentSuccess = () => {
+  const axiosSecure = useAxiosSecure()
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
   console.log(sessionId);
 
   useEffect(() => {
     if(sessionId) {
-        axios.post(`${import.meta.env.VITE_API_URL}/payment-success` ,{sessionId})
+        axiosSecure.post(`/payment-success` ,{sessionId})
     }
-  }, [sessionId]);
+  }, [axiosSecure, sessionId]);
 
   const navigate = useNavigate();
   return (

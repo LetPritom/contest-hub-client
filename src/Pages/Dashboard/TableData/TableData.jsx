@@ -1,19 +1,22 @@
-import axios from "axios";
 import React from "react";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const TableData = ({ pending, refetch }) => {
   const { id } = useParams();
+    const axiosSecure = useAxiosSecure()
   console.log(id);
 
   const { image, name, contestType, prizeMoney, create_by, price, _id } =
     pending;
 
+    //approve control
+
   const handleApprove = async () => {
     try {
-      await axios.patch(`${import.meta.env.VITE_API_URL}/approve-contest`, {
+      await axiosSecure.patch(`/approve-contest`, {
         _id,
       });
       refetch();
@@ -22,6 +25,8 @@ const TableData = ({ pending, refetch }) => {
       toast.error(err.message);
     }
   };
+
+  //delete control
 
   const handleDelete = () => {
     Swal.fire({
@@ -35,8 +40,8 @@ const TableData = ({ pending, refetch }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(
-            `${import.meta.env.VITE_API_URL}/delete-contest/${_id}`
+          await axiosSecure.delete(
+            `/delete-contest/${_id}`
           );
 
           Swal.fire({
@@ -52,10 +57,12 @@ const TableData = ({ pending, refetch }) => {
     });
   };
 
+  //reject control
+
 
   const handleReject = async () => {
     try {
-      await axios.patch(`${import.meta.env.VITE_API_URL}/reject-contest`, {
+      await axiosSecure.patch(`/reject-contest`, {
         _id,
       });
       refetch();
