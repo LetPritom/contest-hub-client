@@ -26,7 +26,7 @@ const Sidebar = () => {
   console.log(role);
   return (
     <div className="min-h-screen bg-linear-to-br from-[#17002e] via-[#07000f] to-[#340575] overflow-x-hidden">
-``
+      ``
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
@@ -62,7 +62,7 @@ const Sidebar = () => {
             </label>
 
             <h1
-                className="px-4 text-xl md:text-2xl font-extrabold
+              className="px-4 text-xl md:text-2xl font-extrabold
                 bg-linear-to-r from-purple-300 to-indigo-400
                 bg-clip-text text-transparent drop-shadow"
             >
@@ -102,12 +102,11 @@ const Sidebar = () => {
                 </Menu>
               </NavLink>
 
+              {role === "user" && <UserSidebar />}
 
-                {role === "user" && <UserSidebar />}
+              {role === "creator" && <SellerSidebar />}
 
-                {role === "creator" && <SellerSidebar />}
-
-                {role === "admin" && <AdminSidebar />}
+              {role === "admin" && <AdminSidebar />}
 
               <NavLink to="/dashboard/my-profile">
                 <Menu title={"My-profile"} icon={<MdPerson />}>
@@ -116,31 +115,6 @@ const Sidebar = () => {
               </NavLink>
 
               <hr className="border-purple-400/20 my-3" />
-
-              {/* ===== PROFILE ===== */}
-              {/* <NavLink to="/profile">
-                {({ isActive }) => (
-                  <li>
-                    <button
-                      className={`
-                    flex items-center gap-3 px-3 py-2 rounded-xl transition-all
-                    ${
-                      isActive
-                        ? "bg-linear-to-r from-purple-600/40 to-indigo-600/30 shadow-lg"
-                        : "hover:bg-purple-600/20"
-                    }
-                    is-drawer-close:tooltip is-drawer-close:tooltip-right
-                  `}
-                      data-tip="Profile"
-                    >
-                      <MdPerson className="text-xl text-purple-300" />
-                      <span className="is-drawer-close:hidden text-base font-semibold">
-                        Profile
-                      </span>
-                    </button>
-                  </li>
-                )}
-              </NavLink> */}
 
               {/* ===== LOGOUT ===== */}
               <li>
@@ -158,6 +132,13 @@ const Sidebar = () => {
                     Logout
                   </span>
                 </button>
+
+                <NavLink to="/">
+                  {" "}
+                  <Menu title={"Home"} icon={<GoHomeFill />}>
+                    Home
+                  </Menu>
+                </NavLink>
               </li>
             </ul>
           </div>

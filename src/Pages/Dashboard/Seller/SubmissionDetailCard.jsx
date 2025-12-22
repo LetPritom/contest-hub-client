@@ -1,14 +1,15 @@
-import axios from 'axios';
 import React from 'react';
 import { toast } from 'react-toastify';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const SubmissionDetailCard = ({ submission }) => {
+  const axiosSecure = useAxiosSecure()
   const { participant_name, participant_email, taskData, submittedAt, _id, contestId } = submission || {};
 
   const handleDeclareWinner = async () => {
 
     try {
-      await axios.patch(`${import.meta.env.VITE_API_URL}/announce-winner`, { _id, contestId});
+      await axiosSecure.patch(`/announce-winner`, { _id, contestId});
       toast.success("Winner",participant_name);
     } catch (err) {
       toast.error(err.message);
