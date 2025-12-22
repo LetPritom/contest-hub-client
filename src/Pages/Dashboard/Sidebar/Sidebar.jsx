@@ -7,8 +7,9 @@ import AdminSidebar from "./AdminSidebar/AdminSidebar";
 import { IoIosLogOut } from "react-icons/io";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
-import LineParticles from "../../../Components/LineParticles";
 import { GoHomeFill } from "react-icons/go";
+import useRole from "../../../hooks/UseRole";
+import Menu from "./Menu";
 const Sidebar = () => {
   const { logoutFunction, setLoading } = useAuth();
   const handleLogOut = async () => {
@@ -20,6 +21,9 @@ const Sidebar = () => {
       toast.error(err.message);
     }
   };
+
+  const [role] = useRole()
+  console.log(role)
   return (
     <div className="min-h-screen bg-linear-to-br from-[#17002e] via-[#07000f] to-[#340575] overflow-x-hidden">
       {/* <LineParticles></LineParticles> */}
@@ -91,11 +95,25 @@ const Sidebar = () => {
             <ul className="menu w-full grow flex flex-col gap-2 p-3 text-white">
               {/* existing role-based sidebars (UNCHANGED) */}
               {/* home link */}
+              <NavLink to='/'>  <Menu  title={'Home'} icon={<GoHomeFill />}>Home</Menu></NavLink>
               
+               {
 
-              <UserSidebar />
-              <SellerSidebar />
-              <AdminSidebar />
+                role ==='user' && <UserSidebar />
+               }
+              
+               {
+
+                role ==='Creator' && <SellerSidebar />
+               }
+              
+               {
+
+                role ==='Admin' && <AdminSidebar />
+               }
+              
+              
+              <NavLink to='/dashboard/my-profile'><Menu title={'My-profile'} icon={<MdPerson />}>My profile</Menu></NavLink>
 
               <hr className="border-purple-400/20 my-3" />
 

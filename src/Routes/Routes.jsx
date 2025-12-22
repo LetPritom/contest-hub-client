@@ -23,6 +23,8 @@ import PaymentSuccess from "../Pages/Pyment/PaymentSuccess";
 import About from "../Components/About/About";
 import Stories from "../Components/Stories/Stories";
 import Leaderboard from "../Components/Leaderboard/Leaderboard";
+import PrivateCreator from "../Private/PrivateCreator";
+import AdminCreator from "../Private/AdminCreator";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -85,40 +87,64 @@ export const router = createBrowserRouter([
         element: <Dashboard></Dashboard>,
       },
       {
-        path:'my-participate',
+        path: "my-participate",
         element: <MyParticipatedContests></MyParticipatedContests>,
       },
       {
-        path:'my-profile',
+        path: "my-profile",
         element: <Profile></Profile>,
       },
       {
-        path:'my-winning',
+        path: "my-winning",
         element: <MyWinningContests></MyWinningContests>,
       },
       {
-        path:'add-Contest',
-        element: <AddContest></AddContest>,
+        path: "add-Contest",
+        element: (
+          <PrivateCreator>
+            <AddContest></AddContest>
+          </PrivateCreator>
+        ),
       },
       {
-        path:'created-Contests',
-        element: <MyCreateContestPage></MyCreateContestPage>,
+        path: "created-Contests",
+        element: (
+          <PrivateCreator>
+            <MyCreateContestPage></MyCreateContestPage>
+          </PrivateCreator>
+        ),
       },
       {
-        path:'submitted-tasks/:id',
-        element: <SubmittedTasksPage></SubmittedTasksPage>
+        path: "submitted-tasks/:id",
+        element: (
+          <PrivateCreator>
+            <SubmittedTasksPage></SubmittedTasksPage>
+          </PrivateCreator>
+        ),
       },
       {
-        path:'edit-contest/:upId',
-        element:<EditContestPage></EditContestPage>
+        path: "edit-contest/:upId",
+        element: (
+          <PrivateCreator>
+            <EditContestPage></EditContestPage>
+          </PrivateCreator>
+        ),
       },
       {
-        path:'manage-contest',
-        element:<ManageContest></ManageContest>
+        path: "manage-contest",
+        element: (
+          <AdminCreator>
+            <ManageContest></ManageContest>
+          </AdminCreator>
+        ),
       },
       {
-        path:'manage-users',
-        element:<ManageUsers></ManageUsers>
+        path: "manage-users",
+        element: (
+          <AdminCreator>
+            <ManageUsers></ManageUsers>
+          </AdminCreator>
+        ),
       },
     ],
   },

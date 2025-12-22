@@ -1,16 +1,31 @@
+import { useQuery } from "@tanstack/react-query";
 import banner from "../../assets/banner.jpg";
 import LineParticles from "../../Components/LineParticles";
 import SnowLineParticles from "../../Components/SnowParticles";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useState } from "react";
 
-const Banner = ( {searchType, setSearchType, setContests}) => {
+const Banner = ({ setUiContests }) => {
+  const [searchType, setSearchType] = useState("");
+  const axiosSecure = useAxiosSecure();
 
-  const axiosSecure= useAxiosSecure()
+  const { refetch, isFetching } = useQuery({
+    queryKey: ["searchContest", searchType],
+    queryFn: async () => {
+      const result = await axiosSecure(`/if-search-contest?type=${searchType}`);
+      return result.data;
+    },
+    enabled: false,
+  });
+
+  
 
   const handleSearch = async () => {
-    const result = await axiosSecure(`/search-contest?type=${searchType}` );
-    setContests(result.data);
+    const res = await refetch();
+    setUiContests(res.data || []);
   };
+
+
 
   return (
     <div
@@ -59,7 +74,7 @@ const Banner = ( {searchType, setSearchType, setContests}) => {
               bg-linear-to-r from-indigo-500 to-purple-600
               text-white font-semibold hover:scale-105 transition cursor-pointer"
             >
-              Search
+              {isFetching ? "Searching..." : "Search"}
             </button>
           </div>
         </div>

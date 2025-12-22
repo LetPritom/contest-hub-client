@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../../Pages/Home/Banner";
 import HomeTitle from "../../Pages/Home/HomeTitle";
 import ContestDetails from "../../Pages/ContestDetails/ContestDetails";
@@ -12,15 +12,14 @@ import WinnerSections from "../../Pages/Home/WinnerSections";
 import ExtraSection from "../../Pages/Home/ExtraSection";
 
 const Home = () => {
-  // const [searchType, setSearchType] = useState("");
-  // const [contests, setContests] = useState([]);
 
-        //   searchType={searchType}
-        // setSearchType={setSearchType}
-        // setContests={setContests}
+  
+  const [uiContests, setUiContests] = useState([]);
 
-  const { data: contests = [], isPending } = useQuery({
-    queryKey: ["contest"],
+
+  // Default approved contests load (page load e)
+  const { data: defaultContests = [], isPending } = useQuery({
+    queryKey: ["approvedContests"],
     queryFn: async () => {
       const result = await axios(
         `${import.meta.env.VITE_API_URL}/approve-contest`
@@ -29,17 +28,26 @@ const Home = () => {
     },
   });
 
-  if (isPending) return <LoaderSpinner></LoaderSpinner>;
+  // Jab search hoy na, default contests show korbo
+  useEffect(() => {
+    
+    setUiContests(defaultContests);
+  
+  }, [defaultContests]);
+
+  console.log(uiContests)
+
+  if(isPending) return<LoaderSpinner></LoaderSpinner>
 
   return (
     <div>
       <Banner
-
+        setUiContests={setUiContests}
       ></Banner>
       <HomeTitle></HomeTitle>
 
       <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {contests.map((contest, i) => (
+        {uiContests.map((contest, i) => (
           <ContestCard contest={contest} key={i}></ContestCard>
         ))}
       </div>
