@@ -120,14 +120,22 @@ const Sidebar = () => {
               <li>
                 <NavLink to="/">
                   {" "}
-                  <Menu title={"Home"} icon={<GoHomeFill />}>
-                    Home
-                  </Menu>
+                  <div
+                    className="home  flex items-center gap-3 px-3 py-2 rounded-xl transition-all
+                  hover:bg-red-500/20
+                  is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  >
+                    <Menu title={"Home"} icon={<GoHomeFill />}>
+                      <span className="is-drawer-close:hidden text-base font-semibold">
+                        Home
+                      </span>
+                    </Menu>
+                  </div>
                 </NavLink>
 
                 <button
                   onClick={handleLogOut}
-                    className="
+                  className="
                   flex items-center gap-3 px-3 py-2 rounded-xl transition-all
                   hover:bg-red-500/20
                   is-drawer-close:tooltip is-drawer-close:tooltip-right
