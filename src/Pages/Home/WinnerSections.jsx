@@ -77,7 +77,7 @@ const WinnerSections = () => {
         <StatsSection totalWinner={totalWinner}></StatsSection>
 
         <div className="current my-20 flex items-center justify-center gap-5 flex-wrap">
-          <span className="animate-bounce text-5xl">🏆</span>\
+          <span className="animate-bounce text-5xl">🏆</span>
           <div
             data-aos="fade-down"
             data-aos-delay="200"
@@ -117,7 +117,8 @@ const WinnerSections = () => {
           ))}
         </div>
 
-        {/* CTA Text */}
+        {/* button */}
+
         <div className="text-center mt-16">
           <p className="text-3xl md:text-5xl font-bold text-white">
             Ready to be the next{" "}

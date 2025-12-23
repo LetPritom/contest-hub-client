@@ -118,12 +118,19 @@ const Sidebar = () => {
 
               {/* ===== LOGOUT ===== */}
               <li>
+                <NavLink to="/">
+                  {" "}
+                  <Menu title={"Home"} icon={<GoHomeFill />}>
+                    Home
+                  </Menu>
+                </NavLink>
+
                 <button
                   onClick={handleLogOut}
-                  className="
-                flex items-center gap-3 px-3 py-2 rounded-xl transition-all
-                hover:bg-red-500/20
-                is-drawer-close:tooltip is-drawer-close:tooltip-right
+                    className="
+                  flex items-center gap-3 px-3 py-2 rounded-xl transition-all
+                  hover:bg-red-500/20
+                  is-drawer-close:tooltip is-drawer-close:tooltip-right
               "
                   data-tip="Logout"
                 >
@@ -132,13 +139,6 @@ const Sidebar = () => {
                     Logout
                   </span>
                 </button>
-
-                <NavLink to="/">
-                  {" "}
-                  <Menu title={"Home"} icon={<GoHomeFill />}>
-                    Home
-                  </Menu>
-                </NavLink>
               </li>
             </ul>
           </div>
