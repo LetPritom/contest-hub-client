@@ -1,13 +1,13 @@
-ContestHub 🎨🎓 – Find Your Perfect contest
+# ContestHub 🎨🎓 – Find Your Perfect contest
 
 
 🌐 Live ContestHub link
 Client: https://contest-game.netlify.app
 
-Description
+# Description
 A modern, full-stack contest management platform where users can create, discover, participate in, and manage creative contests.
 
-🚀 Key Features
+🚀 #Key Features
 
 🔐 Secure authentication using Firebase (Email/Password + Google Sign-in)
 
@@ -39,7 +39,7 @@ Tabbed filtering by contest type
 
 Details button redirects to contest details or login
 
-##Home Page Highlights
+# Home Page Highlights
 
 Beautiful banner with search functionality
 
@@ -51,8 +51,8 @@ Extra static section and responsive footer
 
 404 Not Found page with redirect button
 
-Extra Route
-#About-us #Stories
+# Extra Route
+# About-us #Stories
 
 about us section is basically describe contest hub Features and rules
 
@@ -70,6 +70,8 @@ Submitted Tasks: view and declare a winner
 
 Edit Contest: pre-filled form
 
+# Multi Vendor 
+
 🛠 Admin Dashboard
 
 Manage Users: change roles
@@ -84,18 +86,21 @@ Firebase Auth + Firebase Admin SDK
 
 Express.js + MongoDB
 
-Stripe for payments
+# Stripe for payments
 
 DaisyUI for UI components + and so many npm packages
 
-🔒 Route Protection :
-creator page and admin page added multi layer Production
+# Route Protection :
+# creator page and admin page added multi layer Production
 
-#Responsive Responsive Design Works smoothly across desktop, tablet, and mobile
+# Responsive Responsive Design Works smoothly across desktop, tablet, and mobile
 
-#Alert For Using Toastify Toast Alerts - Feedback for Login/Loguot actions
+# Alert For Using Toastify Toast Alerts - Feedback for Login/Loguot actions
 
-#Dynamic Routing Dynamic Routing - /details/:id routes with fallback handling and many other thinkgs and query is also fetching data
+# Dynamic Routing Dynamic Routing -
+ /details/:id routes with fallback handling and many other thinkgs and query is also fetching data
+
+# Projects Highlight
 
 Project Highlights (For Recruiters)
 Full-stack MERN project with clean architecture
