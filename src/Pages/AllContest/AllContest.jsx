@@ -10,7 +10,7 @@ const AllContest = () => {
 
   const contestTypes = [
     "All",
-    "web design",
+    "web-design",
     "graphic-design",
     "article",
     "writing",
