@@ -32,7 +32,7 @@ const WinnerMarquee = () => {
             <h4 className="mt-4 text-lg font-bold">
               Winner Of Contest
             </h4>
-            <h4 className="mt-4 text-lg font-semibold">
+            <h4 className="mt-4 text-lg font-semibold wrap-break-word line-clamp-2 max-w-55 mx-auto">
               {winner.name}
             </h4>
 
