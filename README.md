@@ -1,16 +1,106 @@
-# React + Vite
+ContestHub 🎨🎓 – Find Your Perfect contest
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+🌐 Live ContestHub link
+Client: https://contest-game.netlify.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Description
+A modern, full-stack contest management platform where users can create, discover, participate in, and manage creative contests.
 
-## React Compiler
+🚀 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🔐 Secure authentication using Firebase (Email/Password + Google Sign-in)
 
-## Expanding the ESLint configuration
+🧑‍💼 Role-based access: Admin, Contest Creator, and Normal User
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+💳 Stripe payment integration for contest registration
+
+📊 Responsive dashboards for each user role
+
+🔍 Search contests by type from the banner section
+
+🏆 Popular contests sorted by participation count
+
+🎉 Winner advertisement section to showcase achievements
+
+📁 Contest details page with registration, countdown, and task submission
+
+📈 Leaderboard page ranked by contest wins
+
+🌗 Dark/Light theme toggle with localStorage persistence
+
+📦 Environment variables used to hide secrets (Firebase, MongoDB, Stripe)
+
+📄 All Contests Page
+
+Displays all admin-approved contests
+
+Tabbed filtering by contest type
+
+Details button redirects to contest details or login
+
+##Home Page Highlights
+
+Beautiful banner with search functionality
+
+Popular contests section with creative cards
+
+Winner showcase section with inspiring visuals
+
+Extra static section and responsive footer
+
+404 Not Found page with redirect button
+
+Extra Route
+#About-us #Stories
+
+about us section is basically describe contest hub Features and rules
+
+and stories section is build based on list of happy winner
+
+these are my two extra sections
+
+🎨 Creator Dashboard
+
+Add Contest: form with react-hook-form and react-datepicker
+
+My Created Contests: table with status, edit/delete, view submissions
+
+Submitted Tasks: view and declare a winner
+
+Edit Contest: pre-filled form
+
+🛠 Admin Dashboard
+
+Manage Users: change roles
+
+Manage Contests: confirm, reject, delete
+
+📦 Tech Stack
+
+React + React Router + TanStack Query
+
+Firebase Auth + Firebase Admin SDK
+
+Express.js + MongoDB
+
+Stripe for payments
+
+DaisyUI for UI components + and so many npm packages
+
+🔒 Route Protection :
+creator page and admin page added multi layer Production
+
+#Responsive Responsive Design Works smoothly across desktop, tablet, and mobile
+
+#Alert For Using Toastify Toast Alerts - Feedback for Login/Loguot actions
+
+#Dynamic Routing Dynamic Routing - /details/:id routes with fallback handling and many other thinkgs and query is also fetching data
+
+Project Highlights (For Recruiters)
+Full-stack MERN project with clean architecture
+Production-level code quality & folder structure
+Real-time CRUD operations with MongoDB
+Secure private routes & authentication
+Deployed live with CI/CD (Netlify + Vercel)
+Smooth animations & excellent UX
