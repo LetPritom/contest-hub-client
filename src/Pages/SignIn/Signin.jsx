@@ -103,11 +103,11 @@ const Signin = () => {
                     value: 6,
                     message: "password should be at least 6 characters long",
                   },
-                  pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
-                    message:
-                      "Password must contain at least one uppercase letter and one lowercase letter",
-                  },
+                  // pattern: {
+                  //   value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+                  //   message:
+                  //     "Password must contain at least one uppercase letter and one lowercase letter",
+                  // },
                 })}
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"
               />
