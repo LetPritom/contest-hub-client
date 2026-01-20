@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 
 const About = () => {
   return (
-    <div className="  min-h-screen bg-linear-to-br from-purple-950 via-black to-black text-white py-16 px-4 overflow-hidden relative">
+    <div className="  min-h-screen bg-linear-to-br from-purple-950 via-black to-black text-white py-16 px-4 overflow-hidden relative mt-16">
       {/* Floating Glow Orbs */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-pink-600/20 rounded-full blur-3xl animate-pulse delay-1000" />

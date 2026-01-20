@@ -27,6 +27,9 @@ const Navbar = () => {
       toast.error(err.message);
     }
   };
+    const [show, setShow] = useState(true); // Scroll up/down visibility
+  // const [top, setTop] = useState(true)
+    const [lastScrollY, setLastScrollY] = useState(0);
   const [dark, setDark] = useState("");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -55,8 +58,30 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+
+   const controlNavbar = () => {
+    if (typeof window !== "undefined") {
+      if (window.scrollY > lastScrollY) {
+        setShow(false); // Scroll down hide
+      } else {
+        setShow(true); // Scroll up show
+      }
+
+      // setTop(window.scrollY < 50); // Detect top position
+      setLastScrollY(window.scrollY);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", controlNavbar);
+    return () => window.removeEventListener("scroll", controlNavbar);
+  }, [lastScrollY]);
+
+
   return (
-    <Container className="border-b border-gray-300">
+    <Container  className={`w-full backdrop-blur-2xl fixed top-0 z-50 transition-transform duration-300 ${
+        show ? "translate-y-0" : "-translate-y-full"
+      }`}>
       <div className=" ">
         <div className="navbar lg:w-12/12 mx-auto py-4 relative z-50">
           <div className="navbar-start">
@@ -328,9 +353,9 @@ const Navbar = () => {
               <NavLink to="/login">
                 <button
                   className="
-                    relative px-5 py-2 rounded-xl font-semibold text-md
+                    relative px-5 py-2 rounded-xl font-normal text-md
                     text-white
-                    bg-linear-to-r from-blue-600 via-indigo-600 to-purple-500
+                    bg-linear-to-r from-blue-500 via-indigo-600 to-purple-500
                     shadow-lg shadow-indigo-500/20
                     overflow-hidden
                     transition-all duration-500 ease-out

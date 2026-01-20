@@ -6,11 +6,12 @@ import { toast } from "react-toastify";
 import { saveOrUpdateUser } from "../../Utils";
 
 const Signin = () => {
-  const { signInWithGoogleFunc, signInWithEmailAndPassFunc , setLoading , user } = useAuth();
+  const { signInWithGoogleFunc, signInWithEmailAndPassFunc, setLoading, user } =
+    useAuth();
 
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state || "/";
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state || "/";
 
   const {
     handleSubmit,
@@ -18,44 +19,40 @@ const Signin = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit =async (data) => {
-        console.log(data);
+  const onSubmit = async (data) => {
+    console.log(data);
 
-    const {email , password} = data;
-     await signInWithEmailAndPassFunc(email, password)
-     saveOrUpdateUser({
+    const { email, password } = data;
+    await signInWithEmailAndPassFunc(email, password);
+    saveOrUpdateUser({
       name: user?.displayName,
-      image:user?.photoURL,
+      image: user?.photoURL,
       email,
-      win:0,
-      participated:0,
-      address: 'Jashore Khulna Bangladesh',
-     })
-     setLoading(false)
-     navigate(from)
-     toast.success('successfully Login');
-
-
+      win: 0,
+      participated: 0,
+      address: "Jashore Khulna Bangladesh",
+    });
+    setLoading(false);
+    navigate(from);
+    toast.success("successfully Login");
   };
-
-
 
   const handleGoogleSignin = async () => {
     try {
       const { user } = await signInWithGoogleFunc();
       saveOrUpdateUser({
-      name: user?.displayName,
-      image:user?.photoURL,
-      email:user?.email,
-      win:0,
-      participated:0,
-      address: 'Jashore Khulna Bangladesh',
-     })
-      navigate(from)
+        name: user?.displayName,
+        image: user?.photoURL,
+        email: user?.email,
+        win: 0,
+        participated: 0,
+        address: "Jashore Khulna Bangladesh",
+      });
+      navigate(from);
       console.log(user);
     } catch (err) {
       console.log(err);
-      toast.error(err?.message || "Google sign-in failed. Please try again.")
+      toast.error(err?.message || "Google sign-in failed. Please try again.");
     }
   };
 
@@ -105,6 +102,11 @@ const Signin = () => {
                   minLength: {
                     value: 6,
                     message: "password should be at least 6 characters long",
+                  },
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+                    message:
+                      "Password must contain at least one uppercase letter and one lowercase letter",
                   },
                 })}
                 className="w-full px-5 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-500/70 transition-all duration-300"

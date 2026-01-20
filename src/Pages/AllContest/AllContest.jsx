@@ -51,7 +51,7 @@ const AllContest = () => {
   if (isPending) return <LoaderSpinner></LoaderSpinner>;
 
   return (
-    <div className="div min-h-screen w-11/12 mx-auto">
+    <div className="div min-h-screen w-11/12 mx-auto mt-16">
       <div className="write flex flex-col flex-wrap h-50 justify-center items-center space-y-5 ">
         <h1 className="text-2xl md:text-4xl font-bold ">
           Explore All Contests 🏆{" "}

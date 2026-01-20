@@ -25,6 +25,7 @@ import Stories from "../Components/Stories/Stories";
 import Leaderboard from "../Components/Leaderboard/Leaderboard";
 import PrivateCreator from "../Private/PrivateCreator";
 import AdminCreator from "../Private/AdminCreator";
+import PrivacyPolicy from "../Components/PrivacyPolicy/PrivacyPolicy";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
         element: <Leaderboard></Leaderboard>,
       },
       {
+        path: "/policy",
+        element: <PrivacyPolicy></PrivacyPolicy>,
+      },
+      {
         path: "/stories",
         element: <Stories></Stories>,
       },
@@ -65,11 +70,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/detail-contest/:id",
-        element: (
-          <Private>
-            <ContestDetails></ContestDetails>
-          </Private>
-        ),
+        element: <ContestDetails></ContestDetails>,
       },
     ],
   },

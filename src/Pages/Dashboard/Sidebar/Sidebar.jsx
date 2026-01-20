@@ -10,7 +10,8 @@ import { toast } from "react-toastify";
 import { GoHomeFill } from "react-icons/go";
 import useRole from "../../../hooks/UseRole";
 import Menu from "./Menu";
-const Sidebar = () => {
+const 
+Sidebar = () => {
   const { logoutFunction, setLoading } = useAuth();
   const handleLogOut = async () => {
     try {
@@ -26,7 +27,6 @@ const Sidebar = () => {
   console.log(role);
   return (
     <div className="min-h-screen bg-linear-to-br from-[#17002e] via-[#07000f] to-[#340575] overflow-x-hidden">
-      ``
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 

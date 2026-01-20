@@ -29,7 +29,7 @@ const Banner = ({ setUiContests }) => {
 
   return (
     <div
-      className="relative min-h-screen overflow-hidden flex items-center justify-center
+      className="relative h-[92vh] overflow-hidden flex items-center justify-center
     bg-linear-to-br from-purple-900 via-black to-purple-900"
     >
       {/* Background Image */}

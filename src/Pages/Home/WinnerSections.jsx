@@ -9,13 +9,15 @@ import useAuth from "../../hooks/useAuth";
 const WinnerSections = () => {
   const { user } = useAuth();
 
-  const { data: winnerDetail = [], isPending } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ["Winner", user?.email],
     queryFn: async () => {
       const result = await axios(`${import.meta.env.VITE_API_URL}/all-winner`);
       return result.data;
     },
   });
+
+  const winnerDetail = Array.isArray(data) ? data : []
 
   console.log(winnerDetail);
 

@@ -5,6 +5,7 @@ import { FaWhatsappSquare } from 'react-icons/fa';
 import { IoMdCall } from 'react-icons/io';
 import { SiGmail } from 'react-icons/si';
 import { IoLocationSharp } from 'react-icons/io5';
+import { Link } from 'react-router';
 
 const Footer = () => {
   return (
@@ -33,13 +34,13 @@ const Footer = () => {
               <h3 className="text-white text-xl font-bold mb-6">Contact Us</h3>
               <ul className="space-y-4 text-white/80">
                 <li className="flex items-center gap-3 hover:text-purple-300 transition">
-                  <IoMdCall className="text-xl" /> 01500-110010
+                  <IoMdCall className="text-xl" /> 01522-100212
                 </li>
                 <li className="flex items-center gap-3 hover:text-purple-300 transition">
-                  <SiGmail className="text-xl" /> contests@hub.com
+                  <SiGmail className="text-xl" /> pritom.royjess@gmail.com
                 </li>
                 <li className="flex items-center gap-3 hover:text-purple-300 transition">
-                  <IoLocationSharp className="text-xl" /> Dhaka, Bangladesh
+                  <IoLocationSharp className="text-xl" />Jashore, Bangladesh
                 </li>
               </ul>
             </div>
@@ -48,34 +49,64 @@ const Footer = () => {
             <div>
               <h3 className="text-white text-xl font-bold mb-6">Useful Links</h3>
               <ul className="space-y-4 text-white/80">
-                <li className="hover:text-purple-300 cursor-pointer transition">About Us</li>
-                <li className="hover:text-purple-300 cursor-pointer transition">Contests</li>
-                <li className="hover:text-purple-300 cursor-pointer transition">Leaderboard</li>
-                <li className="hover:text-purple-300 cursor-pointer transition">Privacy Policy</li>
-                <li className="hover:text-purple-300 cursor-pointer transition">Terms of Service</li>
+              <Link to='/about'>
+                              <li className="hover:text-purple-300 cursor-pointer transition">About Us</li></Link>
+                <Link to='/all-contest'>  <li className="hover:text-purple-300 cursor-pointer transition">Contests</li></Link>
+                <Link to='/leaderboard'><li className="hover:text-purple-300 cursor-pointer transition">Leaderboard</li></Link>
+                <Link to='/policy'><li className="hover:text-purple-300 cursor-pointer transition">Privacy Policy</li></Link>
+                <Link to=''><li className="hover:text-purple-300 cursor-pointer transition">Terms of Service</li></Link>
+
+              
+                
+                
+                
               </ul>
             </div>
 
             {/* Social Links */}
             <div>
-              <h3 className="text-white text-xl font-bold mb-6">Follow Us</h3>
-              <ul className="space-y-4 text-white/80">
-                <li className="flex items-center gap-3 hover:text-purple-300 transition">
-                  <FaFacebook className="text-xl" /> Facebook
-                </li>
-                <li className="flex items-center gap-3 hover:text-purple-300 transition">
-                  <FaInstagram className="text-xl" /> Instagram
-                </li>
-                <li className="flex items-center gap-3 hover:text-purple-300 transition">
-                  <FaXTwitter className="text-xl" /> Twitter (X)
-                </li>
-                <li className="flex items-center gap-3 hover:text-purple-300 transition">
-                  <FaLinkedin className="text-xl" /> LinkedIn
-                </li>
-                <li className="flex items-center gap-3 hover:text-purple-300 transition">
-                  <FaWhatsappSquare className="text-xl" /> WhatsApp
-                </li>
-              </ul>
+              <h3 className="text-white text-xl font-bold mb-6">Social Contact</h3>
+              <ul className="text-white flex flex-col  gap-2">
+            <a
+              target="_blank" // ← নতুন ট্যাবে খুলবে
+              rel="noopener noreferrer"
+              href="https://www.facebook.com/prithom.roy.94"
+            >
+              <li className="flex items-center gap-2 hover:underline cursor-pointer">
+                <FaFacebook />
+                Facebook
+              </li>
+            </a>
+
+            <a
+             target="_blank" // ← নতুন ট্যাবে খুলবে
+              rel="noopener noreferrer"
+             href="https://www.instagram.com/_pritom__roy_/">
+                 <li className="flex items-center gap-2 hover:underline cursor-pointer">
+              <FaInstagram />
+              Instagram
+            </li>
+            </a>
+
+           <a 
+           target="_blank" // ← নতুন ট্যাবে খুলবে
+              rel="noopener noreferrer"
+           href="https://www.linkedin.com/in/pritom-roy-jess/">
+            <li className="flex items-center gap-2 hover:underline cursor-pointer">
+              <FaLinkedin />
+              Linkedin
+            </li>
+           </a>
+            
+            {/* <li className="flex items-center gap-2 hover:underline cursor-pointer">
+              twitter
+             
+            </li>
+            <li className="flex items-center gap-2 hover:underline cursor-pointer">
+              <FaWhatsappSquare />
+              Whatsapp
+            </li> */}
+          </ul>
             </div>
           </div>
 

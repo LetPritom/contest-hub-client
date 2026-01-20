@@ -10,6 +10,7 @@ import { NavLink } from "react-router";
 import { FaRightLong } from "react-icons/fa6";
 import WinnerSections from "../../Pages/Home/WinnerSections";
 import ExtraSection from "../../Pages/Home/ExtraSection";
+import TermsOfService from "../../Pages/Home/TermsOfService";
 
 const Home = () => {
   const [uiContests, setUiContests] = useState([]);
@@ -47,6 +48,7 @@ const Home = () => {
 
       <HomeTitle></HomeTitle>
 
+
       <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {uiContests.map((contest, index) => (
           <div
@@ -83,6 +85,8 @@ const Home = () => {
       </div>
 
       <WinnerSections></WinnerSections>
+
+            <TermsOfService></TermsOfService>
 
       <div
         data-aos="fade-down"
