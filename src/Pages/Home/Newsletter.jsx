@@ -4,7 +4,7 @@ import React from 'react';
 
 const Newsletter = () => {
   return (
-    <section className="py-16 px-4 md:px-8 bg-linear-to-br from-purple-950 via-black to-pink-950  relative overflow-hidden">
+    <section className="py-16 px-4 md:px-8 bg-linear-to-br from-purple-700 via-black to-black relative overflow-hidden">
       {/* Optional subtle background glow */}
       <div className="absolute inset-0 bg-linear-to-b from-purple-950/20 to-transparent pointer-events-none"></div>
 

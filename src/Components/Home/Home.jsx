@@ -11,6 +11,7 @@ import { FaRightLong } from "react-icons/fa6";
 import WinnerSections from "../../Pages/Home/WinnerSections";
 import ExtraSection from "../../Pages/Home/ExtraSection";
 import TermsOfService from "../../Pages/Home/TermsOfService";
+import Newsletter from "../../Pages/Home/Newsletter";
 
 const Home = () => {
   const [uiContests, setUiContests] = useState([]);
@@ -96,6 +97,7 @@ const Home = () => {
       >
 
         <ExtraSection></ExtraSection>
+        <Newsletter></Newsletter>
 
       </div>
       
